@@ -15,3 +15,7 @@
 ### conda 기반 필수 패키지 설치
 
 `conda install --file packagelist.txt`
+
+### conda qgis 설치 참고
+- https://anaconda.org/conda-forge/qgis
+- https://github.com/conda-forge/qgis-feedstock
