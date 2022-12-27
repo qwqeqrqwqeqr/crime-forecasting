@@ -6,7 +6,7 @@ dy = [0, 1, 1, 1, 0, -1, -1, -1]
 
 '''
 input define
-colume = ['격자고유번호',NUMPOINTS']
+colume = ['격자고유번호',count']
 
 '''
 
@@ -18,16 +18,15 @@ def read_data(input_path):
     df = df.astype({'y': 'int'})
     df.insert(4, "visited", False)
 
-    df = df.sort_values(by='NUMPOINTS', ascending=False)
+    df = df.sort_values(by='count', ascending=False)
 
     df.insert(5, "index", df.index)
     return df.to_numpy()
 
 
 def save_data(df,output_path):
-    df_ar = pd.DataFrame(df, columns=["격자고유번호", "NUMPOINTS", "x", "y", "visited","index"])
+    df_ar = pd.DataFrame(df, columns=["격자고유번호", "count", "x", "y", "visited","index"])
     df_ar.to_csv(output_path)
-    print("처리완료")
 
 
 def expand_data(depth,input_path,output_path):

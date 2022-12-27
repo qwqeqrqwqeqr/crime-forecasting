@@ -5,19 +5,30 @@ import pyproj
 from geopandas import GeoDataFrame
 from util.constants import *
 
-p1_type = "epsg:5181"
-p2_type = "epsg:4326"
+'''
+Param
+count_point_in_polygon
+    input_path => 데이터 입력경로
+    output_path => 데이터 저장경로
+    encoding => 인코딩 방식
+    x_coordinate_name =>  x 좌표 이름
+    y_coordinate_name =>  y 좌표 이름
+    p1 => 현재 좌표계
+    p2 => 타겟 좌표계
 
-def count_point_in_polygon(input_path,output_path):
+'''
+
+
+
+def count_point_in_polygon(input_path,output_path,encoding,x_coordinate_name, y_coordinate_name,p1,p2):
 
     grid_geojson = gpd.read_file(PATH_격자_MAP, driver="GeoJSON")
 
+    df = pd.read_csv(input_path, encoding=encoding)
+    df['x'] = df[x_coordinate_name]
+    df['y'] = df[y_coordinate_name]
 
-    df = pd.read_csv(input_path, encoding='euc-kr')
-    df['x'] = df['좌표정보(X)']
-    df['y'] = df['좌표정보(Y)']
-
-    transform_coordinate_result = transform_coordinate(np.array(df[['x','y']]) , p1_type, p2_type)
+    transform_coordinate_result = transform_coordinate(np.array(df[['x','y']]) , p1, p2)
 
     df['x'] = transform_coordinate_result[:,0]
     df['y'] = transform_coordinate_result[:,1]
