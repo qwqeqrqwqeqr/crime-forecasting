@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 /qgis
+/data
 # C extensions
 *.so
 
