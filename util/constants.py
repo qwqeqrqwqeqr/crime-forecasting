@@ -23,8 +23,12 @@ PATH_CCTV_ORIGIN="data/origin/안전시설/서울시_CCTV_설치현황.csv"
 PATH_스마트보안등_ORIGIN="data/origin/안전시설/스마트보안등/스마트보안등.csv"
 PATH_안심택배함_ORIGIN="data/origin/안전시설/여성안심택배함.csv"
 PATH_여성안심지킴이집_ORIGIN="data/origin/안전시설/여성안심지킴이집.csv"
-PATH_아동안전지킴이시설물_ORIGIN="data/origin/안전시설/아동안전지킴이시설물.shp"
-PATH_편의점_ORIGIN="data/origin/안전시설/편의점.shp"
+PATH_아동안전지킴이시설물_ORIGIN="data/origin/안전시설/아동안전지킴이시설물.csv"
+PATH_편의점_ORIGIN="data/origin/안전시설/편의점.csv"
+
+PATH_아동안전지킴이시설물_ORIGIN_SHP="data/origin/안전시설/아동안전지킴이시설물.shp"
+PATH_편의점_ORIGIN_SHP="data/origin/안전시설/편의점.shp"
+
 
 '''
 MAP_PATH
@@ -46,6 +50,8 @@ PATH_치안센터_AFTER = "data/after/치안시설/치안센터.csv"
 PATH_파출소지구대_AFTER= "data/after/치안시설/파출소지구대.csv"
 
 
+PATH_CCTV_AFTER="data/after/안전시설/서울시_CCTV_설치현황.csv"
+PATH_스마트보안등_AFTER="data/after/안전시설/스마트보안등.csv"
 PATH_여성안심지킴이집_AFTER = "data/after/안전시설/여성안심지킴이집.csv"
 PATH_여성안심택배함_AFTER = "data/after/안전시설/여성안심택배함.csv"
 PATH_아동안전지킴이시설물_AFTER= "data/after/안전시설/아동안전지킴이시설물.csv"

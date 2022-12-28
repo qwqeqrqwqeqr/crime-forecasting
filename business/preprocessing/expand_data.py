@@ -10,8 +10,8 @@ colume = ['격자고유번호',count']
 
 '''
 
-def read_data(input_path):
-    df = pd.read_csv(input_path,encoding='euc-kr')
+def read_data(input_path,encoding):
+    df = pd.read_csv(input_path,encoding=encoding)
     df['x'] = df['격자고유번호'].str.slice(start=2, stop=5)
     df['y'] = df['격자고유번호'].str.slice(start=-3)
     df = df.astype({'x': 'int'})
@@ -26,11 +26,12 @@ def read_data(input_path):
 
 def save_data(df,output_path):
     df_ar = pd.DataFrame(df, columns=["격자고유번호", "count", "x", "y", "visited","index"])
-    df_ar.to_csv(output_path)
+
+    df_ar[['격자고유번호','count']].to_csv(output_path,index=False)
 
 
-def expand_data(depth,input_path,output_path):
-    df = read_data(input_path)
+def expand_data(depth,input_path,output_path,encoding):
+    df = read_data(input_path,encoding)
 
     queue = []
     count = 0
