@@ -3,13 +3,10 @@ import os
 
 
 
-'''
-Param
-dir_path : directory path
-filename : filename (ex. test.txt)
-file_content : content (ex. lorem ipsum ...)
-'''
-def save_file_at_dir(dir_path, filename, file_content, mode='w'):
-    os.makedirs(dir_path, exist_ok=True)
-    with open(os.path.join(dir_path, filename), mode) as f:
-        f.write(file_content)
+
+def create_directory(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print('Error: 디렉터리 생성을 실패 하였습니다, 디렉터리 명 :' + directory)

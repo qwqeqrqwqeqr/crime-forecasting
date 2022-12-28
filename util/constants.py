@@ -1,7 +1,13 @@
-"""
-CSV_PATH
-"""
 
+PATH_LIST = ["data/origin/","data/origin/112신고접수/",
+             "data/origin/실시간도시데이터/","data/origin/치안유관업종/",
+             "data/origin/치안시설/","data/origin/안전시설/","data/map/",
+             "data/after/","data/after/치안유관업종/","data/after/안전시설/","data/after/치안유관업종/","data/expand/"]
+
+
+"""
+ORIGIN_PATH
+"""
 
 PATH_생활인구_ORIGIN=""
 PATH_112신고접수정보_ORIGIN="data/origin/112신고접수/112신고접수정보.csv"
@@ -34,11 +40,11 @@ PATH_편의점_ORIGIN_SHP="data/origin/안전시설/편의점.shp"
 MAP_PATH
 '''
 
-PATH_격자_MAP="data/map/격자/격자.geojson"
-PATH_집계구_MAP="data/map/집계구/집계구.shp"
-PATH_파출소지구대_MAP="data/map/파출소지구대/경찰서별파출소지구대위치정보.shp"
-PATH_한강수변구역_MAP="data/map/한강수변구역/한강수변구역.shp"
-PATH_행정구역_MAP="data/map/행정구역/행정구역.shp"
+PATH_격자_MAP="data/map/격자.geojson"
+PATH_집계구_MAP="data/map/집계구.shp"
+PATH_파출소지구대_MAP="data/map/경찰서별파출소지구대위치정보.shp"
+PATH_한강수변구역_MAP="data/map/한강수변구역.shp"
+PATH_행정구역_MAP="data/map/행정구역.shp"
 
 
 
@@ -52,8 +58,9 @@ PATH_파출소지구대_AFTER= "data/after/치안시설/파출소지구대.csv"
 
 PATH_CCTV_AFTER="data/after/안전시설/서울시_CCTV_설치현황.csv"
 PATH_스마트보안등_AFTER="data/after/안전시설/스마트보안등.csv"
-PATH_여성안심지킴이집_AFTER = "data/after/안전시설/여성안심지킴이집.csv"
 PATH_여성안심택배함_AFTER = "data/after/안전시설/여성안심택배함.csv"
+PATH_여성안심지킴이집_AFTER = "data/after/안전시설/여성안심지킴이집.csv"
+
 PATH_아동안전지킴이시설물_AFTER= "data/after/안전시설/아동안전지킴이시설물.csv"
 PATH_편의점_AFTER= "data/after/안전시설/편의점.csv"
 

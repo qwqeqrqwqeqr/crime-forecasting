@@ -37,6 +37,8 @@ def count_point_in_polygon(input_path,output_path,encoding,x_coordinate_name, y_
 
     df = df[['x','y']]
 
+    df= df.drop_duplicates()
+
     point = GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.x, y=df.y),crs='epsg:4326')
     point.crs = grid_geojson.crs
     point_in_polygon = gpd.sjoin(point, grid_geojson[['격자고유번호', 'geometry']], how="inner", predicate='intersects')
