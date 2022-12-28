@@ -12,10 +12,12 @@
    5. **Location** /home/ncyc-admin/anaconda3/envs/crime-forecasting/bin/python3.9
    6. **Sync-folders**  Project root -> /home/ncyc-admin/crime-forecasting
 
+
+### Anaconda 설치
+
+`https://www.anaconda.com/`
+
 ### conda 기반 필수 패키지 설치
 
-`conda install --file packagelist.txt`
+`conda env create -n <env_name> -f environment.yaml`
 
-### conda qgis 설치 참고
-- https://anaconda.org/conda-forge/qgis
-- https://github.com/conda-forge/qgis-feedstock

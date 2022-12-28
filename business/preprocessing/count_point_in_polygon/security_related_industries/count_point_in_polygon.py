@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import pyproj
 from geopandas import GeoDataFrame
+from pyproj import transform, Proj
+
 from util.constants import *
 
 '''
@@ -62,12 +64,12 @@ def concat_df(subset_df,full_df):
 
 def count_in_df(df):
     df['count'] = 1
-    return df.groupby(['격자고유번호']).sum().reset_index()
+    return df.groupby(['격자고유번호']).sum(numeric_only=True).reset_index()
 
 def transform_coordinate(coord, p1_type, p2_type):
-    p1 = pyproj.Proj(init=p1_type)
-    p2 = pyproj.Proj(init=p2_type)
-    fx, fy = pyproj.transform(p1, p2, coord[:, 0], coord[:, 1],always_xy=True)
+    p1 = Proj(init=p1_type)
+    p2 = Proj(init=p2_type)
+    fx, fy = transform(p1, p2, coord[:, 0], coord[:, 1])
     return np.dstack([fx, fy])[0]
 
 
