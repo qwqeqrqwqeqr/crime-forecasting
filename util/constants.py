@@ -20,7 +20,7 @@ PATH_치안센터_ORIGIN = "data/origin/치안시설/치안센터.csv"
 PATH_파출소지구대_ORIGIN= "data/origin/치안시설/파출소지구대.csv"
 
 PATH_CCTV_ORIGIN="data/origin/안전시설/서울시_CCTV_설치현황.csv"
-PATH_스마트보안등_ORIGIN="data/origin/안전시설/스마트보안등/스마트보안등.csv"
+PATH_스마트보안등_ORIGIN="data/origin/안전시설/스마트보안등.csv"
 PATH_안심택배함_ORIGIN="data/origin/안전시설/여성안심택배함.csv"
 PATH_여성안심지킴이집_ORIGIN="data/origin/안전시설/여성안심지킴이집.csv"
 PATH_아동안전지킴이시설물_ORIGIN="data/origin/안전시설/아동안전지킴이시설물.csv"

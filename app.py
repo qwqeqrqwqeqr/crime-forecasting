@@ -1,5 +1,5 @@
-from business.preprocessing.covert_shp_to_csv import read_shp, convert_csv
-from business.preprocessing.expand_data import expand_data
+from business.preprocessing.count_point_in_polygon import count_point_in_polygon
+from business.preprocessing.covert_shp_to_csv import convert_csv
 from util.constants import *
 
 EPSG_5181 = "epsg:5181"
@@ -8,8 +8,13 @@ if __name__ == '__main__':
     print(1)
     DEPTH =2
 
-    convert_csv(PATH_아동안전지킴이시설물_ORIGIN_SHP,PATH_아동안전지킴이시설물_ORIGIN,'CP949')
-    convert_csv(PATH_편의점_ORIGIN_SHP,PATH_편의점_ORIGIN,'utf-8')
+
+    # #SHP 파일은 CSV로 변환한다.
+    # convert_csv(PATH_아동안전지킴이시설물_ORIGIN_SHP,PATH_아동안전지킴이시설물_ORIGIN,'CP949')
+    # convert_csv(PATH_편의점_ORIGIN_SHP,PATH_편의점_ORIGIN,'utf-8')
+
+    count_point_in_polygon(PATH_아동안전지킴이시설물_ORIGIN,PATH_아동안전지킴이시설물_AFTER,'euc-kr','x','y',EPSG_5181,EPSG_4326)
+    count_point_in_polygon(PATH_편의점_ORIGIN,PATH_편의점_AFTER,'euc-kr','x','y',EPSG_5181,EPSG_4326)
 
     # count_point_in_polygon(PATH_노래연습장_ORIGIN,PATH_노래연습장_AFTER,'euc-kr','좌표정보(X)','좌표정보(Y)',EPSG_5181,EPSG_4326)
     # count_point_in_polygon(PATH_단란주점_ORIGIN,PATH_단란주점_AFTER,'euc-kr','좌표정보(X)','좌표정보(Y)',EPSG_5181,EPSG_4326)
