@@ -1,10 +1,10 @@
-
-
+from util.util import init
 
 if __name__ == '__main__':
-    print(1)
+
     DEPTH =2
 
+    init()
 
 
     # #SHP 파일은 CSV로 변환한다.
