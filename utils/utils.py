@@ -1,6 +1,6 @@
 import os
 
-from util.constants import *
+from utils.constants import *
 
 
 def init():

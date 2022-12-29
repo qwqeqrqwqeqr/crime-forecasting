@@ -4,7 +4,7 @@ import numpy as np
 from geopandas import GeoDataFrame
 from pyproj import transform, Proj
 
-from util.constants import *
+from utils.constants import *
 
 '''
 Param
