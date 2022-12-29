@@ -1,7 +1,6 @@
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-import pyproj
 from geopandas import GeoDataFrame
 from pyproj import transform, Proj
 
@@ -17,9 +16,7 @@ count_point_in_polygon
     y_coordinate_name =>  y 좌표 이름
     p1 => 현재 좌표계
     p2 => 타겟 좌표계
-
 '''
-
 
 
 def count_point_in_polygon(input_path,output_path,encoding,x_coordinate_name, y_coordinate_name,p1,p2):
@@ -47,9 +44,6 @@ def count_point_in_polygon(input_path,output_path,encoding,x_coordinate_name, y_
     concat_result =  concat_df(count_result,grid_geojson)
 
     concat_result.to_csv(output_path,index=False)
-
-
-
 
 
 def concat_df(subset_df,full_df):

@@ -1,17 +1,11 @@
-from business.preprocessing.count_point_in_polygon import count_point_in_polygon
-from business.preprocessing.covert_shp_to_csv import convert_csv
-from business.preprocessing.expand_data import expand_data
-from util.constants import *
-from util.util import create_directory
 
-EPSG_5181 = "epsg:5181"
-EPSG_4326 = "epsg:4326"
+
+
 if __name__ == '__main__':
     print(1)
     DEPTH =2
 
-    for path in PATH_LIST:
-        create_directory(path)
+
 
     # #SHP 파일은 CSV로 변환한다.
     # convert_csv(PATH_아동안전지킴이시설물_ORIGIN_SHP,PATH_아동안전지킴이시설물_ORIGIN,'CP949')

@@ -1,5 +1,3 @@
-
-
 import geopandas as gpd
 
 
