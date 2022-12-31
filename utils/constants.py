@@ -5,6 +5,9 @@
 EPSG_5181 = "epsg:5181"
 EPSG_4326 = "epsg:4326"
 
+UTF_8 = 'utf-8'
+EUC_KR = 'euc-kr'
+
 '''
 PATH
 '''
@@ -54,6 +57,8 @@ PATH_행정구역_MAP = PATH_MAP + "행정구역.shp"
 '''
 AFTER_PATH
 '''
+PATH_112신고접수정보_ORIGIN = PATH_ORIGIN + "report/report2021.csv"
+
 PATH_경찰서_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
 PATH_치안센터_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
 PATH_파출소지구대_AFTER = PATH_AFTER + "police_facility/파출소지구대.csv"
@@ -100,10 +105,10 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_ORIGIN+"police_facility/",
              PATH_ORIGIN+"safety_facility/",
 
-             PATH_AFTER+"data/after/report/",
-             PATH_AFTER+"data/after/danger_facility/",
-             PATH_AFTER+"data/after/safety_facility/",
-             PATH_AFTER+"data/after/danger_facility/",
+             PATH_AFTER+"report/",
+             PATH_AFTER+"danger_facility/",
+             PATH_AFTER+"safety_facility/",
+             PATH_AFTER+"danger_facility/",
              ]
 
 FILE_LIST = [

@@ -3,6 +3,8 @@ from business.preprocessing.utils.utils import convert_csv
 from utils.constants import *
 
 def service():
+
+    print("========== 격자 내 시설 개수를 산출 합니다. ==========")
     #SHP 파일은 CSV로 변환한다.
     convert_csv(PATH_아동안전지킴이시설물_ORIGIN_SHP,PATH_아동안전지킴이시설물_ORIGIN,'CP949')
     convert_csv(PATH_편의점_ORIGIN_SHP,PATH_편의점_ORIGIN,'utf-8')
