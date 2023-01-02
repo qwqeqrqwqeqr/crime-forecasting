@@ -17,6 +17,7 @@ PATH_ORIGIN = "data/origin/"
 PATH_MAP = "data/map/"
 PATH_AFTER = "data/after/"
 PATH_EXPAND = "data/expand/"
+PATH_RESULT = "data/result/"
 
 """
 ORIGIN_PATH
@@ -50,10 +51,11 @@ MAP_PATH
 '''
 
 PATH_격자_MAP = PATH_MAP + "격자.geojson"
-PATH_집계구_MAP = PATH_MAP + "집계구.shp"
-PATH_파출소지구대_MAP = PATH_MAP + "경찰서별파출소지구대위치정보.shp"
-PATH_한강수변구역_MAP = PATH_MAP + "한강수변구역.shp"
-PATH_행정구역_MAP = PATH_MAP + "행정구역.shp"
+
+PATH_집계구_MAP = PATH_MAP + "grid_subway.csv"
+PATH_한강_MAP = PATH_MAP + "grid_han_river.csv"
+PATH_관광지_MAP = PATH_MAP + "grid_subway.csv"
+PATH_지하철_MAP = PATH_MAP + "grid_tourist.csv"
 
 '''
 AFTER_PATH
@@ -93,23 +95,29 @@ PATH_치안센터_EXPAND = PATH_EXPAND + "치안센터.csv"
 PATH_파출소지구대_EXPAND = PATH_EXPAND + "파출소지구대.csv"
 
 '''
+RESULT_PATH
+산출되는 6가지의 데이터 경로
+'''
+PATH_시설별신고건수_RESULT = PATH_RESULT + "시설별신고건수.csv"
+
+'''
 PATH_LIST
 '''
 
 PATH_LIST = [PATH_ORIGIN,
-
              PATH_MAP,
              PATH_AFTER,
              PATH_EXPAND,
-             PATH_ORIGIN+"report/",
-             PATH_ORIGIN+"danger_facility/",
-             PATH_ORIGIN+"police_facility/",
-             PATH_ORIGIN+"safety_facility/",
+             PATH_RESULT,
+             PATH_ORIGIN + "report/",
+             PATH_ORIGIN + "danger_facility/",
+             PATH_ORIGIN + "police_facility/",
+             PATH_ORIGIN + "safety_facility/",
 
-             PATH_AFTER+"report/",
-             PATH_AFTER+"danger_facility/",
-             PATH_AFTER+"safety_facility/",
-             PATH_AFTER+"danger_facility/",
+             PATH_AFTER + "report/",
+             PATH_AFTER + "danger_facility/",
+             PATH_AFTER + "safety_facility/",
+             PATH_AFTER + "danger_facility/",
              ]
 
 FILE_LIST = [
@@ -133,5 +141,9 @@ FILE_LIST = [
     PATH_아동안전지킴이시설물_ORIGIN_SHP,
     PATH_편의점_ORIGIN_SHP,
 
+    PATH_집계구_MAP,
+    PATH_한강_MAP,
+    PATH_관광지_MAP,
+    PATH_지하철_MAP,
     PATH_격자_MAP,
 ]

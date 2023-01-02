@@ -1,3 +1,6 @@
+import pandas as pd
+
+from business.preprocessing.concat_data.concat_data import concat_data
 from utils.constants import *
 
 
@@ -26,3 +29,12 @@ def service():
     ]
 
     print(name_list)
+
+    dfs = []
+
+    for i in range(0, len(name_list)):
+        df = pd.read_csv(path_list[i])
+        df = df.rename(columns={'count': name_list[i]})
+        dfs.append(df)
+
+    concat_data(dfs)
