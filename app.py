@@ -10,10 +10,15 @@ if __name__ == '__main__':
     # count_point_in_polygon()
 
 
+    # 격자별 시설개수 합치기
+    # 사전 격자별 시설개수 데이터들을 보유하고 있어야 함
+    from business.preprocessing.concat_data.service import service as concat_data
+    concat_data()
 
-    # 시설개수 확장하기
-    DEPTH = 2
-    from business.preprocessing.expand_data.service import service as  expand_data
-    expand_data(DEPTH,False)
+    #  시설개수 확장하기
+    #  사전 격자별 시설개수 데이터들을 보유하고 있어야 함
+    # DEPTH = 2
+    # from business.preprocessing.expand_data.service import service as  expand_data
+    # expand_data(DEPTH,False)
 
 

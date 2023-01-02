@@ -22,7 +22,7 @@ PATH_EXPAND = "data/expand/"
 ORIGIN_PATH
 """
 
-PATH_112신고접수정보_ORIGIN = PATH_ORIGIN + "report/report2021.csv"
+PATH_112신고접수정보_ORIGIN = PATH_ORIGIN + "report/112신고접수.csv"
 
 PATH_노래연습장_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_단란주점_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
@@ -58,7 +58,7 @@ PATH_행정구역_MAP = PATH_MAP + "행정구역.shp"
 '''
 AFTER_PATH
 '''
-PATH_112신고접수정보_AFTER = PATH_AFTER + "report/report2021.csv"
+PATH_112신고접수정보_AFTER = PATH_AFTER + "report/112신고접수.csv"
 
 PATH_경찰서_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
 PATH_치안센터_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
