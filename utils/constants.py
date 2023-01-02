@@ -3,11 +3,12 @@
 '''
 
 EPSG_5181 = "epsg:5181"
-EPSG_4326 = "epsg:4326"
+EPSG_4326: str = "epsg:4326"
 
 UTF_8 = 'utf-8'
 EUC_KR = 'euc-kr'
 CP_949 = 'CP949'
+
 
 '''
 PATH
@@ -56,6 +57,10 @@ PATH_집계구_MAP = PATH_MAP + "grid_subway.csv"
 PATH_한강_MAP = PATH_MAP + "grid_han_river.csv"
 PATH_관광지_MAP = PATH_MAP + "grid_subway.csv"
 PATH_지하철_MAP = PATH_MAP + "grid_tourist.csv"
+
+PATH_자치구_MAP =PATH_MAP + "large_map.shp"
+PATH_행정동_MAP =PATH_MAP + "middle_map.shp"
+PATH_집계구_MAP =PATH_MAP + "small_map.shp"
 
 '''
 AFTER_PATH
@@ -146,4 +151,8 @@ FILE_LIST = [
     PATH_관광지_MAP,
     PATH_지하철_MAP,
     PATH_격자_MAP,
+
+    PATH_자치구_MAP,
+    PATH_행정동_MAP,
+    PATH_집계구_MAP
 ]
