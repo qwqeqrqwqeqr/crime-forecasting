@@ -7,6 +7,7 @@ EPSG_4326 = "epsg:4326"
 
 UTF_8 = 'utf-8'
 EUC_KR = 'euc-kr'
+CP_949 = 'CP949'
 
 '''
 PATH
@@ -57,7 +58,7 @@ PATH_행정구역_MAP = PATH_MAP + "행정구역.shp"
 '''
 AFTER_PATH
 '''
-PATH_112신고접수정보_ORIGIN = PATH_ORIGIN + "report/report2021.csv"
+PATH_112신고접수정보_AFTER = PATH_AFTER + "report/report2021.csv"
 
 PATH_경찰서_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
 PATH_치안센터_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
