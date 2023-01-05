@@ -1,7 +1,6 @@
 from utils.constants import *
 
-# TODO 격자별 생활인구 추가
-# TODO NAME_LIST 이름 수정 예정
+
 
 GRID_NAME_LIST = [
     PATH_112신고접수정보_AFTER.split('/')[-1].split('.')[0],
