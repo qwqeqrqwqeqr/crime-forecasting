@@ -9,7 +9,6 @@ UTF_8 = 'utf-8'
 EUC_KR = 'euc-kr'
 CP_949 = 'CP949'
 
-
 '''
 PATH
 '''
@@ -19,20 +18,6 @@ PATH_MAP = "data/map/"
 PATH_AFTER = "data/after/"
 PATH_EXPAND = "data/expand/"
 PATH_RESULT = "data/result/"
-PATH_LIFE_POPULATION = "data/life_population/"
-
-PATH_LIFE_POPULATION_JAN = PATH_LIFE_POPULATION+"jan"
-PATH_LIFE_POPULATION_FEB = PATH_LIFE_POPULATION+"feb"
-PATH_LIFE_POPULATION_MAR = PATH_LIFE_POPULATION+"mar"
-PATH_LIFE_POPULATION_APR = PATH_LIFE_POPULATION+"apr"
-PATH_LIFE_POPULATION_MAY = PATH_LIFE_POPULATION+"may"
-PATH_LIFE_POPULATION_JUN = PATH_LIFE_POPULATION+"jun"
-PATH_LIFE_POPULATION_JUL = PATH_LIFE_POPULATION+"jul"
-PATH_LIFE_POPULATION_AUG = PATH_LIFE_POPULATION+"aug"
-PATH_LIFE_POPULATION_SEP = PATH_LIFE_POPULATION+"sep"
-PATH_LIFE_POPULATION_OCT = PATH_LIFE_POPULATION+"oct"
-PATH_LIFE_POPULATION_NOV = PATH_LIFE_POPULATION+"nov"
-PATH_LIFE_POPULATION_DEC = PATH_LIFE_POPULATION+"dec"
 
 """
 ORIGIN_PATH
@@ -61,20 +46,35 @@ PATH_편의점_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 PATH_아동안전지킴이시설물_ORIGIN_SHP = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.shp"
 PATH_편의점_ORIGIN_SHP = PATH_ORIGIN + "safety_facility/편의점.shp"
 
+PATH_LIFE_POPULATION_ORIGIN = PATH_ORIGIN + "life_population/"
+
+PATH_LIFE_POPULATION_JAN = PATH_LIFE_POPULATION_ORIGIN + "jan/"
+PATH_LIFE_POPULATION_FEB = PATH_LIFE_POPULATION_ORIGIN + "feb/"
+PATH_LIFE_POPULATION_MAR = PATH_LIFE_POPULATION_ORIGIN + "mar/"
+PATH_LIFE_POPULATION_APR = PATH_LIFE_POPULATION_ORIGIN + "apr/"
+PATH_LIFE_POPULATION_MAY = PATH_LIFE_POPULATION_ORIGIN + "may/"
+PATH_LIFE_POPULATION_JUN = PATH_LIFE_POPULATION_ORIGIN + "jun/"
+PATH_LIFE_POPULATION_JUL = PATH_LIFE_POPULATION_ORIGIN + "jul/"
+PATH_LIFE_POPULATION_AUG = PATH_LIFE_POPULATION_ORIGIN + "aug/"
+PATH_LIFE_POPULATION_SEP = PATH_LIFE_POPULATION_ORIGIN + "sep/"
+PATH_LIFE_POPULATION_OCT = PATH_LIFE_POPULATION_ORIGIN + "oct/"
+PATH_LIFE_POPULATION_NOV = PATH_LIFE_POPULATION_ORIGIN + "nov/"
+PATH_LIFE_POPULATION_DEC = PATH_LIFE_POPULATION_ORIGIN + "dec/"
+
 '''
 MAP_PATH
 '''
 
 PATH_격자_MAP = PATH_MAP + "격자.geojson"
 
-PATH_집계구_MAP = PATH_MAP + "grid_subway.csv"
-PATH_한강_MAP = PATH_MAP + "grid_han_river.csv"
-PATH_관광지_MAP = PATH_MAP + "grid_subway.csv"
-PATH_지하철_MAP = PATH_MAP + "grid_tourist.csv"
+PATH_격자_집계구_MAP = PATH_MAP + "grid_area.csv"
+PATH_격자_한강_MAP = PATH_MAP + "grid_han_river.csv"
+PATH_격자_관광지_MAP = PATH_MAP + "grid_tourist.csv"
+PATH_격자_지하철_MAP = PATH_MAP + "grid_subway.csv"
 
-PATH_자치구_MAP =PATH_MAP + "large_map.shp"
-PATH_행정동_MAP =PATH_MAP + "middle_map.shp"
-PATH_집계구_MAP =PATH_MAP + "small_map.shp"
+PATH_자치구_MAP = PATH_MAP + "large_map.shp"
+PATH_행정동_MAP = PATH_MAP + "middle_map.shp"
+PATH_집계구_MAP = PATH_MAP + "small_map.shp"
 
 '''
 AFTER_PATH
@@ -100,6 +100,8 @@ PATH_숙박업_AFTER = PATH_AFTER + "danger_facility/서울시수
 PATH_유흥주점_AFTER = PATH_AFTER + "danger_facility/서울시유흥주점영업인허가정보.csv"
 PATH_인터넷컴퓨터게임시설_AFTER = PATH_AFTER + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
 
+PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
+
 '''
 EXPAND_PATH
 '''
@@ -115,9 +117,15 @@ PATH_파출소지구대_EXPAND = PATH_EXPAND + "파출소지구대.csv"
 
 '''
 RESULT_PATH
-산출되는 6가지의 데이터 경로
+산출되는 7가지의 데이터 경로
 '''
-PATH_시설별신고건수_RESULT = PATH_RESULT + "시설별신고건수.csv"
+PATH_시설별_RESULT = PATH_RESULT + "facility/"
+PATH_유형별_RESULT = PATH_RESULT + "category/"
+PATH_혼잡도_RESULT = PATH_RESULT + "congestion/"
+PATH_위험지수_RESULT = PATH_RESULT + "danger/"
+PATH_한강_RESULT = PATH_RESULT + "han_river/"
+PATH_관광지_RESULT = PATH_RESULT + "tourist/"
+PATH_지하철_RESULT = PATH_RESULT + "subway/"
 
 '''
 PATH_LIST
@@ -128,6 +136,15 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_AFTER,
              PATH_EXPAND,
              PATH_RESULT,
+
+             PATH_시설별_RESULT,
+             PATH_유형별_RESULT,
+             PATH_혼잡도_RESULT,
+             PATH_위험지수_RESULT,
+             PATH_한강_RESULT,
+             PATH_관광지_RESULT,
+             PATH_지하철_RESULT,
+
              PATH_ORIGIN + "report/",
              PATH_ORIGIN + "danger_facility/",
              PATH_ORIGIN + "police_facility/",
@@ -137,6 +154,22 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_AFTER + "danger_facility/",
              PATH_AFTER + "safety_facility/",
              PATH_AFTER + "danger_facility/",
+
+             PATH_ORIGIN + "life_population/",
+             PATH_AFTER + "life_population/",
+
+             PATH_LIFE_POPULATION_JAN,
+             PATH_LIFE_POPULATION_FEB,
+             PATH_LIFE_POPULATION_MAR,
+             PATH_LIFE_POPULATION_APR,
+             PATH_LIFE_POPULATION_MAY,
+             PATH_LIFE_POPULATION_JUN,
+             PATH_LIFE_POPULATION_JUL,
+             PATH_LIFE_POPULATION_AUG,
+             PATH_LIFE_POPULATION_SEP,
+             PATH_LIFE_POPULATION_OCT,
+             PATH_LIFE_POPULATION_NOV,
+             PATH_LIFE_POPULATION_DEC
              ]
 
 FILE_LIST = [
@@ -160,13 +193,27 @@ FILE_LIST = [
     PATH_아동안전지킴이시설물_ORIGIN_SHP,
     PATH_편의점_ORIGIN_SHP,
 
-    PATH_집계구_MAP,
-    PATH_한강_MAP,
-    PATH_관광지_MAP,
-    PATH_지하철_MAP,
+    PATH_격자_집계구_MAP,
+    PATH_격자_관광지_MAP,
+    PATH_격자_한강_MAP,
+    PATH_격자_지하철_MAP,
     PATH_격자_MAP,
 
     PATH_자치구_MAP,
     PATH_행정동_MAP,
     PATH_집계구_MAP
 ]
+
+MONTH_PATH_LIST = [PATH_LIFE_POPULATION_JAN,
+                   PATH_LIFE_POPULATION_FEB,
+                   PATH_LIFE_POPULATION_MAR,
+                   PATH_LIFE_POPULATION_APR,
+                   PATH_LIFE_POPULATION_MAY,
+                   PATH_LIFE_POPULATION_JUN,
+                   PATH_LIFE_POPULATION_JUL,
+                   PATH_LIFE_POPULATION_AUG,
+                   PATH_LIFE_POPULATION_SEP,
+                   PATH_LIFE_POPULATION_OCT,
+                   PATH_LIFE_POPULATION_NOV,
+                   PATH_LIFE_POPULATION_DEC
+                   ]

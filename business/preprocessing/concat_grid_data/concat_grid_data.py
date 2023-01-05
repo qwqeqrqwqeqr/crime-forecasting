@@ -1,14 +1,18 @@
+from datetime import datetime
 from functools import reduce
 
 import pandas as pd
 
 from business.preprocessing.concat_grid_data.constants import GRID_NAME_LIST, GRID_PATH_LIST
-from utils.constants import PATH_시설별신고건수_RESULT
+from utils.constants import PATH_시설별_RESULT
+
+
+now = datetime.now()
 
 # 격자별로 데이터를 하나로 통합한다
 def concat_grid_data(dfs,map_key):
     concat_result = reduce(lambda left, right: pd.merge(left, right, on=map_key), dfs)
-    concat_result.to_csv(PATH_시설별신고건수_RESULT,index=False)
+    concat_result.to_csv(PATH_시설별_RESULT,now.date(),".csv",index=False)
 
 
 # 시설정보 df들을 리스트 묶음으로 변환함

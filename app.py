@@ -1,3 +1,4 @@
+from business.statistics.congestion_statistics.service import service
 from utils.utils import init
 
 if __name__ == '__main__':
@@ -22,6 +23,7 @@ if __name__ == '__main__':
     # expand_data(DEPTH,False)
 
 
-    from business.preprocessing.calculate_life_population_avg.service import service as calculate_life_population_avg
-    calculate_life_population_avg()
+    # from business.preprocessing.life_population.calculate_life_population_average import *
+    # calculate_life_population_average()
 
+    service()
