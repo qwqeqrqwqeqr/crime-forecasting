@@ -12,9 +12,8 @@ count_point_in_polygon
     map_path => 맵 경로
     map_encoding=> 맵 인코딩 방식
     map_key => 매핑하기위한 맵의 키 (ex. 격자고유번호)
-    input_path => 데이터 입력경로
+    df => 입력 데이터 프레임
     output_path => 데이터 저장경로
-    encoding => 인코딩 방식
     x_coordinate_name =>  x 좌표 이름
     y_coordinate_name =>  y 좌표 이름
     current_coordinate_system => 현재 좌표계
@@ -22,7 +21,7 @@ count_point_in_polygon
 
 GEO_JSON_DRIVER= "GeoJSON"
 
-def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,input_path, output_path, encoding, x_coordinate_name, y_coordinate_name, current_coordinate_system):
+def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system):
 
    #geojson 파일과 shp 파일에 따라 다르게 처리한다.
     if geojson_type:
@@ -31,8 +30,7 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,input_pat
         grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
 
 
-    # csv 파일을 읽고 공통적으로 처리하기 위해 x y 컬럼을 생성해줍니다.
-    df = pd.read_csv(input_path, encoding=encoding)
+
     df['x'] = df[x_coordinate_name]
     df['y'] = df[y_coordinate_name]
 
@@ -60,6 +58,8 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,input_pat
 
     # 파일을 csv 형태로 저장합니다.
     concat_result.to_csv(output_path, index=False)
+
+    return concat_result
 
 
 def concat_df(subset_df, full_df,map_key):

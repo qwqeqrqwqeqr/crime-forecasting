@@ -21,8 +21,8 @@ def convert_csv(input_path,output_path,encoding):
 input_path, output_path : 읽기 경로, 저장 경로
 key1,key2,key3,key4: center coordinate 를 도출해 낼 4개 좌표 (x,y 합쳐 총 8개)
 '''
-def get_center_coordinate(input_path,output_path,encoding,key_x1,key_x2,key_x3,key_x4,key_y1,key_y2,key_y3,key_y4):
-    df = pd.read_csv(input_path, encoding=encoding)
+def get_center_coordinate(df,key_x1,key_x2,key_x3,key_x4,key_y1,key_y2,key_y3,key_y4):
     df['x'] = (df[key_x1] + df[key_x2] + df[key_x3] + df[key_x4]) / 4
     df['y'] = (df[key_y1] + df[key_y2] + df[key_y3] + df[key_y4]) / 4
-    df[['x','y']].to_csv(output_path,index=False)
+    # df[['x','y']].to_csv(output_path,index=False)
+    return df[['x','y']]
