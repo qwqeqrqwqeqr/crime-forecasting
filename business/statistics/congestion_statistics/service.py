@@ -16,7 +16,6 @@ def service():
 
     for path in MONTH_PATH_LIST:
         for item in os.listdir(path):
-            statistics_df = pd.DataFrame([], columns=[])
 
             print("파일 : [", item, "] 의 혼잡도를 계산 합니다")
             life_population_df = pd.read_csv(path + item, encoding=EUC_KR)
@@ -50,23 +49,19 @@ def service():
                 concat_report_time_lift_population_map_df = pd.merge(grid_time_life_population_map, sub_report_df,
                                                                      on='격자고유번호', how='inner')
 
-                dfs.append(
-                    make_df(concat_report_time_lift_population_map_df, grid_time_life_population_map, day_month_year,
-                            weekday, time)
-                )
+                dfs.append(make_df(concat_report_time_lift_population_map_df, day_month_year,weekday, time))
 
             pd.concat(dfs).to_csv(save_path, index=False)
 
 
 
 #최종적으로 산출될 df
-def make_df(concat_report_time_lift_population_map_df, grid_time_life_population_map, day_month_year, weekday, time):
+def make_df(concat_report_time_lift_population_map_df, day_month_year, weekday, time):
     columns = ['기준일','요일','시간대','위험방지 신고건수','생활인구','격자고유번호']
     statistics_df = pd.DataFrame(columns=columns)
     statistics_df['위험방지 신고건수'] = concat_report_time_lift_population_map_df['count']
-    statistics_df['생활인구'] = grid_time_life_population_map['총생활인구수'] / grid_time_life_population_map[
-        'duplicate']
-    statistics_df['격자고유번호'] = grid_time_life_population_map['격자고유번호']
+    statistics_df['생활인구'] = concat_report_time_lift_population_map_df['총생활인구수'] / concat_report_time_lift_population_map_df['duplicate']
+    statistics_df['격자고유번호'] = concat_report_time_lift_population_map_df['격자고유번호']
     statistics_df['기준일'] = day_month_year
     statistics_df['요일'] = weekday
     statistics_df['시간대'] = time + "시"

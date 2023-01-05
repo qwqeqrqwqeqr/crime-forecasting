@@ -101,6 +101,7 @@ PATH_유흥주점_AFTER = PATH_AFTER + "danger_facility/서울시ᄋ
 PATH_인터넷컴퓨터게임시설_AFTER = PATH_AFTER + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
 
 PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
+PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
 
 '''
 EXPAND_PATH
@@ -136,6 +137,9 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_AFTER,
              PATH_EXPAND,
              PATH_RESULT,
+
+             PATH_LIFE_POPULATION_AFTER,
+             PATH_LIFE_POPULATION_TEMP_AFTER,
 
              PATH_시설별_RESULT,
              PATH_유형별_RESULT,

@@ -6,25 +6,22 @@ from utils.constants import *
 
 
 def calculate_life_population_average():
-    df_year= []
+    print("생활 인구의 평균을 계산 합니다.")
     for path in MONTH_PATH_LIST:
-        df_month = []
-        for item in  os.listdir(path):
-            print("파일 : [",item,"] 을 처리 합니다")
-            df_month.append(pd.read_csv(path + item, encoding=EUC_KR))
-            df_year.append(pd.read_csv(path + item, encoding=EUC_KR))
+        get_average(path, EUC_KR).to_csv(
+            PATH_LIFE_POPULATION_TEMP_AFTER + os.listdir(path)[0].split('.')[0][:-2] + ".csv")
+        print(path.split('/')[-1], "평균 파일을 저장 하였습니다.")
+
+    get_average(PATH_LIFE_POPULATION_TEMP_AFTER, UTF_8).to_csv(
+        PATH_LIFE_POPULATION_AFTER + os.listdir(PATH_LIFE_POPULATION_TEMP_AFTER)[0].split('.')[0][:-2] + ".csv")
+    print("전체 평균 파일을 저장 하였습니다.")
 
 
-        dfs = pd.concat(df_month)
-        dfs = dfs.groupby('집계구코드').mean().reset_index()
+def get_average(path, encoding):
+    dfs = []
+    for item in os.listdir(path):
+        print("파일 : [", item, "] 을 처리 합니다")
+        dfs.append(pd.read_csv(path + item, encoding=encoding))
 
-        print(path.split('/')[-1],"평균 파일을 저장합니다.")
-        dfs.to_csv(PATH_LIFE_POPULATION_AFTER + item.split('.')[0][:-2] + ".csv")
-
-
-    dfs = pd.concat(df_year)
-    dfs = dfs.groupby('집계구코드').mean().reset_index()
-    print("전체 평균 파일을 저장합니다.")
-    dfs.to_csv(PATH_LIFE_POPULATION_AFTER + item.split('.')[0][:-4] + ".csv")
-
-
+    dfs = pd.concat(dfs)
+    return dfs.groupby('집계구코드').mean().reset_index()
