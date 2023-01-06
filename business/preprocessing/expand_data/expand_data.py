@@ -98,6 +98,7 @@ def expand_data(depth,input_path,output_path,encoding):
 
     #최종적으로 확장된 데이터를 저장함
     save_data(df,output_path)
+    return df
 
 
 

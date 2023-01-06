@@ -16,7 +16,6 @@ PATH
 PATH_ORIGIN = "data/origin/"
 PATH_MAP = "data/map/"
 PATH_AFTER = "data/after/"
-PATH_EXPAND = "data/expand/"
 PATH_RESULT = "data/result/"
 
 """
@@ -103,18 +102,7 @@ PATH_인터넷컴퓨터게임시설_AFTER = PATH_AFTER + "danger_facility/서
 PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
 PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
 
-'''
-EXPAND_PATH
-'''
 
-PATH_여성안심지킴이집_EXPAND = PATH_EXPAND + "여성안심지킴이집.csv"
-PATH_여성안심택배함_EXPAND = PATH_EXPAND + "여성안심택배함.csv"
-PATH_아동안전지킴이시설물_EXPAND = PATH_EXPAND + "아동안전지킴이시설물.csv"
-PATH_편의점_EXPAND = PATH_EXPAND + "편의점.csv"
-
-PATH_경찰서_EXPAND = PATH_EXPAND + "경찰서.csv"
-PATH_치안센터_EXPAND = PATH_EXPAND + "치안센터.csv"
-PATH_파출소지구대_EXPAND = PATH_EXPAND + "파출소지구대.csv"
 
 '''
 RESULT_PATH
@@ -135,7 +123,6 @@ PATH_LIST
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,
              PATH_AFTER,
-             PATH_EXPAND,
              PATH_RESULT,
 
              PATH_LIFE_POPULATION_AFTER,
@@ -208,16 +195,17 @@ FILE_LIST = [
     PATH_집계구_MAP
 ]
 
-MONTH_PATH_LIST = [PATH_LIFE_POPULATION_JAN,
-                   PATH_LIFE_POPULATION_FEB,
-                   PATH_LIFE_POPULATION_MAR,
-                   PATH_LIFE_POPULATION_APR,
-                   PATH_LIFE_POPULATION_MAY,
-                   PATH_LIFE_POPULATION_JUN,
-                   PATH_LIFE_POPULATION_JUL,
-                   PATH_LIFE_POPULATION_AUG,
-                   PATH_LIFE_POPULATION_SEP,
-                   PATH_LIFE_POPULATION_OCT,
-                   PATH_LIFE_POPULATION_NOV,
-                   PATH_LIFE_POPULATION_DEC
-                   ]
+MONTH_PATH_LIST = [
+    PATH_LIFE_POPULATION_FEB,
+    PATH_LIFE_POPULATION_JAN,
+    PATH_LIFE_POPULATION_MAR,
+    PATH_LIFE_POPULATION_APR,
+    PATH_LIFE_POPULATION_MAY,
+    PATH_LIFE_POPULATION_JUN,
+    PATH_LIFE_POPULATION_JUL,
+    PATH_LIFE_POPULATION_AUG,
+    PATH_LIFE_POPULATION_SEP,
+    PATH_LIFE_POPULATION_OCT,
+    PATH_LIFE_POPULATION_NOV,
+    PATH_LIFE_POPULATION_DEC
+]

@@ -4,7 +4,11 @@ import pandas as pd
 
 from utils.constants import *
 
-
+'''
+생활인구의 평균치를 계산하는 코드
+파일 이름 형식 및 폴더 반드시 지킬 것  (LOCAL_PEOPLE_YYYYmmDD.csv)
+최종 파일은  PATH_LIFE_POPULATION_AFTER 에 저장됌
+'''
 def calculate_life_population_average():
     print("생활 인구의 평균을 계산 합니다.")
     for path in MONTH_PATH_LIST:
