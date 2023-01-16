@@ -2,6 +2,8 @@ from business.preprocessing.life_population.calculate_life_population_average im
 from business.statistics.congestion_statistics.service import service
 from utils.utils import init
 
+
+
 if __name__ == '__main__':
     # 초기 검사
     init()

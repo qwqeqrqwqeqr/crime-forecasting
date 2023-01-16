@@ -17,11 +17,12 @@ count_point_in_polygon
     x_coordinate_name =>  x 좌표 이름
     y_coordinate_name =>  y 좌표 이름
     current_coordinate_system => 현재 좌표계
+    duplicate_flag=> 제거 : True / 미제거 : False
 '''
 
 GEO_JSON_DRIVER= "GeoJSON"
 
-def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system):
+def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
 
    #geojson 파일과 shp 파일에 따라 다르게 처리한다.
     if geojson_type:
@@ -34,7 +35,7 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
     df['x'] = df[x_coordinate_name]
     df['y'] = df[y_coordinate_name]
 
-
+    print(df['x'].size)
     #좌표계를 뱐환합니다.
     transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), current_coordinate_system, grid_geojson.crs)
     df['x'] = transform_coordinate_result[:, 0]
@@ -43,7 +44,10 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
     df = df[['x', 'y']]
 
     # x y 제외 나머지 컬럼을 삭제한 뒤, 중복을 제거합니다.
-    df = df.drop_duplicates()
+    if duplicate_flag:
+     df = df.drop_duplicates()
+
+
 
     # polygon 과 point의 교집합을 구합니다. (polygon 내 point를 산출하기위함)
     point = GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.x, y=df.y))
@@ -52,6 +56,7 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
 
     # polygon 별 group by 를 진행합니다.
     count_result = count_in_df(point_in_polygon,map_key)
+
 
     # point가 할당되지 않은 polygon과 할당된 polygon을 중첩시킵니다.
     concat_result = concat_df(count_result, grid_geojson,map_key)
