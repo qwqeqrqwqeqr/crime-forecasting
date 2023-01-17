@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # 초기 검사
     init()
 
-    print("========== 지하철 데이터를 추출합니다. ==========")
+    print("========== 112신고 빈도데이터 - [지하철 경찰대]를 산출 합니다. ==========")
     area_map = pd.read_csv(PATH_격자_지하철_MAP, encoding=UTF_8)
     grid_map = gpd.read_file(PATH_격자_MAP, driver="GeoJSON")
     df = get_center_coordinate(pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8),

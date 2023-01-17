@@ -25,18 +25,15 @@ md_arrest,md_investigation,md_end_report,md_not_handle)
 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
 
 QUERY_INSERT_REPORT = '''INSERT INTO public.report(
-year, month, day_month_year, weekday,
-grid_number, dv_arrest, dv_investigation,
-dv_end_report, dv_not_handle, tp_arrest,
-tp_investigation, tp_end_report, tp_not_handle,
-sh_arrest, sh_investigation, sh_end_report, sh_not_handle,
-ds_arrest,ds_investigation,ds_end_report,
-ds_not_handle,da_arrest,da_investigation,
-da_end_report,da_not_handle,st_arrest,
-st_investigation,st_end_report,st_not_handle,
-ca_arrest,ca_investigation,ca_end_report,
-ca_not_handle,sv_arrest,sv_investigation,
-sv_end_report,sv_not_handle) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
+year, month, day_month_year, weekday,grid_number,
+dv_arrest,dv_investigation,dv_end_report,dv_not_handle, 
+tp_arrest,tp_investigation,tp_end_report,tp_not_handle,
+sh_arrest,sh_investigation,sh_end_report,sh_not_handle,
+ds_arrest,ds_investigation,ds_end_report,ds_not_handle,
+da_arrest,da_investigation,da_end_report,da_not_handle,
+st_arrest,st_investigation,st_end_report,st_not_handle,
+ca_arrest,ca_investigation,ca_end_report,ca_not_handle,
+sv_arrest,sv_investigation,sv_end_report,sv_not_handle) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
 
 QUERY_INSERT_SUBWAY = '''INSERT INTO public.subway(
 year,month,day_month_year,weekday,grid_number,
