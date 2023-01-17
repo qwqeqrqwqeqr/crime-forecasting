@@ -4,14 +4,11 @@ import numpy as np
 from geopandas import GeoDataFrame
 from pyproj import transform, Proj
 
-from app.utils import UTF_8, PATH_MAP
 
 '''
 Param
 count_point_in_polygon
     geojson_type => geojson : True /  shape : False
-    map_path => 맵 경로
-    map_encoding=> 맵 인코딩 방식
     map_key => 매핑하기위한 맵의 키 (ex. 격자고유번호)
     df => 입력 데이터 프레임
     output_path => 데이터 저장경로
@@ -22,16 +19,13 @@ count_point_in_polygon
 '''
 
 GEO_JSON_DRIVER= "GeoJSON"
+# geojson 파일과 shp 파일에 따라 다르게 처리한다.
+# if geojson_type:
+#     grid_geojson = gpd.read_file(map_path, driver=GEO_JSON_DRIVER)
+# else:
+#     grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
 
-def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
-
-   #geojson 파일과 shp 파일에 따라 다르게 처리한다.
-    if geojson_type:
-        grid_geojson = gpd.read_file(map_path, driver=GEO_JSON_DRIVER)
-    else:
-        grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
-        grid_geojson.to_csv(PATH_MAP+"test.csv", encoding=UTF_8, index=False)
-
+def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
 
 
     df['x'] = df[x_coordinate_name]
@@ -39,7 +33,7 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
 
     print(df['x'].size)
     #좌표계를 뱐환합니다.
-    transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), current_coordinate_system, grid_geojson.crs)
+    transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), current_coordinate_system, map.crs)
     df['x'] = transform_coordinate_result[:, 0]
     df['y'] = transform_coordinate_result[:, 1]
 
@@ -53,15 +47,15 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
 
     # polygon 과 point의 교집합을 구합니다. (polygon 내 point를 산출하기위함)
     point = GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.x, y=df.y))
-    point.crs = grid_geojson.crs
-    point_in_polygon = gpd.sjoin(point, grid_geojson[[map_key, 'geometry']], how="inner", predicate='intersects')
+    point.crs = map.crs
+    point_in_polygon = gpd.sjoin(point, map[[map_key, 'geometry']], how="inner", predicate='intersects')
 
     # polygon 별 group by 를 진행합니다.
     count_result = count_in_df(point_in_polygon,map_key)
 
 
     # point가 할당되지 않은 polygon과 할당된 polygon을 중첩시킵니다.
-    concat_result = concat_df(count_result, grid_geojson,map_key)
+    concat_result = concat_df(count_result, map,map_key)
 
     # 파일을 csv 형태로 저장합니다.
     concat_result.to_csv(output_path, index=False)
