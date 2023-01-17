@@ -1,3 +1,4 @@
+
 '''
 좌표정보
 '''
@@ -104,18 +105,6 @@ PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
 
 
 '''
-RESULT_PATH
-산출되는 7가지의 데이터 경로
-'''
-PATH_시설별_RESULT = PATH_RESULT + "facility/"
-PATH_유형별_RESULT = PATH_RESULT + "category/"
-PATH_혼잡도_RESULT = PATH_RESULT + "congestion/"
-PATH_위험지수_RESULT = PATH_RESULT + "danger/"
-PATH_한강_RESULT = PATH_RESULT + "hangang/"
-PATH_관광지_RESULT = PATH_RESULT + "tourist/"
-PATH_지하철_RESULT = PATH_RESULT + "subway/"
-
-'''
 PATH_LIST
 '''
 
@@ -126,14 +115,6 @@ PATH_LIST = [PATH_ORIGIN,
 
              PATH_LIFE_POPULATION_AFTER,
              PATH_LIFE_POPULATION_TEMP_AFTER,
-
-             PATH_시설별_RESULT,
-             PATH_유형별_RESULT,
-             PATH_혼잡도_RESULT,
-             PATH_위험지수_RESULT,
-             PATH_한강_RESULT,
-             PATH_관광지_RESULT,
-             PATH_지하철_RESULT,
 
              PATH_ORIGIN + "report/",
              PATH_ORIGIN + "danger_facility/",

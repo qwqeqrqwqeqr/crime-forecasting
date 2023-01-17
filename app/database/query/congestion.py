@@ -1,4 +1,4 @@
-from app.database.database import Database
+from app.database.database import *
 from app.database.query.constants import *
 
 

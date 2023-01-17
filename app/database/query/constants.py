@@ -12,7 +12,7 @@ QUERY_SELECT_ALL_TOURIST = "select * from public.tourist;"
 insert
 '''
 
-QUERY_INSERT_CONGESTION = '''INSERT INTO public.congestion(day_month_year, week, hour, grid_number,report_count,life_population) VALUES (%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
+QUERY_INSERT_CONGESTION = '''INSERT INTO public.congestion(day_month_year, weekday, hour, grid_number,report_count,life_population) VALUES (%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
 
 QUERY_INSERT_DANGER = '''INSERT INTO public.danger(grid_number, hc_danger_index, gc_danger_index, cc_danger_index) VALUES (%s,%s,%s,%s) ON CONFLICT (grid_number) DO NOTHING;'''
 

@@ -73,6 +73,3 @@ def fill_zero(values):
     return values.zfill(6)[0:2]
 
 
-def get_weekday(target):
-    days = ['월', '화', '수', '목', '금', '토', '일']
-    return days[date(int(target[0:4]), int(target[4:6]), int(target[6:8])).weekday()]

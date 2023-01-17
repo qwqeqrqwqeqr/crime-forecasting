@@ -1,4 +1,3 @@
-from app.database.query.congestion import get_all_congestion, insert_congestion
 from app.utils.utils import init
 
 if __name__ == '__main__':

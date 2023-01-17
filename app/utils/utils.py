@@ -1,5 +1,4 @@
 import os
-
 from app.utils.constants import FILE_LIST, PATH_LIST
 
 
