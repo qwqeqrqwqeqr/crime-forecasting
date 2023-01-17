@@ -1,10 +1,15 @@
-from app.database.query.congestion import get_all_congestion
+from app.database.query.congestion import get_all_congestion, insert_congestion
 from app.utils.utils import init
 
 if __name__ == '__main__':
     # 초기 검사
     init()
+    insert_congestion([(20210913, '월', '01시', '다사323824', 3, 333.12),
+     (20210914,  '화', '01시', '다사323824', 3, 333.12),
+     (20210915,  '수', '01시', '다사323824', 3, 333.12)])
     get_all_congestion()
+
+
 
 
     #시설별 격자 데이터 산출

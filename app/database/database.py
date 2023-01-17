@@ -21,9 +21,11 @@ class Database:
         row = self.cursor.fetchall()
         return row
 
-    def commit(self):
-        print(self.db)
 
+    def executeMany(self,query,args={}):
+        self.cursor.executemany(query,args)
+
+    def commit(self):
         self.db.commit()
 
     def close(self):
