@@ -15,8 +15,8 @@
      - `pip3 install -r requirements.txt` 
 
 ### 데이터 베이스 설정
-- 추가 예정
-- 
+- database 설정
+  - app/database/config/production.py 정보 수정
 
 ### 필수 데이터 확인
 - 추가 예정

@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 /qgis
-/data
+/app/data
 # C extensions
 *.so
 
@@ -132,3 +132,4 @@ dmypy.json
 
 DS_Store
 .idea/
+./app/config/

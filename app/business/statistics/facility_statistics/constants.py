@@ -1,4 +1,4 @@
-from utils.constants import *
+from app.utils import *
 
 GRID_NAME_LIST = [
     '112신고데이터', '생활인구', 'CCTV', '보안등', '편의점', '여성안심지킴이집', '여성안심택배함', '아동안전지킴이시설물', '인터넷컴퓨터게임시설', '노래연습장', '단란주점',

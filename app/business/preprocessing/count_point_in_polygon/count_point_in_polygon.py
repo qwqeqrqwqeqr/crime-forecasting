@@ -4,6 +4,7 @@ import numpy as np
 from geopandas import GeoDataFrame
 from pyproj import transform, Proj
 
+from app.utils import UTF_8, PATH_MAP
 
 '''
 Param
@@ -29,6 +30,7 @@ def count_point_in_polygon(geojson_type, map_path,map_encoding,map_key,df, outpu
         grid_geojson = gpd.read_file(map_path, driver=GEO_JSON_DRIVER)
     else:
         grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
+        grid_geojson.to_csv(PATH_MAP+"test.csv", encoding=UTF_8, index=False)
 
 
 

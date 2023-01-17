@@ -1,5 +1,4 @@
 from business.preprocessing.expand_data.expand_data import expand_data
-from utils.constants import *
 
 '''
 depth : 확장할 격자 범위 

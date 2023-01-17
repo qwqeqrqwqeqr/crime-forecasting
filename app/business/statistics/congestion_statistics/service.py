@@ -1,11 +1,11 @@
 import os
-from datetime import datetime, date
+from datetime import date
 
 import pandas as pd
 
 from business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
 from business.preprocessing.utils.utils import get_center_coordinate
-from utils.constants import *
+
 
 def service():
     area_map = pd.read_csv(PATH_격자_집계구_MAP, encoding=UTF_8)

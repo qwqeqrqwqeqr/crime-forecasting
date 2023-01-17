@@ -2,19 +2,18 @@ import os
 
 import pandas as pd
 
-from business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
-from business.preprocessing.expand_data.expand_data import expand_data
-from business.preprocessing.utils.utils import convert_csv, get_center_coordinate
-from utils.constants import *
+from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
+from app.business.preprocessing.expand_data.expand_data import expand_data
+from app.business.preprocessing.utils.utils import get_center_coordinate
+from app.utils import *
+from app.utils.constants import *
 
 
 def convert_to_grid_facility(df_list, expand_flag, depth):
 
 
     print("격자 별 시설 개수를 산출 합니다.")
-    # SHP 파일은 먼저 CSV로 변환한다.
-    convert_csv(PATH_아동안전지킴이시설물_ORIGIN_SHP, PATH_아동안전지킴이시설물_ORIGIN, CP_949)
-    convert_csv(PATH_편의점_ORIGIN_SHP, PATH_편의점_ORIGIN, UTF_8)
+
 
     # 안전시설
     df_list.append(

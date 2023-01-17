@@ -4,7 +4,7 @@ from functools import reduce
 import pandas as pd
 
 from business.statistics.facility_statistics.constants import GRID_NAME_LIST
-from utils.constants import PATH_시설별_RESULT
+from app.utils import PATH_시설별_RESULT
 
 
 

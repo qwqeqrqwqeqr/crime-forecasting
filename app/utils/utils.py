@@ -1,6 +1,6 @@
 import os
 
-from utils.constants import *
+from app.utils.constants import FILE_LIST, PATH_LIST
 
 
 def init():

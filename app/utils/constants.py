@@ -13,10 +13,10 @@ CP_949 = 'CP949'
 PATH
 '''
 
-PATH_ORIGIN = "data/origin/"
-PATH_MAP = "data/map/"
-PATH_AFTER = "data/after/"
-PATH_RESULT = "data/result/"
+PATH_ORIGIN = "app/data/origin/"
+PATH_MAP = "app/data/map/"
+PATH_AFTER = "app/data/after/"
+PATH_RESULT = "app/data/result/"
 
 """
 ORIGIN_PATH
@@ -42,8 +42,7 @@ PATH_여성안심지킴이집_ORIGIN = PATH_ORIGIN + "safety_facility/여성안�
 PATH_아동안전지킴이시설물_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
 PATH_편의점_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 
-PATH_아동안전지킴이시설물_ORIGIN_SHP = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.shp"
-PATH_편의점_ORIGIN_SHP = PATH_ORIGIN + "safety_facility/편의점.shp"
+
 
 PATH_LIFE_POPULATION_ORIGIN = PATH_ORIGIN + "life_population/"
 
@@ -67,7 +66,7 @@ MAP_PATH
 PATH_격자_MAP = PATH_MAP + "격자.geojson"
 
 PATH_격자_집계구_MAP = PATH_MAP + "grid_area.csv"
-PATH_격자_한강_MAP = PATH_MAP + "grid_han_river.csv"
+PATH_격자_한강_MAP = PATH_MAP + "grid_hangang.csv"
 PATH_격자_관광지_MAP = PATH_MAP + "grid_tourist.csv"
 PATH_격자_지하철_MAP = PATH_MAP + "grid_subway.csv"
 
@@ -112,7 +111,7 @@ PATH_시설별_RESULT = PATH_RESULT + "facility/"
 PATH_유형별_RESULT = PATH_RESULT + "category/"
 PATH_혼잡도_RESULT = PATH_RESULT + "congestion/"
 PATH_위험지수_RESULT = PATH_RESULT + "danger/"
-PATH_한강_RESULT = PATH_RESULT + "han_river/"
+PATH_한강_RESULT = PATH_RESULT + "hangang/"
 PATH_관광지_RESULT = PATH_RESULT + "tourist/"
 PATH_지하철_RESULT = PATH_RESULT + "subway/"
 
@@ -181,8 +180,6 @@ FILE_LIST = [
     PATH_스마트보안등_ORIGIN,
     PATH_안심택배함_ORIGIN,
     PATH_여성안심지킴이집_ORIGIN,
-    PATH_아동안전지킴이시설물_ORIGIN_SHP,
-    PATH_편의점_ORIGIN_SHP,
 
     PATH_격자_집계구_MAP,
     PATH_격자_관광지_MAP,
