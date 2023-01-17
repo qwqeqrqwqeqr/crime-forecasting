@@ -31,7 +31,6 @@ def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coo
     df['x'] = df[x_coordinate_name]
     df['y'] = df[y_coordinate_name]
 
-    print(df['x'].size)
     #좌표계를 뱐환합니다.
     transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), current_coordinate_system, map.crs)
     df['x'] = transform_coordinate_result[:, 0]
@@ -40,7 +39,7 @@ def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coo
     df = df[['x', 'y']]
 
     # x y 제외 나머지 컬럼을 삭제한 뒤, 중복을 제거합니다.
-    if duplicate_flag:
+    if duplicate_flag:g
      df = df.drop_duplicates()
 
 
