@@ -12,8 +12,8 @@ from app.utils.utils import init
 argv[1] : 112 신고 데이터
 EVT_CL_CD : 사건 종별 코드를 의미함
 END_CD : 종결 코드를 의미
-PATH_격자_한강_MAP : 한강 격자 데이터
-PATH_격자_MAP : 격자 데이터
+PATH_격자_지하철_MAP : 지하철 격자 데이터
+PATH_지하철_MAP : 격자 데이터
 '''
 
 CRIME_REPORT_PATH = sys.argv[1]

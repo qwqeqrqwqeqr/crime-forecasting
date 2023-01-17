@@ -1,7 +1,7 @@
 from pandas import DataFrame
 
 from app.business.preprocessing.utils.utils import get_weekday
-from app.database.query.subway import insert_subway
+from app.database.query.tourist import insert_tourist
 from app.utils.code_book import *
 from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
 import pandas as pd
@@ -21,7 +21,7 @@ def service(area_map, grid_map, origin_df):
                          how='inner')
     concat_df = pd.merge(concat_df, make_gc(area_map, grid_map, origin_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_cr(area_map, grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_ts(area_map, grid_map, origin_df, end_cd_mask_list), on='grid_number',
                          how='inner')
     concat_df = pd.merge(concat_df, make_md(area_map, grid_map, origin_df, end_cd_mask_list), on='grid_number',
                          how='inner')
@@ -76,13 +76,13 @@ def make_gc(area_map, grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_cr(area_map, grid_map, origin_df, end_cd_mask_list):
-    cr_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_시비) | (origin_df.EVT_CL_CD == EVT_CL_CD_폭력) | (
-            origin_df.EVT_CL_CD == EVT_CL_CD_행패소란) | (origin_df.EVT_CL_CD == EVT_CL_CD_주취자)
-    name_list = ["cr_arrest", "cr_investigation", "cr_end_report", "cr_not_handle"]
+def make_ts(area_map, grid_map, origin_df, end_cd_mask_list):
+    ts_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_교통사고) | (origin_df.EVT_CL_CD == EVT_CL_CD_교통불편) | (
+            origin_df.EVT_CL_CD == EVT_CL_CD_교통위반) | (origin_df.EVT_CL_CD == EVT_CL_CD_음주운전) | (origin_df.EVT_CL_CD == EVT_CL_CD_사망_대형사고)
+    name_list = ["ts_arrest", "ts_investigation", "ts_end_report", "ts_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[cr_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = origin_df.loc[ts_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -121,6 +121,6 @@ def insert_data(df):
          row['ac_arrest'], row['ac_investigation'], row['ac_end_report'],row['ac_not_handle'],
          row['pp_arrest'], row['pp_investigation'], row['pp_end_report'], row['pp_not_handle'],
          row['gc_arrest'], row['gc_investigation'], row['gc_end_report'], row['gc_not_handle'],
-         row['cr_arrest'], row['cr_investigation'], row['cr_end_report'], row['cr_not_handle'],
+         row['ts_arrest'], row['ts_investigation'], row['ts_end_report'], row['ts_not_handle'],
          row['md_arrest'], row['md_investigation'], row['md_end_report'], row['md_not_handle']))
-    insert_subway(temp_list)
+    insert_tourist(temp_list)

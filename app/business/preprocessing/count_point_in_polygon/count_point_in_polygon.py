@@ -39,7 +39,7 @@ def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coo
     df = df[['x', 'y']]
 
     # x y 제외 나머지 컬럼을 삭제한 뒤, 중복을 제거합니다.
-    if duplicate_flag:g
+    if duplicate_flag:
      df = df.drop_duplicates()
 
 
