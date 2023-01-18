@@ -16,7 +16,7 @@
 - database 설정
   - postgresql 설치 및 생성
   - sql_script 디렉터리 내 6개 sql 파일 확인
-  - app/database/config/production.py DB 정보에 맞게 수정
+  - app/database/config/database.ini DB 정보에 맞게 수정
 
 ### 필수 데이터 확인
 - 추가 예정
