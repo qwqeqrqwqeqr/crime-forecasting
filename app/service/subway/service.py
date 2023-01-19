@@ -132,4 +132,3 @@ def insert_data(df):
                           row['md_arrest'], row['md_investigation'], row['md_end_report'], row['md_not_handle'],row['name']))
     insert_subway(temp_list)
 
-#격자 고유번호를 슬라

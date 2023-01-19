@@ -77,7 +77,6 @@ PATH_집계구_MAP = PATH_MAP + "small_map.shp"
 '''
 AFTER_PATH
 '''
-PATH_112신고접수정보_AFTER = PATH_AFTER + "report/112신고접수.csv"
 
 PATH_경찰서_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
 PATH_치안센터_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
@@ -115,7 +114,6 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_LIFE_POPULATION_AFTER,
              PATH_LIFE_POPULATION_TEMP_AFTER,
 
-             PATH_ORIGIN + "report/",
              PATH_ORIGIN + "danger_facility/",
              PATH_ORIGIN + "police_facility/",
              PATH_ORIGIN + "safety_facility/",
@@ -143,7 +141,6 @@ PATH_LIST = [PATH_ORIGIN,
              ]
 
 FILE_LIST = [
-    PATH_112신고접수정보_ORIGIN,
 
     PATH_노래연습장_ORIGIN,
     PATH_단란주점_ORIGIN,

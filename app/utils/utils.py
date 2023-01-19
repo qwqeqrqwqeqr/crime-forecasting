@@ -34,4 +34,4 @@ def create_directory(directory):
 
 
 def slice_grid_number(s):
-    return s[-6]
+    return s[-6:]

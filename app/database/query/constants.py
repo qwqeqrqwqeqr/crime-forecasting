@@ -49,6 +49,6 @@ ac_arrest,ac_investigation,ac_end_report,ac_not_handle,
 pp_arrest,pp_investigation,pp_end_report,pp_not_handle,
 gc_arrest,gc_investigation,gc_end_report,gc_not_handle,
 ts_arrest,ts_investigation,ts_end_report,ts_not_handle,
-md_arrest,md_investigation,md_end_report,md_not_handle,) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
+md_arrest,md_investigation,md_end_report,md_not_handle,name) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number) DO NOTHING;'''
 
 
