@@ -2,9 +2,9 @@ create table if not exists public.report
 (
     year             integer,
     month            integer,
-    day_month_year   integer     not null,
+    day_month_year   integer    not null,
     weekday          varchar(2),
-    grid_number      varchar(10) not null,
+    grid_number      varchar(6) not null,
     dv_arrest        integer,
     dv_investigation integer,
     dv_end_report    integer,
@@ -39,5 +39,6 @@ create table if not exists public.report
     sv_not_handle    integer,
     constraint report_pk
         primary key (day_month_year, grid_number)
-);
+)
+
 

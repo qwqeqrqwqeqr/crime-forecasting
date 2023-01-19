@@ -7,55 +7,54 @@ from app.business.preprocessing.expand_data.expand_data import expand_data
 from app.business.preprocessing.utils.utils import get_center_coordinate
 from app.utils import *
 from app.utils.constants import *
+import geopandas as gpd
 
 
 def convert_to_grid_facility(df_list, expand_flag, depth):
-
-
     print("격자 별 시설 개수를 산출 합니다.")
-
+    grid_map = gpd.read_file(PATH_격자_MAP, driver="GeoJSON")
 
     # 안전시설
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, CP_949, '격자고유번호', pd.read_csv(PATH_CCTV_ORIGIN, encoding=EUC_KR),
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_CCTV_ORIGIN, encoding=EUC_KR),
                                PATH_CCTV_AFTER, '경도', '위도', EPSG_4326,True))
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_스마트보안등_ORIGIN, encoding=UTF_8)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_스마트보안등_ORIGIN, encoding=UTF_8)
                                , PATH_스마트보안등_AFTER, '경도', '위도', EPSG_4326,True))
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_편의점_ORIGIN, encoding=EUC_KR)
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_편의점_ORIGIN, encoding=EUC_KR)
                                    , PATH_편의점_AFTER, 'x', 'y', EPSG_5181,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_편의점_ORIGIN, encoding=EUC_KR)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_편의점_ORIGIN, encoding=EUC_KR)
                                , PATH_편의점_AFTER, 'x', 'y', EPSG_5181, True)
         df_list.append(expand_data(depth, PATH_편의점_AFTER, PATH_편의점_AFTER, UTF_8))
 
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_여성안심지킴이집_ORIGIN, encoding=UTF_8)
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_여성안심지킴이집_ORIGIN, encoding=UTF_8)
                                    , PATH_여성안심지킴이집_AFTER, 'lon', 'lat', EPSG_4326,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_여성안심지킴이집_ORIGIN, encoding=UTF_8)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_여성안심지킴이집_ORIGIN, encoding=UTF_8)
                                , PATH_여성안심지킴이집_AFTER, 'lon', 'lat', EPSG_4326, True)
         df_list.append(expand_data(depth, PATH_여성안심지킴이집_AFTER, PATH_여성안심지킴이집_AFTER, UTF_8))
 
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_안심택배함_ORIGIN, encoding=EUC_KR)
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_안심택배함_ORIGIN, encoding=EUC_KR)
                                    , PATH_여성안심택배함_AFTER, 'WGS X 좌표', 'WGS Y 좌표', EPSG_4326,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_안심택배함_ORIGIN, encoding=EUC_KR)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_안심택배함_ORIGIN, encoding=EUC_KR)
                                , PATH_여성안심택배함_AFTER, 'WGS X 좌표', 'WGS Y 좌표', EPSG_4326, True)
         df_list.append(expand_data(depth, PATH_여성안심택배함_AFTER, PATH_여성안심택배함_AFTER, UTF_8))
 
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호',
+            count_point_in_polygon(grid_map, '격자고유번호',
                                    pd.read_csv(PATH_아동안전지킴이시설물_ORIGIN, encoding=EUC_KR)
                                    , PATH_아동안전지킴이시설물_AFTER, 'x', 'y', EPSG_5181,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호',
+        count_point_in_polygon(grid_map, '격자고유번호',
                                pd.read_csv(PATH_아동안전지킴이시설물_ORIGIN, encoding=EUC_KR)
                                , PATH_아동안전지킴이시설물_AFTER, 'x', 'y', EPSG_5181, True)
         df_list.append(
@@ -63,54 +62,54 @@ def convert_to_grid_facility(df_list, expand_flag, depth):
 
     # 위험시설
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_인터넷컴퓨터게임시설_ORIGIN, encoding=CP_949)
-                               , PATH_인터넷컴퓨터게임시설_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_인터넷컴퓨터게임시설_ORIGIN, encoding=CP_949)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
 
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_노래연습장_ORIGIN, encoding=EUC_KR)
-                               , PATH_노래연습장_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_노래연습장_ORIGIN, encoding=EUC_KR)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
 
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_단란주점_ORIGIN, encoding=EUC_KR)
-                               , PATH_단란주점_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_단란주점_ORIGIN, encoding=EUC_KR)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
 
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_유흥주점_ORIGIN, encoding=EUC_KR)
-                               , PATH_유흥주점_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_유흥주점_ORIGIN, encoding=EUC_KR)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
 
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_목욕장업_ORIGIN, encoding=EUC_KR)
-                               , PATH_목욕장업_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_목욕장업_ORIGIN, encoding=EUC_KR)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
     df_list.append(
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_숙박업_ORIGIN, encoding=EUC_KR)
-                               , PATH_숙박업_AFTER, '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_숙박업_ORIGIN, encoding=EUC_KR)
+                               , '좌표정보(X)', '좌표정보(Y)', EPSG_5181,True))
 
     # 치안시설
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_파출소지구대_ORIGIN, encoding=UTF_8)
-                                   , PATH_파출소지구대_AFTER, 'lon', 'lat', EPSG_4326,True))
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_파출소지구대_ORIGIN, encoding=UTF_8)
+                                   , 'lon', 'lat', EPSG_4326,True))
     else:
-         count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_파출소지구대_ORIGIN, encoding=UTF_8)
-                               , PATH_파출소지구대_AFTER, 'lon', 'lat', EPSG_4326, True)
+         count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_파출소지구대_ORIGIN, encoding=UTF_8)
+                               , 'lon', 'lat', EPSG_4326, True)
          df_list.append(expand_data(depth, PATH_파출소지구대_AFTER, PATH_파출소지구대_AFTER, UTF_8))
 
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_치안센터_ORIGIN, encoding=UTF_8)
-                                   , PATH_치안센터_AFTER, 'lon', 'lat', EPSG_4326,True))
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_치안센터_ORIGIN, encoding=UTF_8)
+                                   , 'lon', 'lat', EPSG_4326,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_치안센터_ORIGIN, encoding=UTF_8)
-                               , PATH_치안센터_AFTER, 'lon', 'lat', EPSG_4326, True)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_치안센터_ORIGIN, encoding=UTF_8)
+                               , 'lon', 'lat', EPSG_4326, True)
         df_list.append( expand_data(depth, PATH_치안센터_AFTER, PATH_치안센터_AFTER, UTF_8))
 
     if expand_flag:
         df_list.append(
-            count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_경찰서_ORIGIN, encoding=UTF_8)
-                                   , PATH_경찰서_AFTER, 'lon', 'lat', EPSG_4326,True))
+            count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_경찰서_ORIGIN, encoding=UTF_8)
+                                   , 'lon', 'lat', EPSG_4326,True))
     else:
-        count_point_in_polygon(True, PATH_격자_MAP, UTF_8, '격자고유번호', pd.read_csv(PATH_경찰서_ORIGIN, encoding=UTF_8)
-                               , PATH_경찰서_AFTER, 'lon', 'lat', EPSG_4326, True)
+        count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_경찰서_ORIGIN, encoding=UTF_8)
+                               , 'lon', 'lat', EPSG_4326, True)
         df_list.append( expand_data(depth, PATH_경찰서_AFTER, PATH_경찰서_AFTER, UTF_8))
 
 
@@ -122,14 +121,14 @@ def convert_to_grid_facility(df_list, expand_flag, depth):
 
 
 # 112신고 접수
-def convert_to_grid_report():
+def convert_to_grid_report(grid_map):
     print("격자 별 신고 건수를 산출 합니다.")
-    return count_point_in_polygon(True, PATH_격자_MAP, CP_949, '격자고유번호'
+    return count_point_in_polygon(grid_map, '격자고유번호'
                                   ,
                                   get_center_coordinate(pd.read_csv(PATH_112신고접수정보_ORIGIN, encoding=UTF_8),
                                                         'HPPN_X_SW', 'HPPN_X_NE', 'HPPN_X_NW', 'HPPN_X_SE',
                                                         'HPPN_Y_SW', 'HPPN_Y_NE', 'HPPN_Y_NW', 'HPPN_Y_SE')
-                                  , PATH_112신고접수정보_AFTER, 'x', 'y', EPSG_4326,False)
+                                  , 'x', 'y', EPSG_4326,False)
 
 
 # 생활인구

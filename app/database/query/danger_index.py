@@ -11,7 +11,7 @@ def select_all_danger():
 
 def insert_danger(data_record_list):
     database = Database()
-    database.executeMany(QUERY_INSERT_DANGER, data_record_list)
+    database.executeMany(QUERY_INSERT_DANGER_INDEX, data_record_list)
     database.commit()
     database.close()
 

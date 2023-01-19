@@ -42,7 +42,7 @@ def make_dv(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[dv_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -56,7 +56,7 @@ def make_tp(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[tp_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -69,7 +69,7 @@ def make_sh(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[sh_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -82,7 +82,7 @@ def make_ds(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[ds_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -95,7 +95,7 @@ def make_da(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[da_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -108,7 +108,7 @@ def make_st(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[st_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -122,7 +122,7 @@ def make_ca(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[ca_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']
@@ -135,7 +135,7 @@ def make_sv(grid_map, origin_df, end_cd_mask_list):
     new_df = DataFrame()
     for i in range(4):
         temp_df = origin_df.loc[sv_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, "./test.csv", 'x', 'y', EPSG_4326, False)
+        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df,  'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호']

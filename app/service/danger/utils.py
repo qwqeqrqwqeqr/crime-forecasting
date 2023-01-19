@@ -3,15 +3,12 @@ from functools import reduce
 
 import pandas as pd
 
-from business.statistics.facility_statistics.constants import GRID_NAME_LIST
-from app.utils import PATH_시설별_RESULT
-
+from app.service.danger.constants import GRID_NAME_LIST
 
 
 # 격자별로 데이터를 하나로 통합한다
 def concat_grid_data(dfs,map_key):
-    concat_result = reduce(lambda left, right: pd.merge(left, right, on=map_key), dfs)
-    concat_result.to_csv(PATH_시설별_RESULT+"facility_result.csv",index=False)
+    return reduce(lambda left, right: pd.merge(left, right, on=map_key), dfs)
 
 
 # 시설정보 df들을 리스트 묶음으로 변환함

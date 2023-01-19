@@ -2,9 +2,9 @@ create table if not exists public.tourist
 (
     year             integer,
     month            integer,
-    day_month_year   integer     not null,
+    day_month_year   integer    not null,
     weekday          varchar(2),
-    grid_number      varchar(10) not null,
+    grid_number      varchar(6) not null,
     ac_arrest        integer,
     ac_investigation integer,
     ac_end_report    integer,
@@ -25,5 +25,6 @@ create table if not exists public.tourist
     md_investigation integer,
     md_end_report    integer,
     md_not_handle    integer,
+    name             varchar(30),
     primary key (grid_number, day_month_year)
-);
+)

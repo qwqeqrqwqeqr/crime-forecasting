@@ -23,7 +23,6 @@ PATH_RESULT = "app/data/result/"
 ORIGIN_PATH
 """
 
-PATH_112신고접수정보_ORIGIN = PATH_ORIGIN + "report/112신고접수.csv"
 
 PATH_노래연습장_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_단란주점_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"

@@ -7,11 +7,9 @@ from pyproj import transform, Proj
 
 '''
 Param
-count_point_in_polygon
-    geojson_type => geojson : True /  shape : False
+    map => map geojson 데이터
     map_key => 매핑하기위한 맵의 키 (ex. 격자고유번호)
     df => 입력 데이터 프레임
-    output_path => 데이터 저장경로
     x_coordinate_name =>  x 좌표 이름
     y_coordinate_name =>  y 좌표 이름
     current_coordinate_system => 현재 좌표계
@@ -25,7 +23,7 @@ GEO_JSON_DRIVER= "GeoJSON"
 # else:
 #     grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
 
-def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
+def count_point_in_polygon(map,map_key,df, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
 
 
     df['x'] = df[x_coordinate_name]
@@ -56,8 +54,6 @@ def count_point_in_polygon(map,map_key,df, output_path, x_coordinate_name, y_coo
     # point가 할당되지 않은 polygon과 할당된 polygon을 중첩시킵니다.
     concat_result = concat_df(count_result, map,map_key)
 
-    # 파일을 csv 형태로 저장합니다.
-    concat_result.to_csv(output_path, index=False)
 
     return concat_result
 

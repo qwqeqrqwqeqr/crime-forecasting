@@ -1,5 +1,5 @@
 import psycopg2
-from app.config.production import *
+from app.config.constants import *
 import configparser
 class Database:
 

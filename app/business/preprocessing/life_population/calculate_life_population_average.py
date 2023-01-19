@@ -2,6 +2,8 @@ import os
 
 import pandas as pd
 
+from app.utils.constants import *
+
 '''
 생활인구의 평균치를 계산하는 코드
 파일 이름 형식 및 폴더 반드시 지킬 것  (LOCAL_PEOPLE_YYYYmmDD.csv)
