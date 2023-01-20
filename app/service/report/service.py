@@ -9,40 +9,49 @@ import pandas as pd
 from app.utils.constants import *
 from app.utils.utils import slice_grid_number
 
-
-def service(grid_map, origin_df):
-    end_cd_mask_list = [end_cd_arrest_mask(origin_df), end_cd_investigation_mask(origin_df),
-                        end_cd_end_report_mask(origin_df), end_cd_not_handle_mask(origin_df)]
+'''
+@Param
+grid_map : 격자 데이터를 의미함
+report_df : 112 신고건수 데이터를 의미함
+'''
+def service(grid_map, report_df):
+    #데이터를 필터링 하기위한 4개의 종결코드 카테고리에 대한 종결코드 마스크 리스트를 만듬  (검거,계속조사,신고종결,미처리)
+    end_cd_mask_list = [end_cd_arrest_mask(report_df), end_cd_investigation_mask(report_df),
+                        end_cd_end_report_mask(report_df), end_cd_not_handle_mask(report_df)]
+    #산출 데이터 프레임을 만듦
     concat_df = DataFrame()
+    #격자 고유번호의 앞자리 ("다사")를 제거함
     concat_df['grid_number'] = grid_map['격자고유번호'].map(slice_grid_number)
 
-    concat_df = pd.merge(concat_df, make_dv(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    #사건종별코드 (총 8개) 별로 4종의 종결 코드 건수를 산출하기위한 코드입니다.
+    #가정폭력,주거침입,성폭력,데이트폭력-스토킹,데이트폭력,스토킹,아동학대,학교폭력
+    concat_df = pd.merge(concat_df, make_dv(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_tp(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_tp(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_sh(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_sh(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_ds(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_ds(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_da(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_da(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_st(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_st(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_ca(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_ca(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = pd.merge(concat_df, make_sv(grid_map, origin_df, end_cd_mask_list), on='grid_number',
+    concat_df = pd.merge(concat_df, make_sv(grid_map, report_df, end_cd_mask_list), on='grid_number',
                          how='inner')
-    concat_df = concat_sub_data(origin_df, concat_df)
+    concat_df = concat_sub_data(report_df, concat_df)
 
     insert_data(concat_df)
 
 
-def make_dv(grid_map, origin_df, end_cd_mask_list):
-    dv_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_가정폭력)
+def make_dv(grid_map, report_df, end_cd_mask_list):
+    dv_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_가정폭력)
     name_list = ["dv_arrest", "dv_investigation", "dv_end_report", "dv_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[dv_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[dv_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -51,12 +60,12 @@ def make_dv(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_tp(grid_map, origin_df, end_cd_mask_list):
-    tp_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_주거침입)
+def make_tp(grid_map, report_df, end_cd_mask_list):
+    tp_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_주거침입)
     name_list = ["tp_arrest", "tp_investigation", "tp_end_report", "tp_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[tp_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[tp_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -65,12 +74,12 @@ def make_tp(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_sh(grid_map, origin_df, end_cd_mask_list):
-    sh_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_성폭력)
+def make_sh(grid_map, report_df, end_cd_mask_list):
+    sh_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_성폭력)
     name_list = ["sh_arrest", "sh_investigation", "sh_end_report", "sh_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[sh_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[sh_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -79,12 +88,12 @@ def make_sh(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_ds(grid_map, origin_df, end_cd_mask_list):
-    ds_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_데이트폭력) | (origin_df.EVT_CL_CD == EVT_CL_CD_스토킹)
+def make_ds(grid_map, report_df, end_cd_mask_list):
+    ds_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_데이트폭력) | (report_df.EVT_CL_CD == EVT_CL_CD_스토킹)
     name_list = ["ds_arrest", "ds_investigation", "ds_end_report", "ds_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[ds_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[ds_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -93,12 +102,12 @@ def make_ds(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_da(grid_map, origin_df, end_cd_mask_list):
-    da_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_데이트폭력)
+def make_da(grid_map, report_df, end_cd_mask_list):
+    da_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_데이트폭력)
     name_list = ["da_arrest", "da_investigation", "da_end_report", "da_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[da_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[da_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -107,12 +116,12 @@ def make_da(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_st(grid_map, origin_df, end_cd_mask_list):
-    st_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_스토킹)
+def make_st(grid_map, report_df, end_cd_mask_list):
+    st_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_스토킹)
     name_list = ["st_arrest", "st_investigation", "st_end_report", "st_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[st_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[st_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -121,13 +130,13 @@ def make_st(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_ca(grid_map, origin_df, end_cd_mask_list):
-    ca_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_아동학대_가정내) | (origin_df.EVT_CL_CD == EVT_CL_CD_아동학대_가정내)
+def make_ca(grid_map, report_df, end_cd_mask_list):
+    ca_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_아동학대_가정내) | (report_df.EVT_CL_CD == EVT_CL_CD_아동학대_가정내)
 
     name_list = ["ca_arrest", "ca_investigation", "ca_end_report", "ca_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[ca_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[ca_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -136,12 +145,12 @@ def make_ca(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def make_sv(grid_map, origin_df, end_cd_mask_list):
-    sv_evt_cl_mask = (origin_df.EVT_CL_CD == EVT_CL_CD_학교폭력)
+def make_sv(grid_map, report_df, end_cd_mask_list):
+    sv_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_학교폭력)
     name_list = ["sv_arrest", "sv_investigation", "sv_end_report", "sv_not_handle"]
     new_df = DataFrame()
     for i in range(4):
-        temp_df = origin_df.loc[sv_evt_cl_mask & end_cd_mask_list[i]]
+        temp_df = report_df.loc[sv_evt_cl_mask & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(grid_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
@@ -149,11 +158,11 @@ def make_sv(grid_map, origin_df, end_cd_mask_list):
     return new_df
 
 
-def concat_sub_data(origin_df, new_df):
-    new_df.insert(0, 'weekday', get_weekday(str(origin_df['DAY'].iloc[0])))
-    new_df.insert(0, 'day_month_year', str(origin_df['DAY'].iloc[0]))
-    new_df.insert(0, 'month', str(origin_df['DAY'].iloc[0])[4:6])
-    new_df.insert(0, 'year', str(origin_df['DAY'].iloc[0])[0:4])
+def concat_sub_data(report_df, new_df):
+    new_df['weekday']= get_weekday(str(report_df['DAY'].iloc[0]))
+    new_df['day_month_year'] = str(report_df['DAY'].iloc[0])
+    new_df['month']= str(report_df['DAY'].iloc[0])[4:6]
+    new_df['year']= str(report_df['DAY'].iloc[0])[0:4]
     return new_df
 
 

@@ -8,9 +8,9 @@ from app.database.query.congestion import insert_congestion
 from app.utils.constants import *
 
 
-def service(area_map, grid_map, origin_df):
-    origin_df = origin_df.astype({'TIME': 'str'})
-    origin_df['NEW_TIME'] = origin_df['TIME'].apply(fill_zero)
+def service(area_map, grid_map, report_df):
+    report_df = report_df.astype({'TIME': 'str'})
+    report_df['NEW_TIME'] = report_df['TIME'].apply(fill_zero)
 
     for path in MONTH_PATH_LIST:
         for item in os.listdir(path):
@@ -35,8 +35,8 @@ def service(area_map, grid_map, origin_df):
                                                          right_on='집계구코드', how='inner')
 
                 # 일별 시간대별로 112신고건수 분리
-                sub_report_df = origin_df[(origin_df['NEW_TIME'] == time)]
-                sub_report_df = sub_report_df[origin_df['DAY'] == int(day_month_year)]
+                sub_report_df = report_df[(report_df['NEW_TIME'] == time)]
+                sub_report_df = sub_report_df[report_df['DAY'] == int(day_month_year)]
                 sub_report_df = count_point_in_polygon(grid_map, '격자고유번호', sub_report_df, 'x', 'y', EPSG_4326, False)
 
                 concat_report_time_lift_population_map_df = pd.merge(grid_time_life_population_map, sub_report_df,

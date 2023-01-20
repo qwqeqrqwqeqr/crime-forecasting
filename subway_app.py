@@ -12,7 +12,7 @@ from app.utils.utils import init
 argv[1] : 112 신고 데이터
 EVT_CL_CD : 사건 종별 코드를 의미함
 END_CD : 종결 코드를 의미
-PATH_격자_지하철_MAP : 지하철 격자 데이터
+PATH_GRID_SUBWAY_MAP : 지하철 격자 데이터
 PATH_지하철_MAP : 격자 데이터
 '''
 
@@ -23,9 +23,9 @@ if __name__ == '__main__':
     init()
 
     print("========== 112신고 빈도데이터 - [지하철 경찰대]를 산출 합니다. ==========")
-    area_map = pd.read_csv(PATH_격자_지하철_MAP, encoding=UTF_8)
-    grid_map = gpd.read_file(PATH_격자_MAP, driver="GeoJSON")
-    chunk_df = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8, chunksize=100000)
+    area_map = pd.read_csv(PATH_GRID_SUBWAY_MAP, encoding=UTF_8)
+    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
+    chunk_df = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8, chunksize=5)
     for chunk in chunk_df:
         df = get_center_coordinate(chunk,
                                    'HPPN_X_SW', 'HPPN_X_NE', 'HPPN_X_NW', 'HPPN_X_SE',

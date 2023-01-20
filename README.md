@@ -25,7 +25,7 @@
   - grid_hangang.csv => 한강 격자 데이터
   - grid_subway.csv => 지하철 격자 데이터
   - grid_tourist.csv => 관광지 격자 데이터
-  - 격자.geojson => 격자 데이터
+  - grid.geojson => 격자 데이터
   - large_map(dbf,prj,shp,shx) => 자치구 지리 데이터
   - middle_map(dbf,prj,shp,shx) => 행정동 지리 데이터
   - small_map(dbf,prj,shp,shx) => 집계구 지리 데이터 

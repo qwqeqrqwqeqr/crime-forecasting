@@ -24,23 +24,23 @@ ORIGIN_PATH
 """
 
 
-PATH_노래연습장_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
-PATH_단란주점_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
-PATH_목욕장업_ORIGIN = PATH_ORIGIN + "danger_facility/서울시목욕장업인허가정보.csv"
-PATH_숙박업_ORIGIN = PATH_ORIGIN + "danger_facility/서울시숙박업인허가정보.csv"
-PATH_유흥주점_ORIGIN = PATH_ORIGIN + "danger_facility/서울시유흥주점영업인허가정보.csv"
-PATH_인터넷컴퓨터게임시설_ORIGIN = PATH_ORIGIN + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
+PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
+PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
+PATH_MJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시목욕장업인허가정보.csv"
+PATH_SB_ORIGIN = PATH_ORIGIN + "danger_facility/서울시숙박업인허가정보.csv"
+PATH_YH_ORIGIN = PATH_ORIGIN + "danger_facility/서울시유흥주점영업인허가정보.csv"
+PATH_ICG_ORIGIN = PATH_ORIGIN + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
 
-PATH_경찰서_ORIGIN = PATH_ORIGIN + "police_facility/경찰서.csv"
-PATH_치안센터_ORIGIN = PATH_ORIGIN + "police_facility/치안센터.csv"
-PATH_파출소지구대_ORIGIN = PATH_ORIGIN + "police_facility/파출소지구대.csv"
+PATH_POLICE_OFFICE_ORIGIN = PATH_ORIGIN + "police_facility/경찰서.csv"
+PATH_SAFETY_CENTER_ORIGIN = PATH_ORIGIN + "police_facility/치안센터.csv"
+PATH_POICE_STATION_ORIGIN = PATH_ORIGIN + "police_facility/파출소지구대.csv"
 
 PATH_CCTV_ORIGIN = PATH_ORIGIN + "safety_facility/서울시_CCTV_설치현황.csv"
-PATH_스마트보안등_ORIGIN = PATH_ORIGIN + "safety_facility/스마트보안등.csv"
-PATH_안심택배함_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심택배함.csv"
-PATH_여성안심지킴이집_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심지킴이집.csv"
-PATH_아동안전지킴이시설물_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
-PATH_편의점_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
+PATH_SMART_SECURITY_LIGHT_ORIGIN = PATH_ORIGIN + "safety_facility/스마트보안등.csv"
+PATH_DELIVERY_BOX_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심택배함.csv"
+PATH_SAFETY_HOUSE_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심지킴이집.csv"
+PATH_SAFETY_FACILITY_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
+PATH_CONVENIENCE_STORE_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 
 
 
@@ -63,39 +63,39 @@ PATH_LIFE_POPULATION_DEC = PATH_LIFE_POPULATION_ORIGIN + "dec/"
 MAP_PATH
 '''
 
-PATH_격자_MAP = PATH_MAP + "격자.geojson"
+PATH_GRID_MAP = PATH_MAP + "grid.geojson"
 
-PATH_격자_집계구_MAP = PATH_MAP + "grid_area.csv"
-PATH_격자_한강_MAP = PATH_MAP + "grid_hangang.csv"
-PATH_격자_관광지_MAP = PATH_MAP + "grid_tourist.csv"
-PATH_격자_지하철_MAP = PATH_MAP + "grid_subway.csv"
+PATH_GRID_AREA_MAP = PATH_MAP + "grid_area.csv"
+PATH_GRID_HANGANG_MAP = PATH_MAP + "grid_hangang.csv"
+PATH_GRID_TOURIST_MAP = PATH_MAP + "grid_tourist.csv"
+PATH_GRID_SUBWAY_MAP = PATH_MAP + "grid_subway.csv"
 
-PATH_자치구_MAP = PATH_MAP + "large_map.shp"
-PATH_행정동_MAP = PATH_MAP + "middle_map.shp"
-PATH_집계구_MAP = PATH_MAP + "small_map.shp"
+PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
+PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
+PATH_SMALL_MAP = PATH_MAP + "small_map.csv"
 
 '''
 AFTER_PATH
 '''
 
-PATH_경찰서_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
-PATH_치안센터_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
-PATH_파출소지구대_AFTER = PATH_AFTER + "police_facility/파출소지구대.csv"
+PATH_POLICE_OFFICE_AFTER = PATH_AFTER + "police_facility/경찰서.csv"
+PATH_SAFETY_CENTER_AFTER = PATH_AFTER + "police_facility/치안센터.csv"
+PATH_POLICE_STATION_AFTER = PATH_AFTER + "police_facility/파출소지구대.csv"
 
 PATH_CCTV_AFTER = PATH_AFTER + "safety_facility/서울시_CCTV_설치현황.csv"
-PATH_스마트보안등_AFTER = PATH_AFTER + "safety_facility/스마트보안등.csv"
-PATH_여성안심택배함_AFTER = PATH_AFTER + "safety_facility/여성안심택배함.csv"
-PATH_여성안심지킴이집_AFTER = PATH_AFTER + "safety_facility/여성안심지킴이집.csv"
+PATH_SMART_SECURITY_LIGHT_AFTER = PATH_AFTER + "safety_facility/스마트보안등.csv"
+PATH_DELIVERY_BOX_AFTER = PATH_AFTER + "safety_facility/여성안심택배함.csv"
+PATH_SAFETY_HOUSE_AFTER = PATH_AFTER + "safety_facility/여성안심지킴이집.csv"
 
-PATH_아동안전지킴이시설물_AFTER = PATH_AFTER + "safety_facility/아동안전지킴이시설물.csv"
-PATH_편의점_AFTER = PATH_AFTER + "safety_facility/편의점.csv"
+PATH_SAFETY_FACILITY_AFTER = PATH_AFTER + "safety_facility/아동안전지킴이시설물.csv"
+PATH_CONVENIENCE_STORE_AFTER = PATH_AFTER + "safety_facility/편의점.csv"
 
-PATH_노래연습장_AFTER = PATH_AFTER + "danger_facility/서울시노래연습장업인허가정보.csv"
-PATH_단란주점_AFTER = PATH_AFTER + "danger_facility/서울시단란주점영업인허가정보.csv"
-PATH_목욕장업_AFTER = PATH_AFTER + "danger_facility/서울시목욕장업인허가정보.csv"
-PATH_숙박업_AFTER = PATH_AFTER + "danger_facility/서울시숙박업인허가정보.csv"
-PATH_유흥주점_AFTER = PATH_AFTER + "danger_facility/서울시유흥주점영업인허가정보.csv"
-PATH_인터넷컴퓨터게임시설_AFTER = PATH_AFTER + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
+PATH_NY_AFTER = PATH_AFTER + "danger_facility/서울시노래연습장업인허가정보.csv"
+PATH_DJ_AFTER = PATH_AFTER + "danger_facility/서울시단란주점영업인허가정보.csv"
+PATH_MJ_AFTER = PATH_AFTER + "danger_facility/서울시목욕장업인허가정보.csv"
+PATH_SB_AFTER = PATH_AFTER + "danger_facility/서울시숙박업인허가정보.csv"
+PATH_YH_AFTER = PATH_AFTER + "danger_facility/서울시유흥주점영업인허가정보.csv"
+PATH_ICG_AFTER = PATH_AFTER + "danger_facility/서울시인터넷컴퓨터게임시설제공업인허가정보.csv"
 
 PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
 PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
@@ -142,31 +142,31 @@ PATH_LIST = [PATH_ORIGIN,
 
 FILE_LIST = [
 
-    PATH_노래연습장_ORIGIN,
-    PATH_단란주점_ORIGIN,
-    PATH_목욕장업_ORIGIN,
-    PATH_숙박업_ORIGIN,
-    PATH_유흥주점_ORIGIN,
-    PATH_인터넷컴퓨터게임시설_ORIGIN,
+    PATH_NY_ORIGIN,
+    PATH_DJ_ORIGIN,
+    PATH_MJ_ORIGIN,
+    PATH_SB_ORIGIN,
+    PATH_YH_ORIGIN,
+    PATH_ICG_ORIGIN,
 
-    PATH_경찰서_ORIGIN,
-    PATH_치안센터_ORIGIN,
-    PATH_파출소지구대_ORIGIN,
+    PATH_POLICE_OFFICE_ORIGIN,
+    PATH_SAFETY_CENTER_ORIGIN,
+    PATH_POICE_STATION_ORIGIN,
 
     PATH_CCTV_ORIGIN,
-    PATH_스마트보안등_ORIGIN,
-    PATH_안심택배함_ORIGIN,
-    PATH_여성안심지킴이집_ORIGIN,
+    PATH_SMART_SECURITY_LIGHT_ORIGIN,
+    PATH_DELIVERY_BOX_ORIGIN,
+    PATH_SAFETY_HOUSE_ORIGIN,
 
-    PATH_격자_집계구_MAP,
-    PATH_격자_관광지_MAP,
-    PATH_격자_한강_MAP,
-    PATH_격자_지하철_MAP,
-    PATH_격자_MAP,
+    PATH_GRID_AREA_MAP,
+    PATH_GRID_TOURIST_MAP,
+    PATH_GRID_HANGANG_MAP,
+    PATH_GRID_SUBWAY_MAP,
+    PATH_GRID_MAP,
 
-    PATH_자치구_MAP,
-    PATH_행정동_MAP,
-    PATH_집계구_MAP
+    PATH_LARGE_MAP,
+    PATH_MIDDLE_MAP,
+    PATH_SMALL_MAP
 ]
 
 MONTH_PATH_LIST = [
