@@ -1,12 +1,6 @@
 import sys
-
 import pandas as pd
-import geopandas as gpd
-
-from app.business.preprocessing.utils.utils import get_center_coordinate
-from app.model.report import Report
 from app.utils.constants import *
-from app.utils.utils import init
 
 '''
 입력 신고 데이터 포멧 : KPU_99_YYYYMMDD_C_001.csv 
@@ -21,14 +15,22 @@ CRIME_REPORT_PATH = sys.argv[1]
 
 if __name__ == '__main__':
     # 초기 검사
+    from app.utils.utils import init
     init()
 
     print("========== 112신고 빈도데이터 - [지하철 경찰대]를 산출 합니다. ==========")
-    area_map = pd.read_csv(PATH_GRID_SUBWAY_MAP, encoding=UTF_8)
-    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
 
-    report = Report(CRIME_REPORT_PATH, UTF_8)
-    day_month_year_list = list(set(report.day.tolist()))
+    area_map = pd.read_csv(PATH_GRID_SUBWAY_MAP, encoding=UTF_8)
+
+    from app.model.grid_map import GridMap
+    grid_map = GridMap(PATH_GRID_MAP)
+
+    report = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8)
+
+
+    day_month_year_list = list(set(report['DAY'].values.tolist()))
     for day_month_year in day_month_year_list:
+
         from app.service.subway.service import service
-        service(area_map, grid_map, report.date_report(day_month_year))
+        from app.model.report import Report
+        service(area_map, grid_map,Report(report.loc[report['DAY'] == day_month_year]))

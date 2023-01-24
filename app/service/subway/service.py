@@ -12,16 +12,13 @@ from app.utils.utils import slice_grid_number
 
 
 def service(area_map, grid_map, report):
-
-
     concat_df = DataFrame()
-    concat_df['grid_number'] = area_map['격자고유번호'].map(slice_grid_number)
+    concat_df['grid_number'] = grid_map.grid_number
 
     for i in range(len(name_list)):
         concat_df = pd.merge(concat_df,
-                             make_df(area_map,grid_map,report,evt_cl_cd_mask_list(report)[i],end_cd_mask_list(report),name_list[i]),
+                             make_df(area_map,grid_map.grid_map,report.report,evt_cl_cd_mask_list(report.report)[i],end_cd_mask_list(report.report),name_list[i]),
                              on='grid_number',how='inner')
-
     concat_df = concat_sub_data(report, concat_df)
 
     insert_data(concat_df)
@@ -37,17 +34,12 @@ def make_df(area_map,grid_map,report,evt_cl_cd_mask_list,end_cd_mask_list,name_l
         new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
         new_df['name'] = concat_df['지하철']
     return new_df
-
-
-
-
 def concat_sub_data(report, new_df):
-    new_df.insert(0, 'weekday', get_weekday(str(report['DAY'].iloc[0])))
-    new_df.insert(0, 'day_month_year', str(report['DAY'].iloc[0]))
-    new_df.insert(0, 'month', str(report['DAY'].iloc[0])[4:6])
-    new_df.insert(0, 'year', str(report['DAY'].iloc[0])[0:4])
+    new_df.insert(0,'weekday', str(report.weekday.iloc[0]))
+    new_df.insert(0,'day_month_year', str(report.day.iloc[0]))
+    new_df.insert(0,'month', str(report.day.iloc[0])[4:6])
+    new_df.insert(0,'year', str(report.day.iloc[0])[0:4])
     return new_df
-
 
 def insert_data(df):
     temp_list = []
@@ -58,5 +50,6 @@ def insert_data(df):
                           row['gc_arrest'], row['gc_investigation'], row['gc_end_report'], row['gc_not_handle'],
                           row['cr_arrest'], row['cr_investigation'], row['cr_end_report'], row['cr_not_handle'],
                           row['md_arrest'], row['md_investigation'], row['md_end_report'], row['md_not_handle'],row['name']))
+    print(temp_list)
     insert_subway(temp_list)
 
