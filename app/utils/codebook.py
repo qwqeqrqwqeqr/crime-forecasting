@@ -142,4 +142,9 @@ def end_cd_not_handle_mask(df):
             df.END_CD == END_CD_신고취소) | (df.END_CD == END_CD_무조취종결) | (df.END_CD == END_CD_무응답) | (
             df.END_CD == END_CD_미도착종결)
 
+def end_cd_mask_list(report) :
+    return [end_cd_arrest_mask(report),
+            end_cd_investigation_mask(report),
+            end_cd_end_report_mask(report),
+            end_cd_not_handle_mask(report)]
 

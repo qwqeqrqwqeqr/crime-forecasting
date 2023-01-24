@@ -1,8 +1,8 @@
-import numpy as np
 from pandas import DataFrame
 
 from app.business.preprocessing.utils.utils import get_weekday
 from app.database.query.subway import insert_subway
+from app.service.subway.constants import evt_cl_cd_mask_list, name_list
 from app.utils.codebook import *
 from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
 import pandas as pd
@@ -11,113 +11,41 @@ from app.utils.constants import *
 from app.utils.utils import slice_grid_number
 
 
-def service(area_map, grid_map, report_df):
-    end_cd_mask_list = [end_cd_arrest_mask(report_df), end_cd_investigation_mask(report_df),
-                        end_cd_end_report_mask(report_df), end_cd_not_handle_mask(report_df)]
+def service(area_map, grid_map, report):
+
+
     concat_df = DataFrame()
     concat_df['grid_number'] = area_map['격자고유번호'].map(slice_grid_number)
 
-    concat_df = pd.merge(concat_df, make_ac(area_map, grid_map, report_df, end_cd_mask_list), on='grid_number',
-                         how='inner')
-    concat_df = pd.merge(concat_df, make_pp(area_map, grid_map, report_df, end_cd_mask_list), on='grid_number',
-                         how='inner')
-    concat_df = pd.merge(concat_df, make_gc(area_map, grid_map, report_df, end_cd_mask_list), on='grid_number',
-                         how='inner')
-    concat_df = pd.merge(concat_df, make_cr(area_map, grid_map, report_df, end_cd_mask_list), on='grid_number',
-                         how='inner')
-    concat_df = pd.merge(concat_df, make_md(area_map, grid_map, report_df, end_cd_mask_list), on='grid_number',
-                         how='inner')
-    concat_df = concat_sub_data(report_df, concat_df)
+    for i in range(len(name_list)):
+        concat_df = pd.merge(concat_df,
+                             make_df(area_map,grid_map,report,evt_cl_cd_mask_list(report)[i],end_cd_mask_list(report),name_list[i]),
+                             on='grid_number',how='inner')
+
+    concat_df = concat_sub_data(report, concat_df)
 
     insert_data(concat_df)
 
 
-def make_ac(area_map, grid_map, report_df, end_cd_mask_list):
-    ac_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_보호조치) | (report_df.EVT_CL_CD == EVT_CL_CD_위험방지) | (
-            report_df.EVT_CL_CD == EVT_CL_CD_비상벨)
-    name_list = ["ac_arrest", "ac_investigation", "ac_end_report", "ac_not_handle"]
+def make_df(area_map,grid_map,report,evt_cl_cd_mask_list,end_cd_mask_list,name_list):
     new_df = DataFrame()
-    for i in range(4):
-        temp_df = report_df.loc[ac_evt_cl_mask & end_cd_mask_list[i]]
+    for i in range(len(name_list)):
+        temp_df = report.loc[evt_cl_cd_mask_list & end_cd_mask_list[i]]
         count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
         concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
         new_df['name'] = concat_df['지하철']
-
     return new_df
 
 
-def make_pp(area_map, grid_map, report_df, end_cd_mask_list):
-    pp_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_분실습득) | (report_df.EVT_CL_CD == EVT_CL_CD_절도) | (
-            report_df.EVT_CL_CD == EVT_CL_CD_재물손괴) | (report_df.EVT_CL_CD == EVT_CL_CD_사기)
-    name_list = ["pp_arrest", "pp_investigation", "pp_end_report", "pp_not_handle"]
-    new_df = DataFrame()
-
-    for i in range(4):
-        temp_df = report_df.loc[pp_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
-        concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
-        new_df[name_list[i]] = concat_df['count']
-        new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
-        new_df['name'] = concat_df['지하철']
-
-    return new_df
 
 
-def make_gc(area_map, grid_map, report_df, end_cd_mask_list):
-    gc_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_성폭력) | (report_df.EVT_CL_CD == EVT_CL_CD_데이트폭력) | (
-            report_df.EVT_CL_CD == EVT_CL_CD_스토킹)
-    name_list = ["gc_arrest", "gc_investigation", "gc_end_report", "gc_not_handle"]
-    new_df = DataFrame()
-    for i in range(4):
-        temp_df = report_df.loc[gc_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
-        concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
-        new_df[name_list[i]] = concat_df['count']
-        new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
-        new_df['name'] = concat_df['지하철']
-
-    return new_df
-
-
-def make_cr(area_map, grid_map, report_df, end_cd_mask_list):
-    cr_evt_cl_mask = (report_df.EVT_CL_CD == EVT_CL_CD_시비) | (report_df.EVT_CL_CD == EVT_CL_CD_폭력) | (
-            report_df.EVT_CL_CD == EVT_CL_CD_행패소란) | (report_df.EVT_CL_CD == EVT_CL_CD_주취자)
-    name_list = ["cr_arrest", "cr_investigation", "cr_end_report", "cr_not_handle"]
-    new_df = DataFrame()
-    for i in range(4):
-        temp_df = report_df.loc[cr_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
-        concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
-        new_df[name_list[i]] = concat_df['count']
-        new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
-        new_df['name'] = concat_df['지하철']
-
-    return new_df
-
-
-def make_md(area_map, grid_map, report_df, end_cd_mask_list):
-    md_evt_cl_mask = ((report_df.EVT_CL_CD == EVT_CL_CD_화재) | (report_df.EVT_CL_CD == EVT_CL_CD_재해재난)) & (
-            report_df.RECV_EMG_CD == RECV_EMG_CD_긴급)
-    name_list = ["md_arrest", "md_investigation", "md_end_report", "md_not_handle"]
-    new_df = DataFrame()
-    for i in range(4):
-        temp_df = report_df.loc[md_evt_cl_mask & end_cd_mask_list[i]]
-        count_point_df = count_point_in_polygon(grid_map, '격자고유번호', temp_df, 'x', 'y', EPSG_4326, False)
-        concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
-        new_df[name_list[i]] = concat_df['count']
-        new_df['grid_number'] = concat_df['격자고유번호'].map(slice_grid_number)
-        new_df['name'] = concat_df['지하철']
-
-    return new_df
-
-
-def concat_sub_data(report_df, new_df):
-    new_df.insert(0, 'weekday', get_weekday(str(report_df['DAY'].iloc[0])))
-    new_df.insert(0, 'day_month_year', str(report_df['DAY'].iloc[0]))
-    new_df.insert(0, 'month', str(report_df['DAY'].iloc[0])[4:6])
-    new_df.insert(0, 'year', str(report_df['DAY'].iloc[0])[0:4])
+def concat_sub_data(report, new_df):
+    new_df.insert(0, 'weekday', get_weekday(str(report['DAY'].iloc[0])))
+    new_df.insert(0, 'day_month_year', str(report['DAY'].iloc[0]))
+    new_df.insert(0, 'month', str(report['DAY'].iloc[0])[4:6])
+    new_df.insert(0, 'year', str(report['DAY'].iloc[0])[0:4])
     return new_df
 
 
