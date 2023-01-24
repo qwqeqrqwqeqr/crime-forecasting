@@ -3,7 +3,7 @@ from functools import reduce
 
 import pandas as pd
 
-from app.service.danger.constants import GRID_NAME_LIST
+from app.service.danger_index.constants import GRID_NAME_LIST
 
 
 # 격자별로 데이터를 하나로 통합한다

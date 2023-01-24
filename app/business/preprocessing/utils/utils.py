@@ -1,6 +1,5 @@
 from datetime import date
 
-import geopandas as gpd
 
 
 

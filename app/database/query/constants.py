@@ -2,7 +2,7 @@
 select all
 '''
 QUERY_SELECT_ALL_CONGESTION = "select * from public.congestion;"
-QUERY_SELECT_ALL_DANGER = "select * from public.danger;"
+QUERY_SELECT_ALL_DANGER = "select * from public.danger_index;"
 QUERY_SELECT_ALL_HANGANG = "select * from public.hangang;"
 QUERY_SELECT_ALL_REPORT = "select * from public.report;"
 QUERY_SELECT_ALL_SUBWAY = "select * from public.subway;"

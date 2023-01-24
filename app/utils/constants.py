@@ -15,14 +15,12 @@ PATH
 '''
 
 PATH_ORIGIN = "app/data/origin/"
-PATH_MAP = "app/data/map/"
 PATH_AFTER = "app/data/after/"
-PATH_RESULT = "app/data/result/"
+PATH_MAP = "app/data/map/"
 
-"""
+'''
 ORIGIN_PATH
-"""
-
+'''
 
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
@@ -101,7 +99,6 @@ PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
 PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
 
 
-
 '''
 PATH_LIST
 '''
@@ -109,7 +106,6 @@ PATH_LIST
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,
              PATH_AFTER,
-             PATH_RESULT,
 
              PATH_LIFE_POPULATION_AFTER,
              PATH_LIFE_POPULATION_TEMP_AFTER,

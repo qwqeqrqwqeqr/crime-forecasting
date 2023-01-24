@@ -1,9 +1,11 @@
-from app.business.preprocessing.utils.utils import read_shp
-from app.utils.constants import *
+import re
+
+from app.model.report import Report
+from app.utils.constants import UTF_8
 
 if __name__ == '__main__':
-    shp=read_shp("./app/data/map/large_map.shp",CP_949)
+    report = Report("./data_sample/report2022_novdec.csv", encoding=UTF_8)
 
-    shp.to_csv("./large_map.csv")
-    print(shp)
-
+    # print(report.__get__())
+    print(report.time)
+    # print(report.get_week_day())
