@@ -51,9 +51,9 @@ def concat_date_df(report, new_df):
 
 
 def insert_data(df):
-    inert_list = []
+    insert_list = []
     for idx, row in df.iterrows():
-        inert_list.append(to_insert_list(row))
+        insert_list.append(to_insert_list(row))
 
     from app.database.query.hangang import insert_hangang
-    insert_hangang(inert_list)
+    insert_hangang(insert_list)

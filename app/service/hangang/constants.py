@@ -29,4 +29,4 @@ def to_insert_list(df):
             df['ac_arrest'], df['ac_investigation'], df['ac_end_report'], df['ac_not_handle'],
             df['ls_arrest'], df['ls_investigation'], df['ls_end_report'], df['ls_not_handle'],
             df['ts_arrest'], df['ts_investigation'], df['ts_end_report'], df['ts_not_handle'],
-            df['md_arrest'], df['md_investigation'], df['md_end_report'], df['md_not_handle'], df['name'])
+            df['md_arrest'], df['md_investigation'], df['md_end_report'], df['md_not_handle'], df['name_x'].iloc[1])

@@ -48,9 +48,9 @@ def concat_date_df(report, new_df):
 
 
 def insert_data(df):
-    inert_list= []
+    insert_list= []
     for idx, row in df.iterrows():
-        inert_list.append(to_insert_list(row))
+        insert_list.append(to_insert_list(row))
 
     from app.database.query.subway import insert_subway
-    insert_subway(inert_list)
+    insert_subway(insert_list)

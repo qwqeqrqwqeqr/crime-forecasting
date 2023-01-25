@@ -3,7 +3,7 @@ import pandas as pd
 from app.utils.constants import *
 
 '''
-입력 신고 데이터 포멧 : KPU_99_YYYYMMDD_C_001.csv 
+입력 신고 데이터 포멧 : POL_01_YYYYMMDD_M.csv 
 argv[1] : 112 신고 데이터
 EVT_CL_CD : 사건 종별 코드를 의미함
 END_CD : 종결 코드를 의미
