@@ -9,7 +9,7 @@ def service(area_map, grid_map, report):
     concat_df = DataFrame()
     concat_df['grid_number'] = grid_map.grid_number
 
-    for i in range(len(name_list)):
+    for i in range(len(name_list)):         # concat filtered evt, cd  df
         concat_df = pd.merge(concat_df,
                              make_df(
                                  area_map, grid_map.grid_map,
@@ -17,7 +17,7 @@ def service(area_map, grid_map, report):
                                  evt_cl_cd_mask_list(report.report)[i],
                                  end_cd_mask_list(report.report), name_list[i]),
                              on='grid_number', how='inner')
-    concat_df = concat_sub_data(report, concat_df)
+    concat_df = concat_date_df(report, concat_df)       # concat date df
 
     insert_data(concat_df)
 
@@ -39,7 +39,7 @@ def make_df(area_map, grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, n
     return new_df
 
 
-def concat_sub_data(report, new_df):
+def concat_date_df(report, new_df):
     new_df.insert('weekday', str(report.weekday.iloc[0]))
     new_df.insert('day_month_year', str(report.day.iloc[0]))
     new_df.insert('month', str(report.day.iloc[0])[4:6])
@@ -48,9 +48,9 @@ def concat_sub_data(report, new_df):
 
 
 def insert_data(df):
-    temp_list = []
+    inert_list= []
     for idx, row in df.iterrows():
-        temp_list.append(get_df_for_insert)
+        inert_list.append(to_insert_list(row))
 
     from app.database.query.subway import insert_subway
-    insert_subway(temp_list)
+    insert_subway(inert_list)

@@ -22,7 +22,7 @@ name_list = [
     ["md_arrest", "md_investigation", "md_end_report", "md_not_handle"]
 ]
 
-def get_df_for_insert(df):
+def to_insert_list(df):
     return (df['year'], df['month'], df['day_month_year'], df['weekday'], df['grid_number'],
      df['ac_arrest'], df['ac_investigation'], df['ac_end_report'], df['ac_not_handle'],
      df['pp_arrest'], df['pp_investigation'], df['pp_end_report'], df['pp_not_handle'],

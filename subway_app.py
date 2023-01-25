@@ -28,7 +28,6 @@ if __name__ == '__main__':
     from app.model.grid_map import GridMap
     grid_map = GridMap(PATH_GRID_MAP)
 
-
     for day_month_year in report.get_day_list():
         from app.service.subway.service import service
         service(area_map, grid_map,report.get_report_filtered_day(day_month_year))
