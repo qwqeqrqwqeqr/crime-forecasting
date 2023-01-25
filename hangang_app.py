@@ -5,7 +5,6 @@ import geopandas as gpd
 
 from app.business.preprocessing.utils.utils import get_center_coordinate
 from app.utils.constants import *
-from app.utils.utils import init
 
 '''
 입력 신고 데이터 포멧 : KPU_99_YYYYMMDD_C_001.csv 
@@ -20,21 +19,21 @@ CRIME_REPORT_PATH = sys.argv[1]
 
 
 if __name__ == '__main__':
-    # 초기 검사
-    init()
+    from app.utils.utils import init
+    init()          # 초기 검사
 
     print("========== 112신고 빈도데이터 - [한강 경찰대]를 산출 합니다. ==========")
+
     area_map = pd.read_csv(PATH_GRID_HANGANG_MAP, encoding=UTF_8)
-    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
-    chunk_df = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8,chunksize=5)
-    for chunk in chunk_df:
-        df = get_center_coordinate(chunk_df,
-                                   'HPPN_X_SW', 'HPPN_X_NE', 'HPPN_X_NW', 'HPPN_X_SE',
-                                   'HPPN_Y_SW', 'HPPN_Y_NE', 'HPPN_Y_NW', 'HPPN_Y_SE').fillna(0).astype(
-            {'EVT_CL_CD': 'int', 'END_CD': 'int'})
-        day_month_year_list = list(set(df['DAY'].values.tolist()))
-        for day_month_year in day_month_year_list:
-            from app.service.hangang.service import service
-            service(area_map,grid_map,df.loc[df['DAY'] == day_month_year])
+
+    from app.model.report import Report
+    report = Report(pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8))
+
+    from app.model.grid_map import GridMap
+    grid_map = GridMap(PATH_GRID_MAP)
+
+    for day_month_year in report.get_day_list():
+        from app.service.hangang.service import service
+        service(area_map,grid_map,report.get_report_filtered_day(day_month_year))
 
 

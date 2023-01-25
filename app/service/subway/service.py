@@ -40,10 +40,10 @@ def make_df(area_map, grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, n
 
 
 def concat_date_df(report, new_df):
-    new_df.insert('weekday', str(report.weekday.iloc[0]))
-    new_df.insert('day_month_year', str(report.day.iloc[0]))
-    new_df.insert('month', str(report.day.iloc[0])[4:6])
-    new_df.insert('year', str(report.day.iloc[0])[0:4])
+    new_df.insert(0, 'weekday', str(report.weekday.iloc[0]))
+    new_df.insert(0, 'day_month_year', str(report.day.iloc[0]))
+    new_df.insert(0, 'month', str(report.day.iloc[0])[4:6])
+    new_df.insert(0, 'year', str(report.day.iloc[0])[0:4])
     return new_df
 
 
