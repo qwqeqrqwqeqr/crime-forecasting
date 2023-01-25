@@ -17,11 +17,7 @@ Param
 '''
 
 GEO_JSON_DRIVER= "GeoJSON"
-# geojson 파일과 shp 파일에 따라 다르게 처리한다.
-# if geojson_type:
-#     grid_geojson = gpd.read_file(map_path, driver=GEO_JSON_DRIVER)
-# else:
-#     grid_geojson = gpd.read_file(map_path, encoding=map_encoding)
+
 
 def count_point_in_polygon(map,map_key,df, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
 

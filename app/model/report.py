@@ -5,6 +5,9 @@ from datetime import date
 class Report:  # 112 신고 건수 DaraFrame Class
 
     def __init__(self, data_frame):
+        self.__week_day_list  = ['월', '화', '수', '목', '금', '토', '일']
+
+
         self.__report = data_frame
         self.__report["TIME"] = self.__report["TIME"].map(lambda x: str(x).zfill(6)[0:2])
         self.__report["weekday"] = self.__report["DAY"].map(
@@ -25,7 +28,10 @@ class Report:  # 112 신고 건수 DaraFrame Class
         self.__end_cd = self.__report["END_CD"]        # 종결 코드
         self.__x = self.__report["x"]
         self.__y = self.__report["y"]
-        self.__week_day_list  = ['월', '화', '수', '목', '금', '토', '일']
+
+
+    def get_day_list(self) : return list(set(self.__day.values.tolist()))
+    def get_report_filtered_day(self,day_month_year): return Report(self.__report.loc[self.__day == day_month_year])
 
     @property
     def report(self):

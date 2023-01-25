@@ -30,8 +30,3 @@ def create_directory(directory):
             os.makedirs(directory)
     except OSError:
         print('Error: 디렉터리 생성을 실패 하였습니다. [%s]'%(directory.split('/')[-1]))
-
-
-
-def slice_grid_number(s):
-    return s[-6:]

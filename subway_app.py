@@ -21,17 +21,14 @@ if __name__ == '__main__':
     print("========== 112신고 빈도데이터 - [지하철 경찰대]를 산출 합니다. ==========")
 
     area_map = pd.read_csv(PATH_GRID_SUBWAY_MAP, encoding=UTF_8)
-    report = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8)
 
+    from app.model.report import Report
+    report = Report(pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8))
 
     from app.model.grid_map import GridMap
     grid_map = GridMap(PATH_GRID_MAP)
 
 
-
-    day_month_year_list = list(set(report['DAY'].values.tolist()))
-    for day_month_year in day_month_year_list:
-
+    for day_month_year in report.get_day_list():
         from app.service.subway.service import service
-        from app.model.report import Report
-        service(area_map, grid_map,Report(report.loc[report['DAY'] == day_month_year]))
+        service(area_map, grid_map,report.get_report_filtered_day(day_month_year))
