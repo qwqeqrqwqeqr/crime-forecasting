@@ -14,18 +14,19 @@ PATH_지하철_MAP : 격자 데이터
 CRIME_REPORT_PATH = sys.argv[1]
 
 if __name__ == '__main__':
-    # 초기 검사
+
     from app.utils.utils import init
-    init()
+    init()      # 초기 검사
 
     print("========== 112신고 빈도데이터 - [지하철 경찰대]를 산출 합니다. ==========")
 
     area_map = pd.read_csv(PATH_GRID_SUBWAY_MAP, encoding=UTF_8)
+    report = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8)
+
 
     from app.model.grid_map import GridMap
     grid_map = GridMap(PATH_GRID_MAP)
 
-    report = pd.read_csv(CRIME_REPORT_PATH, encoding=UTF_8)
 
 
     day_month_year_list = list(set(report['DAY'].values.tolist()))

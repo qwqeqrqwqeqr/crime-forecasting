@@ -50,6 +50,5 @@ def insert_data(df):
                           row['gc_arrest'], row['gc_investigation'], row['gc_end_report'], row['gc_not_handle'],
                           row['cr_arrest'], row['cr_investigation'], row['cr_end_report'], row['cr_not_handle'],
                           row['md_arrest'], row['md_investigation'], row['md_end_report'], row['md_not_handle'],row['name']))
-    print(temp_list)
     insert_subway(temp_list)
 
