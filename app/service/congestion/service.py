@@ -6,12 +6,11 @@ from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon im
 from app.business.preprocessing.utils.utils import get_weekday, get_center_coordinate
 from app.database.query.congestion import insert_congestion
 from app.utils.constants import *
-from app.utils.utils import slice_grid_number
 
 
 def service(area_map, grid_map, report_df):
-    report_df = report_df.astype({'TIME': 'str'})
-    report_df['NEW_TIME'] = report_df['TIME'].apply(fill_zero)
+
+    report_df['NEW_TIME'] = report_df.time
 
     # 디렉터리 개수 만큼 반복이 된다 (현재 기준 12개)  (현재 생활 인구를 월별로 분류 해두었기 때문이다.)
     for path in MONTH_PATH_LIST:
@@ -64,9 +63,6 @@ def make_df(concat_report_time_lift_population_map_df, day_month_year, weekday, 
 
     return statistics_df
 
-
-def fill_zero(values):
-    return values.zfill(6)[0:2]
 
 
 def insert_data(df):

@@ -4,7 +4,6 @@ import pandas as pd
 from app.service.subway.constants import *
 from app.utils.constants import *
 
-
 def service(area_map, grid_map, report):
     concat_df = DataFrame()
     concat_df['grid_number'] = grid_map.grid_number

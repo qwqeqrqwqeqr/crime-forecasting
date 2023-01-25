@@ -1,4 +1,3 @@
-
 '''
 좌표정보
 '''
@@ -40,8 +39,6 @@ PATH_SAFETY_HOUSE_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심지킴이�
 PATH_SAFETY_FACILITY_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
 PATH_CONVENIENCE_STORE_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 
-
-
 PATH_LIFE_POPULATION_ORIGIN = PATH_ORIGIN + "life_population/"
 
 PATH_LIFE_POPULATION_JAN = PATH_LIFE_POPULATION_ORIGIN + "jan/"
@@ -67,6 +64,7 @@ PATH_GRID_AREA_MAP = PATH_MAP + "grid_area.csv"
 PATH_GRID_HANGANG_MAP = PATH_MAP + "grid_hangang.csv"
 PATH_GRID_TOURIST_MAP = PATH_MAP + "grid_tourist.csv"
 PATH_GRID_SUBWAY_MAP = PATH_MAP + "grid_subway.csv"
+PATH_GRID_CONGESTION_MAP = PATH_MAP + "grid_congestion.csv"
 
 PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
 PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
@@ -97,7 +95,6 @@ PATH_ICG_AFTER = PATH_AFTER + "danger_facility/서울시인ᄐ
 
 PATH_LIFE_POPULATION_AFTER = PATH_AFTER + "life_population/"
 PATH_LIFE_POPULATION_TEMP_AFTER = PATH_AFTER + "life_population/month/"
-
 
 '''
 PATH_LIST
@@ -158,6 +155,7 @@ FILE_LIST = [
     PATH_GRID_TOURIST_MAP,
     PATH_GRID_HANGANG_MAP,
     PATH_GRID_SUBWAY_MAP,
+    PATH_GRID_CONGESTION_MAP,
     PATH_GRID_MAP,
 
     PATH_LARGE_MAP,

@@ -1,16 +1,11 @@
-'''
-신고 유형
-'''
+# 신고 유형
 RECV_EMG_CD_긴급="C0"
 RECV_EMG_CD_중요="C1"
 RECV_EMG_CD_일반="C2"
 RECV_EMG_CD_민원="C3"
 RECV_EMG_CD_기타="C4"
 
-'''
-종결 코드
-'''
-
+# 종결 코드
 END_CD_체포 = 101
 END_CD_임의동행 = 102
 END_CD_통고처분 = 103
@@ -50,9 +45,7 @@ END_CD_동일 = 708
 END_CD_이첩 = 709
 END_CD_FAX전송종결 = 710
 
-'''
-사건 종별 코드
-'''
+# 사건 종별 코드
 EVT_CL_CD_살인 = 101
 EVT_CL_CD_강도 = 102
 EVT_CL_CD_치기 = 103
