@@ -3,9 +3,9 @@ import pandas as pd
 from app.utils.constants import *
 
 '''
-위험지수는 한 달 단위로 계산 됩니다.
-122 신고 데이터 :  (현재 2021년 )
-생활인구 데이터 포멧 :  (현재 : 2021년 데이터 총 365개)
+위험지수는 1달 단위로 계산함
+CRIME_REPORT_PATH :  폴더로 지정
+LIFE_POPULATION_PATH :  폴더로 지정
 PATH_GRID_AREA_MAP : 집계구 격자 데이터
 PATH_GRID_MAP : 격자 데이터
 '''

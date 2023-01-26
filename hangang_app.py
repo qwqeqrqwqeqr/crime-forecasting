@@ -1,13 +1,12 @@
 
 import pandas as pd
+from log import logger
 
 from app.utils.constants import *
 
 '''
-입력 신고 데이터 포멧 : KPU_99_YYYYMMDD_C_001.csv 
-argv[1] : 112 신고 데이터
-EVT_CL_CD : 사건 종별 코드를 의미함
-END_CD : 종결 코드를 의미
+112 신고 데이터 형식 : POL_01_YYYYMMDD_M.csv 
+CRIME_REPORT_PATH : 112 신고 데이터
 PATH_GRID_HANGANG_MAP : 한강 격자 데이터
 PATH_GRID_MAP : 격자 데이터
 '''
@@ -35,12 +34,11 @@ if __name__ == '__main__':
     grid_map = GridMap(PATH_GRID_MAP)
 
 
-    # TODO 혼잡도 날짜 검증
+
 
     for day_month_year in report.get_day_list():
 
-        print("========== [%s] 데이터를 산출합니다.==========" % day_month_year)
-
+        logger.info(f"[한강 경찰대] [%s] 데이터를 산출합니다" % day_month_year)
         from app.service.hangang.service import service
         service(grid_hangang_map,grid_map,report.get_report_filtered_day(day_month_year))
 

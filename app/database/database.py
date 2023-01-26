@@ -1,6 +1,5 @@
 import psycopg2
 import configparser
-# "./data_sample/POL_01_20210101_M.csv"
 
 
 class Database:

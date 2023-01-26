@@ -1,15 +1,14 @@
 import sys
 
 import pandas as pd
+from log import logger
 
 from app.utils.constants import *
 from app.utils.utils import init
 
 '''
-입력 신고 데이터 포멧 : POL_01_YYYYMMDD_M.csv 
-argv[1] : 112 신고 데이터
-EVT_CL_CD : 사건 종별 코드를 의미함
-END_CD : 종결 코드를 의미
+112 신고 데이터 형식 : POL_01_YYYYMMDD_M.csv 
+CRIME_REPORT_PATH : 112 신고 데이터
 PATH_GRID_MAP : 격자 데이터
 '''
 
@@ -23,7 +22,6 @@ if __name__ == '__main__':
 
     init()      # 초기 검사
 
-    print("==========[112 신고 [유형별 발생 건수]를 산출 합니다]")
 
     from app.model.report import Report
 
@@ -34,8 +32,7 @@ if __name__ == '__main__':
     grid_map = GridMap(PATH_GRID_MAP)
 
     for day_month_year in report.get_day_list():
-        print("==========[(%s) 데이터를 산출합니다]" % day_month_year)
-
+        logger.info(f"[유형별 발생 건수] [%s] 데이터를 산출합니다" % day_month_year)
         from app.service.report.service import service
         service(grid_map, report.get_report_filtered_day(day_month_year))
 
