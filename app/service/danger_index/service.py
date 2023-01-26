@@ -1,6 +1,6 @@
 
 
-def service():
+def service(train_data):
     pass
     # convert_to_grid_report()
     # df_list = [convert_to_grid_report(), convert_to_grid_life_population()]

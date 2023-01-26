@@ -26,6 +26,7 @@ df 컬럼 정보
 
 def preprocess(df):
     #csv 파일 읽은 뒤, 격자고유번호의 형태를 바탕으로 x공간정보와 y공간정보를 산출해낸다.
+    df['격자고유번호']=df['격자고유번호'].map(lambda x: x[-6:])
     df['x'] = df['격자고유번호'].str.slice(start=0, stop=3)
     df['y'] = df['격자고유번호'].str.slice(start=-3)
     df = df.astype({'x': 'int'})

@@ -49,7 +49,7 @@ if __name__ == '__main__':
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
     grid_congestion_map = pd.read_csv(PATH_GRID_CONGESTION_MAP, encoding=UTF_8)
 
-    # TODO 생활인구 신고건수 검증 코드 추가
+    # TODO 생활인구 신고 건수 검증 코드 추가
 
     for day_month_year in life_population.get_day_list():
         print("========== [%s] 데이터를 산출합니다.==========" % day_month_year)
