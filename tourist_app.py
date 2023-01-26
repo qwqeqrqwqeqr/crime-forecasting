@@ -37,3 +37,4 @@ if __name__ == '__main__':
 
         print("========== [%s] 데이터를 산출합니다.==========" % day_month_year)
         service(grid_subway_map, grid_map, report.get_report_filtered_day(day_month_year))
+

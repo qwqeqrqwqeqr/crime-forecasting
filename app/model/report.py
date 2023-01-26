@@ -19,7 +19,7 @@ class Report:  # 112 신고 건수 DaraFrame Class
                               self.__report["HPPN_Y_NE"] +
                               self.__report["HPPN_Y_NW"] +
                               self.__report["HPPN_Y_SE"]) / 4
-        self.__report["EVT_CL_CD"] = self.__report["EVT_CL_CD"].map(lambda x: str(int(x)))
+        self.__report["EVT_CL_CD"] = self.__report["EVT_CL_CD"].map(lambda x: str(x).split('.')[0])
         self.__report["END_CD"] = self.__report["END_CD"].map(lambda x: str(int(str(x).replace('{', '0').replace('nan','0').split('.')[0])))
         self.__day = self.__report["DAY"]  # yyyyMMdd
         self.__month = self.__report["month"]  # MM
