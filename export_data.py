@@ -14,4 +14,4 @@ if __name__ == '__main__':
 
     sql = "select * from public.congestion;"
     df = pd.read_sql_query(sql, conn)
-    df.to_csv("./congestion202201.csv")
+    df.to_csv("./congestion202202.csv")

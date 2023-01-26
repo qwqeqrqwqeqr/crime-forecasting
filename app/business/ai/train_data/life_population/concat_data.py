@@ -12,3 +12,7 @@ def concat_grid_life_population(grid_area_map,life_population):
         'duplicate']
 
     return grid_time_life_population_map[['격자고유번호', 'count']]
+
+
+def calculate_life_population_average(life_population):
+    return life_population.groupby('집계구코드').mean().reset_index()

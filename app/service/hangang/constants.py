@@ -3,14 +3,14 @@ from app.utils.codebook import *
 
 def evt_cl_cd_mask_list(report):
     return [
-        (report.EVT_CL_CD == EVT_CL_CD_보호조치) | (report.EVT_CL_CD == EVT_CL_CD_위험방지) | (
-                report.EVT_CL_CD == EVT_CL_CD_비상벨),
-        (report.EVT_CL_CD == EVT_CL_CD_자살) | (report.EVT_CL_CD == EVT_CL_CD_구조요청) | (
-                report.EVT_CL_CD == EVT_CL_CD_변사자),
-        (report.EVT_CL_CD == EVT_CL_CD_교통사고) | (report.EVT_CL_CD == EVT_CL_CD_교통불편) | (
-                report.EVT_CL_CD == EVT_CL_CD_교통위반) | (report.EVT_CL_CD == EVT_CL_CD_음주운전) | (
-                report.EVT_CL_CD == EVT_CL_CD_사망_대형사고),
-        ((report.EVT_CL_CD == EVT_CL_CD_화재) | (report.EVT_CL_CD == EVT_CL_CD_재해재난)) & (
+        (report.evt_cl_cd == EVT_CL_CD_보호조치) | (report.evt_cl_cd == EVT_CL_CD_위험방지) | (
+                report.evt_cl_cd == EVT_CL_CD_비상벨),
+        (report.evt_cl_cd == EVT_CL_CD_자살) | (report.evt_cl_cd == EVT_CL_CD_구조요청) | (
+                report.evt_cl_cd == EVT_CL_CD_변사자),
+        (report.evt_cl_cd == EVT_CL_CD_교통사고) | (report.evt_cl_cd == EVT_CL_CD_교통불편) | (
+                report.evt_cl_cd == EVT_CL_CD_교통위반) | (report.evt_cl_cd == EVT_CL_CD_음주운전) | (
+                report.evt_cl_cd == EVT_CL_CD_사망_대형사고),
+        ((report.evt_cl_cd == EVT_CL_CD_화재) | (report.evt_cl_cd == EVT_CL_CD_재해재난)) & (
                 report.RECV_EMG_CD == RECV_EMG_CD_긴급)
     ]
 

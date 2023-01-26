@@ -2,13 +2,6 @@ import pandas as pd
 
 
 
-'''
-input define
-colume = ['격자고유번호',count']
-
-해당 데이터 형식이 아닐경우 오류가난다.
-'''
-
 # 8방향 인접 공간들에 대한 정보
 dx = [-1, -1, 0, 1, 1, 1, 0, -1]
 dy = [0, 1, 1, 1, 0, -1, -1, -1]
@@ -92,7 +85,8 @@ def expand_data(depth,df):
         count += 1
 
 
-    return df
+    df_ar = pd.DataFrame(df, columns=["격자고유번호", "count"])
+    return  df_ar[['격자고유번호','count']]
 
 
 

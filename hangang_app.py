@@ -1,9 +1,6 @@
-import sys
 
 import pandas as pd
-import geopandas as gpd
 
-from app.business.preprocessing.utils.utils import get_center_coordinate
 from app.utils.constants import *
 
 '''

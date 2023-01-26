@@ -3,14 +3,14 @@ from app.utils.codebook import *
 
 def evt_cl_cd_mask_list(report):
     return [
-        (report.EVT_CL_CD == EVT_CL_CD_가정폭력),
-        (report.EVT_CL_CD == EVT_CL_CD_주거침입),
-        (report.EVT_CL_CD == EVT_CL_CD_성폭력),
-        (report.EVT_CL_CD == EVT_CL_CD_데이트폭력) | (report.EVT_CL_CD == EVT_CL_CD_스토킹),
-        (report.EVT_CL_CD == EVT_CL_CD_데이트폭력),
-        (report.EVT_CL_CD == EVT_CL_CD_스토킹),
-        (report.EVT_CL_CD == EVT_CL_CD_아동학대_가정내) | (report.EVT_CL_CD == EVT_CL_CD_아동학대_가정내),
-        (report.EVT_CL_CD == EVT_CL_CD_학교폭력),    
+        (report.evt_cl_cd == EVT_CL_CD_가정폭력),
+        (report.evt_cl_cd == EVT_CL_CD_주거침입),
+        (report.evt_cl_cd == EVT_CL_CD_성폭력),
+        (report.evt_cl_cd == EVT_CL_CD_데이트폭력) | (report.evt_cl_cd == EVT_CL_CD_스토킹),
+        (report.evt_cl_cd == EVT_CL_CD_데이트폭력),
+        (report.evt_cl_cd == EVT_CL_CD_스토킹),
+        (report.evt_cl_cd == EVT_CL_CD_아동학대_가정내) | (report.evt_cl_cd == EVT_CL_CD_아동학대_가정내),
+        (report.evt_cl_cd == EVT_CL_CD_학교폭력),
     ]
 
 

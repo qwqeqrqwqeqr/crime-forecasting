@@ -3,16 +3,16 @@ from app.utils.constants import *
 
 
 def service(grid_area_map, grid_congestion_map, grid_map, life_population, report):
-    for time in life_population.get_time_list():
+    for time in life_population.get_hour_list():
         # 집계구 별 격자랑 매핑
         grid_time_life_population_map = pd.merge(grid_area_map,
-                                                 life_population.get_life_population_filtered_time(time).life_population,
+                                                 life_population.get_life_population_filtered_hour(time).life_population,
                                                  left_on='TOT_REG_CD',
                                                  right_on='집계구코드', how='inner')
 
         from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
         count_point_df = count_point_in_polygon(grid_map.grid_map, '격자고유번호',
-                                                report.get_report_filtered_time(time).report,
+                                                report.get_report_filtered_hour(time).report,
                                                 'x', 'y', EPSG_4326, False)
 
         concat_life_population_report_df = pd.merge(grid_time_life_population_map, count_point_df,

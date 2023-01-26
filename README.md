@@ -3,14 +3,7 @@
 
 ***
 ### 초기 환경 설정
-- Anaconda 기반 라이브러리 세팅
-   - Anaconda 설치
-   - conda 가상 환경 생성 
-     - `conda create -n [가상환경 이름]`
-   - conda 기반 필수 패키지 설치
-     - `conda activate [가상환경 이름]`
-     - `conda install pip`
-     - `pip3 install -r requirements.txt` 
+docker run -it seoul
 ***
 ### 데이터 베이스 설정
 - database 설정
