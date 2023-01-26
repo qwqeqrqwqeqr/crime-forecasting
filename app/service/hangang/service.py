@@ -1,4 +1,3 @@
-from pandas import DataFrame
 import pandas as pd
 
 from app.service.hangang.constants import *
@@ -7,15 +6,15 @@ from app.utils.constants import *
 
 
 
-def service(area_map, grid_map, report):
+def service(grid_hangang_map, grid_map, report):
 
-    concat_df = DataFrame()
+    concat_df = pd.DataFrame()
     concat_df['grid_number'] = grid_map.grid_number
 
     for i in range(len(name_list)):         # concat filtered evt, cd  df
         concat_df = pd.merge(concat_df,
                              make_df(
-                                 area_map, grid_map.grid_map,
+                                 grid_hangang_map, grid_map.grid_map,
                                  report.report,
                                  evt_cl_cd_mask_list(report.report)[i],
                                  end_cd_mask_list(report.report), name_list[i]),
@@ -25,17 +24,17 @@ def service(area_map, grid_map, report):
     insert_data(concat_df)
 
 
-def make_df(area_map, grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, name_list):
-    new_df = DataFrame()
+def make_df(grid_hangang_map, grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, name_list):
+    new_df = pd.DataFrame()
     for i in range(len(name_list)):
-        from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
+        from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
         count_point_df = count_point_in_polygon(grid_map,
                                                 '격자고유번호',
                                                 report.loc[evt_cl_cd_mask_list & end_cd_mask_list[i]],
                                                 'x', 'y',
                                                 EPSG_4326, False)
 
-        concat_df = pd.merge(area_map, count_point_df, on='격자고유번호', how='left')
+        concat_df = pd.merge(grid_hangang_map, count_point_df, on='격자고유번호', how='left')
         new_df[name_list[i]] = concat_df['count']
         new_df['grid_number'] = concat_df['격자고유번호'].map(lambda x: x[-6:])
         new_df['name'] = concat_df['한강']

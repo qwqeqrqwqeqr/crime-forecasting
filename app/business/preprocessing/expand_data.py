@@ -24,10 +24,8 @@ df 컬럼 정보
 5: index (df 내 에서 몇번째 위치에 있는지)
 '''
 
-def read_data(input_path,encoding):
-
+def preprocess(df):
     #csv 파일 읽은 뒤, 격자고유번호의 형태를 바탕으로 x공간정보와 y공간정보를 산출해낸다.
-    df = pd.read_csv(input_path,encoding=encoding)
     df['x'] = df['격자고유번호'].str.slice(start=0, stop=3)
     df['y'] = df['격자고유번호'].str.slice(start=-3)
     df = df.astype({'x': 'int'})
@@ -44,15 +42,11 @@ def read_data(input_path,encoding):
     return df.to_numpy()
 
 
-#최종 산출된 데이터를 저장하는 코드
-def save_data(df,output_path):
-    df_ar = pd.DataFrame(df, columns=["격자고유번호", "count", "x", "y", "visited","index"])
-
-    df_ar[['격자고유번호','count']].to_csv(output_path,index=False)
 
 
-def expand_data(depth,input_path,output_path,encoding):
-    df = read_data(input_path,encoding)
+
+def expand_data(depth,df):
+    df = preprocess(df)
 
     #확장시킬 시설정보를 가지고 있는 데이터
     queue = []
@@ -96,8 +90,7 @@ def expand_data(depth,input_path,output_path,encoding):
             queue.append(e)
         count += 1
 
-    #최종적으로 확장된 데이터를 저장함
-    save_data(df,output_path)
+
     return df
 
 

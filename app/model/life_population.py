@@ -1,18 +1,31 @@
+from datetime import date
+
 class LifePopulation:  # 생활인구 DaraFrame Class
 
     def __init__(self, data_frame):
+        self.__week_day_list = ['월', '화', '수', '목', '금', '토', '일']
+
         self.__life_population = data_frame
-        self.__life_population["시간대구분"] =  self.__life_population["시간대구분"].map(lambda x: str(x).zfill(2))
+        self.__life_population["시간대구분"] = self.__life_population["시간대구분"].map(lambda x: str(x).zfill(2))
+        self.__life_population["weekday"] = self.__life_population['?"기준일ID"'].map(
+            lambda x: self.__week_day_list[date(int(str(x)[0:4]), int(str(x)[4:6]), int(str(x)[6:8])).weekday()])
 
         self.__time = self.__life_population["시간대구분"]
-        self.__day = self.__life_population["기준일ID"]
+        self.__day = self.__life_population['?"기준일ID"']
+        self.__weekday = self.__life_population["weekday"]
+
         self.__total_population = self.__life_population["총생활인구수"]
         self.__area_code = self.__life_population["집계구코드"]
 
-
     def get_day_list(self): return list(set(self.__day.tolist()))
 
-    def get_life_population_filtered_day(self, day_month_year): return LifePopulation(self.__life_population.loc[self.__day == day_month_year])
+    def get_time_list(self): return list(set(self.__time.tolist()))
+
+    def get_life_population_filtered_day(self, day_month_year): return LifePopulation(
+        self.__life_population.loc[self.__day == day_month_year])
+
+    def get_life_population_filtered_time(self, time): return LifePopulation(
+        self.__life_population.loc[self.__time == time])
 
     @property
     def life_population(self):
@@ -25,6 +38,10 @@ class LifePopulation:  # 생활인구 DaraFrame Class
     @property
     def day(self):
         return self.__day
+
+    @property
+    def weekday(self):
+        return self.__weekday
 
     @property
     def total_population(self):

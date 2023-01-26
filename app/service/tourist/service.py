@@ -1,4 +1,4 @@
-from pandas import DataFrame
+
 import pandas as pd
 
 
@@ -7,7 +7,7 @@ from app.utils.constants import *
 
 
 def service(area_map, grid_map, report):
-    concat_df = DataFrame()
+    concat_df = pd.DataFrame()
     concat_df['grid_number'] = grid_map.grid_number
 
     for i in range(len(name_list)):  # concat filtered evt, cd  df
@@ -24,9 +24,9 @@ def service(area_map, grid_map, report):
 
 
 def make_df(area_map, grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, name_list):
-    new_df = DataFrame()
+    new_df = pd.DataFrame()
     for i in range(len(name_list)):
-        from app.business.preprocessing.count_point_in_polygon.count_point_in_polygon import count_point_in_polygon
+        from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
         count_point_df = count_point_in_polygon(grid_map,
                                                 '격자고유번호',
                                                 report.loc[evt_cl_cd_mask_list & end_cd_mask_list[i]],

@@ -1,5 +1,5 @@
-from app.business.preprocessing.life_population.calculate_life_population_average import \
-    calculate_life_population_average
+from app.business.ai.train_data.life_population import \
+    life_population_average
 from app.utils.utils import init
 
 '''
@@ -10,7 +10,6 @@ PATH_GRID_AREA_MAP : 집계구 격자 데이터
 PATH_GRID_MAP : 격자 데이터
 '''
 
-# TODO 개발 진행중 (2022-01-25 완료 예정)
 if __name__ == '__main__':
     # 초기 검사
     init()
@@ -21,8 +20,8 @@ if __name__ == '__main__':
     calculate_life_population_average()
 
     #시설별 격자 데이터 산출
-    # from app.business.statistics.facility_statistics.report import report as get_facility_statistics
-    # get_facility_statistics(False,2)
+    from app.business.ai.train_data.facility.concat_data import report as get_facility_statistics
+    get_facility_statistics(False,2)
 
 
     #  시설개수 확장하기
