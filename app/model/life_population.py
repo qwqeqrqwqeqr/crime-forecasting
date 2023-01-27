@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import date
 
 class LifePopulation:  # 생활인구 DaraFrame Class

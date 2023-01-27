@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
 from app.business.preprocessing.expand_data import expand_data

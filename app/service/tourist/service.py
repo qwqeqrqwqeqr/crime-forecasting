@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import pandas as pd
 
@@ -55,4 +56,8 @@ def insert_data(df):
         insert_list.append(to_insert_list(row))
 
     from app.database.query.tourist import insert_tourist
+
+    from app.database.query.tourist import select_all_tourist
+    select_all_tourist()
+
     insert_tourist(insert_list)

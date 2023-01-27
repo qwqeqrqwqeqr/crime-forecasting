@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # 신고 유형
 RECV_EMG_CD_긴급="C0"
 RECV_EMG_CD_중요="C1"

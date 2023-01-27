@@ -15,6 +15,7 @@
   - grid_hangang.csv => 한강 격자 데이터
   - grid_subway.csv => 지하철 격자 데이터
   - grid_tourist.csv => 관광지 격자 데이터
+  - grid_congestion.csv => 혼잡 지역 (실시간 도시) 격자 데이터
   - large_map => 자치구 격자 데이터
   - middle_map => 행정동 격자 데이터
   - small_map => 집계구 격자 데이터
@@ -55,3 +56,4 @@
 - 형식 
   - 단일 파일 `POL_01_YYYYMMDD_M.csv `
 ***
+### 실행 방식

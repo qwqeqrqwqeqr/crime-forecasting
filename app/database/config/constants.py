@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 '''
 DB_NAME => 사용할 DB 이름
 DB_HOST => DB 접속 호스트 주소를 의미 합니다.

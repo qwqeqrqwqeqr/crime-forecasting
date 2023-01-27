@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import geopandas as gpd
 class ShapeFileManager:
     def __init__(self,path,encoding):

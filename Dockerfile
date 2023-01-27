@@ -4,16 +4,17 @@
 FROM python:3.9.16
 FROM ubuntu:20.04
 
-WORKDIR /home/ncyc-admin/crime_forecasting/
+WORKDIR /seoul
 
 
-COPY . .
+COPY . /seoul
 ###############################################
 # install base
 ###############################################
 
 RUN apt update
 RUN apt-get install -y libpq-dev python-dev
+RUN apt-get install -y vim
 
 
 ###############################################

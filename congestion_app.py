@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 
 from app.utils.constants import *
 from log import logger
+
 
 '''
 혼잡도는 1달 단위로 계산함
