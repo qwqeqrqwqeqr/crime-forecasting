@@ -133,4 +133,5 @@ dmypy.json
 
 DS_Store
 .idea/
-./app/config/*
+/test/data/*
+/app/config/*

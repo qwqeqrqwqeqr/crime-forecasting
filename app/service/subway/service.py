@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from app.service.subway.constants import *
+from app.service.subway import *
 from app.utils.constants import *
 
 def service(area_map, grid_map, report):

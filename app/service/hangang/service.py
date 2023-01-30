@@ -1,6 +1,6 @@
 import pandas as pd
 
-from app.service.hangang.constants import *
+from app.service.hangang import *
 from app.utils.constants import *
 # -*- coding: utf-8 -*-
 

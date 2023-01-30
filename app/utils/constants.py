@@ -11,7 +11,8 @@ CP_949 = 'CP949'
 
 PATH_ORIGIN = "app/data/origin/"
 PATH_MAP = "app/data/map/"
-PATH_MODEL = "app/data/model/"
+PATH_TRAIN_MODEL = "app/data/ai/model/"
+PATH_TRAIN_DATA = "app/data/ai/data/"
 
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
@@ -53,7 +54,8 @@ PATH_LIST
 
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,
-             PATH_MODEL,
+             PATH_TRAIN_DATA,
+             PATH_TRAIN_MODEL,
 
              PATH_ORIGIN + "danger_facility/",
              PATH_ORIGIN + "police_facility/",

@@ -3,7 +3,7 @@
 import pandas as pd
 
 
-from app.service.tourist.constants import *
+from app.service.tourist import *
 from app.utils.constants import *
 
 

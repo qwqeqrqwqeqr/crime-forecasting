@@ -1,5 +1,5 @@
 from app.database.database import *
-from app.database.query.constants import *
+from app.database.query.query import *
 
 
 def get_all_congestion():

@@ -3,7 +3,7 @@
 
 import pandas as pd
 
-from app.service.report.constants import *
+from app.service.report import *
 from app.utils.constants import *
 
 def service(grid_map, report):

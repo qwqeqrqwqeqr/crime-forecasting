@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+
 from app.utils.constants import *
 
 
@@ -41,7 +42,7 @@ def make_df(df,life_population,time):
 def insert_data(df):
     insert_list = []
     for idx, row in df.iterrows():
-        from app.service.congestion.constants import to_insert_list
+        from app.service.congestion import to_insert_list
         insert_list.append(to_insert_list(row))
 
     from app.database.query.congestion import insert_congestion

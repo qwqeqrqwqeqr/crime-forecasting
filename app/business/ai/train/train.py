@@ -1,0 +1,68 @@
+import numpy as np
+import pandas as pd
+from app.business.ai.train import *
+
+def train(train_data_df, key_danger_index):
+
+    train_data_df = get_filter_class(train_data_df)
+    x_train_val, y_train_val = generate_train_data(train_data_df)
+
+
+    from sklearn.linear_model import LogisticRegression
+    model = LogisticRegression(random_state=RANDOM_STATE, C=C, penalty=PENALTY, solver=SOLVER)
+    from sklearn.model_selection import KFold
+    kf = KFold(n_splits=10, random_state=RANDOM_STATE, shuffle=True)
+
+    for train_index, val_index in kf.split(x_train_val):        # train model
+        x_train, x_val = x_train_val.values[train_index], x_train_val.values[val_index]
+        y_train, y_val = y_train_val.values[train_index], y_train_val.values[val_index]
+        model.fit(x_train, y_train)
+
+    save_model(model)
+
+    cdf = pd.DataFrame(np.transpose(model.coef_), x_train_val.columns).reset_index(inplace=True).rename(columns={'index': 'feature'})
+    cdf2 = pd.DataFrame()
+    cdf3 = pd.DataFrame()
+
+    for c in range(len(train_data_df[KEY_FILTER_CLASS].value_counts().to_dict().keys())):       # choice danger index
+        for i in cdf['feature'].to_list():
+            cdf2[i] = cdf.loc[cdf['feature'] == i].reset_index()[c][0] * train_data_df[i]
+            cdf3[c] = cdf2.sum(axis=1)
+    train_data_df[key_danger_index] = np.where(train_data_df[KEY_FILTER_CLASS] == 0, cdf3[0],
+                                               np.where(train_data_df[KEY_FILTER_CLASS] == 1, cdf3[1],
+                                                        np.where(train_data_df[KEY_FILTER_CLASS] == 2, cdf3[2],
+                                                                 train_data_df[KEY_FILTER_CLASS])))
+    train_data_df[key_danger_index] = train_data_df[key_danger_index].map(lambda  x : round(x,3))
+
+
+    return train_data_df[['격자고유번호', key_danger_index]]
+
+def save_model(model):
+    import joblib
+    joblib.dump(model, MODEL_PATH)
+
+def generate_train_data(df):
+    from sklearn.model_selection import train_test_split
+    x_train_val, x_test, y_train_val, y_test = train_test_split(df.iloc[:, :-1], df['filter_class'],
+                                                                test_size=0.10, random_state=42, shuffle=True)
+    x_train_val = x_train_val.iloc[:, 2:]
+
+    from sklearn.preprocessing import MinMaxScaler
+    scaler = MinMaxScaler()
+    scaler.fit(x_train_val)
+    x_train_val = pd.DataFrame(scaler.transform(x_train_val), columns=x_train_val.columns)
+
+    return x_train_val, y_train_val
+
+
+def get_filter_class(df):
+    df.fillna(0, inplace=True)
+    df['num'] = (df['112신고데이터'] + 0.0000000001) / df['생활인구']
+    df.fillna(0, inplace=True)
+    print(df)
+
+    # 클래스 생성
+    q1, q2, q3, q4 = np.percentile(df['num'], [25, 50, 75, 100])
+    upper_fence = q3 + (1.5 * (q3 - q1))
+    df[KEY_FILTER_CLASS] = np.digitize(x=df['num'], bins=[q2, upper_fence], right=True)
+    return df.drop(columns=['num'])
