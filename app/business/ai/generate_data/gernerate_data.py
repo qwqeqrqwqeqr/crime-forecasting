@@ -13,6 +13,8 @@ def generate_data(life_population,report,grid_map,grid_area_map):
 
     facility = concat_grid_facility(grid_map.grid_map, 2)  # 시설별 격자 데이터 산출
 
+
+
     dfs=[]
 
     from app.business.ai.generate_data import DF_LIST_SIZE

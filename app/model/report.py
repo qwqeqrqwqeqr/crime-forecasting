@@ -8,7 +8,7 @@ class Report:  # 112 신고 건수 DaraFrame Class
     def __init__(self, data_frame):
         self.__week_day_list = ['월', '화', '수', '목', '금', '토', '일']
 
-        self.__report = data_frame
+        self.__report = data_frame.fillna(0)
         self.__report["hour"] = self.__report["TIME"].map(lambda x: str(x).replace(' ','').zfill(6)[0:2])
         self.__report["DAY"] = self.__report["DAY"].map(lambda x: str(x))  # yyyyMMdd
 
@@ -24,7 +24,7 @@ class Report:  # 112 신고 건수 DaraFrame Class
                               self.__report["HPPN_Y_NW"] +
                               self.__report["HPPN_Y_SE"]) / 4
         self.__report["evt_cl_cd"] = self.__report["EVT_CL_CD"].map(lambda x: str(x).split('.')[0])
-        self.__report["end_cd"] = self.__report["END_CD"].map(lambda x: str(int(str(x).replace('{', '0').replace('nan','0').split('.')[0])))
+        self.__report["end_cd"] = self.__report["END_CD"].map(lambda x: str(int(str(x).replace('{', '0').replace('nan','0').replace(' ','0').split('.')[0])))
         self.__day = self.__report["DAY"]  # yyyyMMdd
         self.__month = self.__report["month"]  # MM
         self.__weekday = self.__report["weekday"]  # 월화수목금토일
