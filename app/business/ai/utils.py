@@ -6,8 +6,8 @@
 def concat_grid_data(dfs,map_key):
     from functools import reduce
     import pandas as pd
-
-    return reduce(lambda left, right: pd.merge(left, right, on=map_key), dfs)
+    df = reduce(lambda left, right: pd.merge(left, right, on=map_key), dfs)
+    return df
 
 
 def grid_df_to_list(df_list,key,name_list):

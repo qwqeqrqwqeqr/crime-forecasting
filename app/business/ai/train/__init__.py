@@ -11,4 +11,4 @@ import datetime
 from app.utils.constants import PATH_TRAIN_MODEL
 
 def MODEL_PATH(key_danger_index) :
-    return PATH_TRAIN_MODEL+str(datetime.date.today())+key_danger_index+".pkl"
+    return PATH_TRAIN_MODEL+str(datetime.date.today())+"_"+key_danger_index.replace('_','-')+".pkl"

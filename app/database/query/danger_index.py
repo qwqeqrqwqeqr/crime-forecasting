@@ -4,7 +4,7 @@ from app.database.query.query import *
 
 def select_all_danger():
     database= Database()
-    result =database.execute(QUERY_SELECT_ALL_DANGER)
+    result =database.execute(QUERY_SELECT_ALL_DANGER_INDEX)
     database.close()
     return  result
 

@@ -19,8 +19,7 @@ def train(train_data_df, key_danger_index):
         model.fit(x_train, y_train)
 
     save_model(model,key_danger_index)
-
-    cdf = pd.DataFrame(np.transpose(model.coef_), x_train_val.columns).reset_index(inplace=True).rename(columns={'index': 'feature'})
+    cdf= pd.DataFrame(np.transpose(model.coef_), x_train_val.columns).reset_index(inplace=False).rename(columns={'index': 'feature'})
     cdf2 = pd.DataFrame()
     cdf3 = pd.DataFrame()
 
@@ -59,7 +58,6 @@ def get_filter_class(df):
     df.fillna(0, inplace=True)
     df['num'] = (df['112신고데이터'] + 0.0000000001) / df['생활인구']
     df.fillna(0, inplace=True)
-    print(df)
 
     # 클래스 생성
     q1, q2, q3, q4 = np.percentile(df['num'], [25, 50, 75, 100])
