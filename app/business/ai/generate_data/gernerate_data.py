@@ -17,20 +17,21 @@ def generate_data(life_population,report,grid_map,grid_area_map):
 
     dfs=[]
 
-    from app.business.ai.generate_data import DF_LIST_SIZE
-    for i in range(DF_LIST_SIZE):
+    from app.business.ai import NAME_LIST_SIZE
+    for i in range(NAME_LIST_SIZE):
 
         from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
-        from app.business.ai.generate_data import evt_cl_cd_mask_list
+        from app.business.ai import evt_cl_cd_mask_list
         evt_cl_cd_mask = evt_cl_cd_mask_list(report.report)[i]
 
-        report = count_point_in_polygon(grid_map.grid_map, '격자고유번호',
+        temp_report = count_point_in_polygon(grid_map.grid_map, '격자고유번호',
                                         report.report.loc[evt_cl_cd_mask],
                                         'x', 'y', EPSG_4326, False)
 
-        df = [report, life_population] + facility
+        temp_dfs = [temp_report, life_population] + facility
 
-        from app.business.ai.generate_data.utils import grid_df_to_list, concat_grid_data
-        dfs.append(concat_grid_data(grid_df_to_list(df), '격자고유번호'))
+        from app.business.ai.utils import grid_df_to_list, concat_grid_data
+        from app.business.ai import GRID_NAME_LIST
+        dfs.append(concat_grid_data(grid_df_to_list(temp_dfs,'count',GRID_NAME_LIST), '격자고유번호'))
 
     return dfs

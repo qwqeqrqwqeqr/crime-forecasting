@@ -18,7 +18,7 @@ def train(train_data_df, key_danger_index):
         y_train, y_val = y_train_val.values[train_index], y_train_val.values[val_index]
         model.fit(x_train, y_train)
 
-    save_model(model)
+    save_model(model,key_danger_index)
 
     cdf = pd.DataFrame(np.transpose(model.coef_), x_train_val.columns).reset_index(inplace=True).rename(columns={'index': 'feature'})
     cdf2 = pd.DataFrame()
@@ -37,9 +37,9 @@ def train(train_data_df, key_danger_index):
 
     return train_data_df[['격자고유번호', key_danger_index]]
 
-def save_model(model):
+def save_model(model,key_danger_index):
     import joblib
-    joblib.dump(model, MODEL_PATH)
+    joblib.dump(model, MODEL_PATH(key_danger_index))
 
 def generate_train_data(df):
     from sklearn.model_selection import train_test_split

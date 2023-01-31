@@ -10,4 +10,5 @@ SOLVER ='lbfgs'
 import datetime
 from app.utils.constants import PATH_TRAIN_MODEL
 
-MODEL_PATH = PATH_TRAIN_MODEL+str(datetime.date.today())+".pkl"
+def MODEL_PATH(key_danger_index) :
+    return PATH_TRAIN_MODEL+str(datetime.date.today())+key_danger_index+".pkl"
