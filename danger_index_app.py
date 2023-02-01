@@ -16,7 +16,7 @@ PATH_GRID_MAP : 격자 데이터
 import os
 import sys
 
-CRIME_REPORT_PATH = sys.argv[1]
+REPORT_PATH = sys.argv[1]
 LIFE_POPULATION_PATH = sys.argv[2]
 
 if __name__ == '__main__':
@@ -25,13 +25,16 @@ if __name__ == '__main__':
 
     warnings.filterwarnings(action='ignore')
 
-    from app.utils.utils import init
+    from app.business.validator.validate_file import init
 
     init()  # 초기 검사
 
     from app.model.grid_map import GridMap
 
-    grid_map = GridMap(PATH_GRID_MAP)  # grid 100
+    import geopandas as gpd
+
+    grid_map = GridMap(gpd.read_file(PATH_GRID_MAP, driver="GeoJSON"))  # 100격자
+
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
 
     temp_life_population = []
@@ -40,8 +43,11 @@ if __name__ == '__main__':
 
 
     temp_report = []
-    for item in os.listdir(CRIME_REPORT_PATH):
-        temp_report.append(pd.read_csv(CRIME_REPORT_PATH + item, encoding=UTF_8))
+    for item in os.listdir(REPORT_PATH):
+        temp_report.append(pd.read_csv(REPORT_PATH + item, encoding=UTF_8))
+
+    from log import logger
+    logger.info(f"[위험지수] [%s] 데이터를 산출합니다")
 
     from app.model.life_population import LifePopulation
     from app.model.report import Report

@@ -3,9 +3,11 @@
 from datetime import date
 
 
-class Report:  # 112 신고 건수 DaraFrame Class
+
+class Report:  # report DaraFrame Class
 
     def __init__(self, data_frame):
+
         self.__week_day_list = ['월', '화', '수', '목', '금', '토', '일']
 
         self.__report = data_frame.fillna(0)
@@ -27,7 +29,7 @@ class Report:  # 112 신고 건수 DaraFrame Class
         self.__report["end_cd"] = self.__report["END_CD"].map(lambda x: str(int(str(x).replace('{', '0').replace('nan','0').replace(' ','0').split('.')[0])))
         self.__day = self.__report["DAY"]  # yyyyMMdd
         self.__month = self.__report["month"]  # MM
-        self.__weekday = self.__report["weekday"]  # 월화수목금토일
+        self.__weekday = self.__report["weekday"]  # MTWTFSS
         self.__time = self.__report["TIME"]  # hhmmss
         self.__hour = self.__report["hour"]  # hh
         self.__evt_cl_cd = self.__report["evt_cl_cd"]  # 신고별 종별 코드

@@ -105,7 +105,7 @@ pp_arrest,pp_investigation,pp_end_report,pp_not_handle,
 gc_arrest,gc_investigation,gc_end_report,gc_not_handle,
 ts_arrest,ts_investigation,ts_end_report,ts_not_handle,
 md_arrest,md_investigation,md_end_report,md_not_handle,name) =(
-year,month,weekday,
+EXCLUDED.year,EXCLUDED.month,EXCLUDED.weekday,
 EXCLUDED.ac_arrest,EXCLUDED.ac_investigation,EXCLUDED.ac_end_report,EXCLUDED.ac_not_handle,
 EXCLUDED.pp_arrest,EXCLUDED.pp_investigation,EXCLUDED.pp_end_report,EXCLUDED.pp_not_handle,
 EXCLUDED.gc_arrest,EXCLUDED.gc_investigation,EXCLUDED.gc_end_report,EXCLUDED.gc_not_handle,

@@ -2,16 +2,15 @@
 
 import pandas as pd
 
-
-from app.service.tourist import *
 from app.utils.constants import *
-
 
 def service(area_map, grid_map, report):
     concat_df = pd.DataFrame()
     concat_df['grid_number'] = grid_map.grid_number
 
-    for i in range(len(name_list)):  # concat filtered evt, cd  df
+    from app.utils.codebook import end_cd_mask_list
+    from app.service.tourist import name_list,evt_cl_cd_mask_list
+    for i in range(len(name_list)):         # concat report data filtered evt_cd & evt_cl_cd
         concat_df = pd.merge(concat_df,
                              make_df(
                                  area_map, grid_map.grid_map,
@@ -53,11 +52,9 @@ def concat_date_df(report, new_df):
 def insert_data(df):
     insert_list= []
     for idx, row in df.iterrows():
+        from app.service.tourist import to_insert_list
+
         insert_list.append(to_insert_list(row))
 
     from app.database.query.tourist import insert_tourist
-
-    from app.database.query.tourist import select_all_tourist
-    select_all_tourist()
-
     insert_tourist(insert_list)

@@ -2,9 +2,10 @@
 
 from datetime import date
 
-class LifePopulation:  # 생활인구 DaraFrame Class
+class LifePopulation:  # Life Population DaraFrame Class
 
     def __init__(self, data_frame):
+
         self.__week_day_list = ['월', '화', '수', '목', '금', '토', '일']
 
         self.__life_population = data_frame.dropna(subset=['?"기준일ID"'])
