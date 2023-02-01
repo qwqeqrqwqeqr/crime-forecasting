@@ -1,81 +1,65 @@
 # -*- coding: utf-8 -*-
-
-import geopandas as gpd
-import pandas as pd
 import numpy as np
-from geopandas import GeoDataFrame
-from pyproj import transform, Proj
-
 
 '''
 Param
-    map => map geojson 데이터
-    map_key => 매핑하기위한 맵의 키 (ex. 격자고유번호)
-    df => 입력 데이터 프레임
-    x_coordinate_name =>  x 좌표 이름
-    y_coordinate_name =>  y 좌표 이름
-    current_coordinate_system => 현재 좌표계
-    duplicate_flag=> 제거 : True / 미제거 : False
+- polygon : target polygon
+- polygon_key : polygon key to map (ex. 격자고유번호)
+- df : target point
+- x_coordinate_name : x coordinate column name
+- y_coordinate_name : y coordinate column name
+- df_coordinate_system : df coordinate system
+- duplicate_flag : [True] Remove duplicates / [False] not remove duplicates
 '''
 
-GEO_JSON_DRIVER= "GeoJSON"
 
-
-def count_point_in_polygon(map,map_key,df, x_coordinate_name, y_coordinate_name, current_coordinate_system,duplicate_flag):
-
-
+def count_point_in_polygon(polygon, polygon_key, df, x_coordinate_name, y_coordinate_name, df_coordinate_system,
+                           duplicate_flag):
     df['x'] = df[x_coordinate_name]
     df['y'] = df[y_coordinate_name]
 
-    #좌표계를 뱐환합니다.
-    transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), current_coordinate_system, map.crs)
+    transform_coordinate_result = transform_coordinate(np.array(df[['x', 'y']]), df_coordinate_system, polygon.crs)
     df['x'] = transform_coordinate_result[:, 0]
     df['y'] = transform_coordinate_result[:, 1]
 
-    df = df[['x', 'y']]
+    df = df[['x', 'y']]  # create point list
 
-    # x y 제외 나머지 컬럼을 삭제한 뒤, 중복을 제거합니다.
     if duplicate_flag:
-     df = df.drop_duplicates()
+        df = df.drop_duplicates()  # remove duplicates
 
+    import geopandas as gpd
+    point = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.x, y=df.y))
+    point.crs = polygon.crs
+    point_in_polygon = gpd.sjoin(point, polygon[[polygon_key, 'geometry']], how="inner",
+                                 predicate='intersects')  # intersect polygon and point
 
+    count_result = count_in_df(point_in_polygon, polygon_key)  # counting point in polygon and sum this
 
-    # polygon 과 point의 교집합을 구합니다. (polygon 내 point를 산출하기위함)
-    point = GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.x, y=df.y))
-    point.crs = map.crs
-    point_in_polygon = gpd.sjoin(point, map[[map_key, 'geometry']], how="inner", predicate='intersects')
-
-    # polygon 별 group by 를 진행합니다.
-    count_result = count_in_df(point_in_polygon,map_key)
-
-
-    # point가 할당되지 않은 polygon과 할당된 polygon을 중첩시킵니다.
-    concat_result = concat_df(count_result, map,map_key)
-
+    concat_result = concat_df(count_result, polygon, polygon_key)  # concat polygon with points and without any point
 
     return concat_result
 
 
-def concat_df(subset_df, full_df,map_key):
-    subset_df_grid_list = subset_df[map_key].to_list()
-    full_df_grid_list = full_df[map_key].to_list()
+def concat_df(point_df, full_df, map_key):  # concat polygon with points and without any point
+    import pandas as pd
 
-    temp_df = pd.DataFrame({map_key: list(list(set(full_df_grid_list) - set(subset_df_grid_list)))})
-    temp_df['count'] = 0
+    not_point_df = pd.DataFrame(
+        {map_key: list(list(set(full_df[map_key].to_list()) - set(point_df[map_key].to_list())))})
+    not_point_df['count'] = 0
+    not_point_df = pd.concat([point_df, not_point_df])
 
-    crime_count_full = pd.concat([subset_df, temp_df])
-
-    return crime_count_full[[map_key, 'count']]
+    return not_point_df[[map_key, 'count']]
 
 
-#group by
-def count_in_df(df,map_key):
+def count_in_df(df, map_key):  # counting point in polygon and sum this
     df['count'] = 1
     return df.groupby([map_key]).sum(numeric_only=True).reset_index()
 
 
-#좌표계변환
-def transform_coordinate(coord, p1_type, p2_type):
+from pyproj import transform, Proj
+
+
+def transform_coordinate(coord, p1_type, p2_type):  # transform coordinate
     p1 = Proj(init=p1_type)
     p2 = Proj(init=p2_type)
     fx, fy = transform(p1, p2, coord[:, 0], coord[:, 1])

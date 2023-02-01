@@ -21,11 +21,11 @@ grid_column_list = ['격자고유번호', '남자0~4세', '남자5~9세', '남�
                     '여자65~69세', '여자70~74세', '여자75~79세', '여자80~84세', '여자85~89세', 'geometry']
 
 
-tourist_grid_column_list = ['격자고유번호' '관광지']
-subway_grid_column_list=['격자고유번호' '지하철']
-hangang_grid_column_list=['격자고유번호' '한강']
-congestion_grid_column_list=['격자고유번호' 'category' '혼잡지역']
-area_grid_column_list=['격자고유번호' 'TOT_REG_CD' 'ADM_NM' 'ADM_CD' 'duplicate']
+tourist_grid_column_list = ['격자고유번호', '관광지']
+subway_grid_column_list=['격자고유번호', '지하철']
+hangang_grid_column_list=['격자고유번호', '한강']
+congestion_grid_column_list=['격자고유번호', 'category', '혼잡지역']
+area_grid_column_list=['격자고유번호', 'TOT_REG_CD', 'ADM_NM', 'ADM_CD', 'duplicate']
 
 def validate_report_df(report: DataFrame):
     if False in (report.columns.values == report_column_list):
@@ -51,31 +51,31 @@ def validate_grid_df(grid: DataFrame):
 def validate_tourist_grid_df(grid: DataFrame):
     if False in (grid.columns.values == tourist_grid_column_list):
         from log import logger
-        logger.info("[Error] [Grid] Incorrect file format")
+        logger.info("[Error] [Tourist Grid] Incorrect file format")
         raise EnvironmentError
 
 def validate_hangang_grid_df(grid: DataFrame):
     if False in (grid.columns.values == hangang_grid_column_list):
         from log import logger
-        logger.info("[Error] [Grid] Incorrect file format")
+        logger.info("[Error] [Hangang Grid] Incorrect file format")
         raise EnvironmentError
 
 
 def validate_subway_grid_df(grid: DataFrame):
     if False in (grid.columns.values == subway_grid_column_list):
         from log import logger
-        logger.info("[Error] [Grid] Incorrect file format")
+        logger.info("[Error] [Subway Grid] Incorrect file format")
         raise EnvironmentError
 
 
 def validate_congestion_grid_df(grid: DataFrame):
     if False in (grid.columns.values == congestion_grid_column_list):
         from log import logger
-        logger.info("[Error] [Grid] Incorrect file format")
+        logger.info("[Error] [Congestion Grid] Incorrect file format")
         raise EnvironmentError
 
 def validate_area_grid_df(grid: DataFrame):
     if False in (grid.columns.values == congestion_grid_column_list):
         from log import logger
-        logger.info("[Error] [Grid] Incorrect file format")
+        logger.info("[Error] [Area Grid] Incorrect file format")
         raise EnvironmentError

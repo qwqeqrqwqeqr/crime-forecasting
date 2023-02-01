@@ -22,14 +22,15 @@ if __name__ == '__main__':
 
     from app.business.validator.validate_file import init, check_file
 
-    init()      # Check directory & data file
-    check_file(REPORT_PATH)     # Check Report file
+    init()  # Check directory & data file
+    check_file(REPORT_PATH)  # Check Report file
 
     import pandas as pd
+
     grid_tourist_map = pd.read_csv(PATH_GRID_TOURIST_MAP, encoding=UTF_8)  # tourist grid data
 
-
     from app.business.validator.validate_dataframe import validate_tourist_grid_df
+
     validate_tourist_grid_df(grid_tourist_map)
     from app.model.report import Report
 
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     report = pd.read_csv(REPORT_PATH, encoding=UTF_8)
     from app.business.validator.validate_dataframe import validate_report_df
 
-    validate_report_df(report)      # validate report dataframe
+    validate_report_df(report)  # validate report dataframe
     report = Report(report)  # report data
 
     from app.model.grid_map import GridMap
@@ -46,7 +47,8 @@ if __name__ == '__main__':
 
     grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
     from app.business.validator.validate_dataframe import validate_grid_df
-    validate_grid_df(grid_map)      # validate grid
+
+    validate_grid_df(grid_map)  # validate grid
 
     grid_map = GridMap(grid_map)  # 100 grid data dataframe
 
@@ -55,4 +57,5 @@ if __name__ == '__main__':
 
         logger.info(f"[관광지 경찰대] [%s] 데이터를 산출합니다" % day_month_year)
         from app.service.tourist.service import service
+
         service(grid_tourist_map, grid_map, report.get_report_filtered_day(day_month_year))
