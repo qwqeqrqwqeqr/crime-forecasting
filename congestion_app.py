@@ -30,7 +30,6 @@ if __name__ == '__main__':
     from app.business.validator.validate_file import init
     init()  # Check directory & data file
 
-
     temp_life_population = []
     for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH): # loop in life population directory
         life_population_item = pd.read_csv(LIFE_POPULATION_DIRECTORY_PATH + item, encoding=EUC_KR)
@@ -54,14 +53,8 @@ if __name__ == '__main__':
 
     report = Report(pd.concat(temp_report))  # concat report df
 
-    from app.model.grid_map import GridMap
-    import geopandas as gpd
-
-    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
-    from app.business.validator.validate_dataframe import validate_grid_df
-
-    validate_grid_df(grid_map)  # validate grid
-    grid_map = GridMap(grid_map)  # 100 grid data dataframe
+    from app.business.utils.shape_file_manager import ShapeFileManager
+    grid_map = ShapeFileManager("./app/data/map/small_map.shp",encoding=UTF_8).get()
 
 
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
@@ -69,10 +62,7 @@ if __name__ == '__main__':
 
     validate_area_grid_df(grid_area_map)
 
-    grid_congestion_map = pd.read_csv(PATH_GRID_CONGESTION_MAP, encoding=UTF_8)
-    from app.business.validator.validate_dataframe import validate_congestion_grid_df
 
-    validate_congestion_grid_df(grid_congestion_map)
 
     for day_month_year in life_population.get_day_list():
         from log import logger
@@ -80,6 +70,6 @@ if __name__ == '__main__':
 
         from app.service.congestion.service import service
 
-        service(grid_area_map, grid_congestion_map, grid_map,
+        service(grid_area_map, grid_map,
                 life_population.get_life_population_filtered_day(day_month_year),
                 report.get_report_filtered_day(day_month_year))

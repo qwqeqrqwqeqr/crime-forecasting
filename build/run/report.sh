@@ -1,5 +1,5 @@
 #!/bin/bash
-target_folder="./"
+target_folder="/home/ncyc-admin/crime_forecasting/test/"
 python_file="./report_app.py"
 
 today=$(date "+%Y%m%d")

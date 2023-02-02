@@ -7,7 +7,6 @@
   - postgresql 설치 
   - postgresql 사용자 생성 (이때, 사용자 권한은 insert,update,delete,select 모두 적용)
   - sql_script 디렉터리 내 6개 sql 파일 확인
-  - app/database/config/database.ini DB 정보에 맞게 수정 (수정 예정)
 ***
 ### 필수 데이터 확인
 - 지도 데이터 (./app/data/map)
@@ -46,7 +45,7 @@
     - 편의점.csv
 ***
 ###  생활인구 
-- 특정 폴더에 ~~일마다~~ 누적
+- 특정 폴더에 누적
 - 형식
   - 단일 파일 `LOCAL_PEOPLE_yyyyMMdd.csv`
   - 월별 파일 `LOCAL_PEOPLE_yyyyMM.zip`
@@ -57,3 +56,10 @@
   - 단일 파일 `POL_01_YYYYMMDD_M.csv `
 ***
 ### 실행 방식
+- docker file 내 구간 DB 정보에 맞게 수정
+- docker build
+  - `sudo docker build -t [image-name]  ./`
+- docker run
+  - `docker run -it -d -v /data:/data [image] `
+- 내부 shell 접속
+  - `sudo docker exec -it [container-name] /bin/bash`

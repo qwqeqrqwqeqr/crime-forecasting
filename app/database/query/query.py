@@ -6,8 +6,8 @@ QUERY_SELECT_ALL_SUBWAY = '''select * from public.subway;'''
 QUERY_SELECT_ALL_TOURIST = '''select * from public.tourist;'''
 
 QUERY_INSERT_CONGESTION = '''INSERT INTO public.congestion(
-day_month_year, weekday, hour, grid_number,report_count,life_population,name) 
-VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,grid_number,hour)  DO UPDATE SET 
+day_month_year, weekday, hour, tot_reg_code,report_count,life_population,name) 
+VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,tot_reg_code,hour)  DO UPDATE SET 
 (weekday,report_count,life_population,name) = (EXCLUDED.weekday,EXCLUDED.report_count,EXCLUDED.life_population,EXCLUDED.name);'''
 
 QUERY_INSERT_DANGER_INDEX = '''INSERT INTO public.danger_index(grid_number, dv_danger_index,tp_danger_index,sh_danger_index,da_danger_index,st_danger_index,ca_danger_index,sv_danger_index) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (grid_number)
