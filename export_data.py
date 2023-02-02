@@ -12,6 +12,6 @@ if __name__ == '__main__':
     conn = psycopg2.connect(
         "host='{}' port={} dbname='{}' user={} password={}".format(host, port, dbname, username, pwd))
 
-    sql = "select * from public.subway;"
+    sql = "select * from public.report;"
     df = pd.read_sql_query(sql, conn)
-    df.to_csv("./subway2017.csv" )
+    df.to_csv("./report2016.csv" )

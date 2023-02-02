@@ -1,11 +1,10 @@
 import numpy as np
-import pandas as pd
 from app.business.ai.train import *
 
 def train(train_data_df, key_danger_index):
 
-    train_data_df = get_filter_class(train_data_df)
-    x_train_val, y_train_val = generate_train_data(train_data_df)
+    train_data_df = generate_filter_class(train_data_df)        # generate filter class
+    x_train_val, y_train_val = generate_train_data(train_data_df)       # generate data for train model
 
 
     from sklearn.linear_model import LogisticRegression
@@ -18,7 +17,8 @@ def train(train_data_df, key_danger_index):
         y_train, y_val = y_train_val.values[train_index], y_train_val.values[val_index]
         model.fit(x_train, y_train)
 
-    save_model(model,key_danger_index)
+    save_model(model,key_danger_index)      # save model
+    import pandas as pd
     cdf= pd.DataFrame(np.transpose(model.coef_), x_train_val.columns).reset_index(inplace=False).rename(columns={'index': 'feature'})
     cdf2 = pd.DataFrame()
     cdf3 = pd.DataFrame()
@@ -46,21 +46,22 @@ def generate_train_data(df):
                                                                 test_size=0.10, random_state=42, shuffle=True)
     x_train_val = x_train_val.iloc[:, 2:]
 
-    from sklearn.preprocessing import MinMaxScaler
+    from sklearn.preprocessing import MinMaxScaler      # preprocessing
     scaler = MinMaxScaler()
     scaler.fit(x_train_val)
+    import pandas as pd
     x_train_val = pd.DataFrame(scaler.transform(x_train_val), columns=x_train_val.columns)
 
     return x_train_val, y_train_val
 
 
-def get_filter_class(df):
+def generate_filter_class(df):
     df.fillna(0, inplace=True)
     df['num'] = (df['112신고데이터'] + 0.0000000001) / df['생활인구']
     df.fillna(0, inplace=True)
 
-    # 클래스 생성
+
     q1, q2, q3, q4 = np.percentile(df['num'], [25, 50, 75, 100])
     upper_fence = q3 + (1.5 * (q3 - q1))
-    df[KEY_FILTER_CLASS] = np.digitize(x=df['num'], bins=[q2, upper_fence], right=True)
+    df[KEY_FILTER_CLASS] = np.digitize(x=df['num'], bins=[q2, upper_fence], right=True)       # generate filter class
     return df.drop(columns=['num'])

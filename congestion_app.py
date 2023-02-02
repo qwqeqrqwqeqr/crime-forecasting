@@ -3,59 +3,79 @@
 import pandas as pd
 
 from app.utils.constants import *
-from log import logger
 
 
 '''
-혼잡도는 1달 단위로 계산함
-CRIME_REPORT_PATH :  폴더로 지정
-LIFE_POPULATION_PATH :  폴더로 지정
-PATH_GRID_AREA_MAP : 집계구 격자 데이터
-PATH_GRID_CONGESTION_MAP : 혼잡 지역(실시간 도시) 데이터
-PATH_GRID_MAP : 격자 데이터
+Run Parameters
+- REPORT_PATH: report directory path (ex) "./test/data/report/"
+- LIFE_POPULATION_PATH: life population directory path (ex) "./test/data/life_population/"
+
+PATH_GRID_MAP : 100 grid data 
+PATH_GRID_AREA_MAP : area(집계구) grid data
+PATH_GRID_CONGESTION_MAP : congestion(혼잡지역,실시간 도시 데이터) grid data
 '''
 
 import os
 import sys
 
-REPORT_PATH = sys.argv[1]
-LIFE_POPULATION_PATH = sys.argv[2]
+REPORT_DIRECTORY_PATH = sys.argv[1]
+LIFE_POPULATION_DIRECTORY_PATH = sys.argv[2]
+
+import warnings
+
+warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
 
-    import warnings
-
-    warnings.filterwarnings(action='ignore')
-
     from app.business.validator.validate_file import init
+    init()  # Check directory & data file
 
-    init()  # 초기 검사
 
     temp_life_population = []
-    for item in os.listdir(LIFE_POPULATION_PATH):
-        temp_life_population.append(pd.read_csv(LIFE_POPULATION_PATH + item, encoding=EUC_KR))
+    for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH): # loop in life population directory
+        life_population_item = pd.read_csv(LIFE_POPULATION_DIRECTORY_PATH + item, encoding=EUC_KR)
+        from app.business.validator.validate_dataframe import validate_life_population_df
+        validate_life_population_df(life_population_item)  # validate life population dataframe
+        temp_life_population.append(life_population_item)
 
     from app.model.life_population import LifePopulation
-
-    life_population = LifePopulation(pd.concat(temp_life_population))  # 생활인구 통합
+    life_population = LifePopulation(pd.concat(temp_life_population))  # concat life population df
 
     temp_report = []
-    for item in os.listdir(REPORT_PATH):
-        temp_report.append(pd.read_csv(REPORT_PATH + item, encoding=UTF_8))
+    for item in os.listdir(REPORT_DIRECTORY_PATH): # loop in report directory
+        report_item = pd.read_csv(REPORT_DIRECTORY_PATH + item, encoding=UTF_8)
+        from app.business.validator.validate_dataframe import validate_report_df
+
+        validate_report_df(report_item)  # validate report dataframe
+
+        temp_report.append(report_item)
 
     from app.model.report import Report
 
-    report = Report(pd.concat(temp_report))  # 112 신고 건수 통합
+    report = Report(pd.concat(temp_report))  # concat report df
 
     from app.model.grid_map import GridMap
     import geopandas as gpd
-    grid_map = GridMap(gpd.read_file(PATH_GRID_MAP, driver="GeoJSON"))  # 100격자
+
+    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
+    from app.business.validator.validate_dataframe import validate_grid_df
+
+    validate_grid_df(grid_map)  # validate grid
+    grid_map = GridMap(grid_map)  # 100 grid data dataframe
+
 
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
-    grid_congestion_map = pd.read_csv(PATH_GRID_CONGESTION_MAP, encoding=UTF_8)
+    from app.business.validator.validate_dataframe import validate_area_grid_df
 
+    validate_area_grid_df(grid_area_map)
+
+    grid_congestion_map = pd.read_csv(PATH_GRID_CONGESTION_MAP, encoding=UTF_8)
+    from app.business.validator.validate_dataframe import validate_congestion_grid_df
+
+    validate_congestion_grid_df(grid_congestion_map)
 
     for day_month_year in life_population.get_day_list():
+        from log import logger
         logger.info(f"[혼잡도] [%s] 데이터를 산출합니다" % day_month_year)
 
         from app.service.congestion.service import service

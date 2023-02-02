@@ -20,11 +20,11 @@ class Report:  # report DaraFrame Class
         self.__report["x"] = (self.__report["HPPN_X_SW"] +
                               self.__report["HPPN_X_NE"] +
                               self.__report["HPPN_X_NW"] +
-                              self.__report["HPPN_X_SE"]) / 4
+                              self.__report["HPPN_X_SE"]) / 4       # get center coordinate
         self.__report["y"] = (self.__report["HPPN_Y_SW"] +
                               self.__report["HPPN_Y_NE"] +
                               self.__report["HPPN_Y_NW"] +
-                              self.__report["HPPN_Y_SE"]) / 4
+                              self.__report["HPPN_Y_SE"]) / 4       # get center coordinate
         self.__report["evt_cl_cd"] = self.__report["EVT_CL_CD"].map(lambda x: str(x).split('.')[0])
         self.__report["end_cd"] = self.__report["END_CD"].map(lambda x: str(int(str(x).replace('{', '0').replace('nan','0').replace(' ','0').split('.')[0])))
         self.__day = self.__report["DAY"]  # yyyyMMdd

@@ -1,5 +1,9 @@
 
 import datetime
+
 from app.utils.constants import PATH_TRAIN_DATA
 
-TRAIN_DATA_PATH = PATH_TRAIN_DATA+str(datetime.date.today())+".csv"
+
+def TRAIN_DATA_PATH(key_danger_index) :
+    return PATH_TRAIN_DATA+str(datetime.date.today())+"_"+key_danger_index.replace('_','-')+".csv"
+

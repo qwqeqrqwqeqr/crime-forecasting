@@ -5,8 +5,6 @@ def init():
     check_data_file()
     create_data_directory()
 
-
-
 def check_data_file():
     from app.utils.constants import FILE_LIST
     for file in FILE_LIST:

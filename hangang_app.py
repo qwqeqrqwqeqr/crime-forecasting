@@ -1,42 +1,60 @@
 # -*- coding: utf-8 -*-
 
-import pandas as pd
-from log import logger
-
 from app.utils.constants import *
 
 '''
-112 신고 데이터 형식 : POL_01_YYYYMMDD_M.csv 
-CRIME_REPORT_PATH : 112 신고 데이터
-PATH_GRID_HANGANG_MAP : 한강 격자 데이터
-PATH_GRID_MAP : 격자 데이터
+Run Parameters
+- REPORT_PATH: report file path (ex) "./test/data/report/POL_01_20220101_M.csv"
+
+PATH_GRID_MAP : 100 grid data 
+PATH_GRID_HANGANG_MAP : hangang grid data
 '''
 
 import sys
 REPORT_PATH = sys.argv[1]
 
+import warnings
+
+warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
 
-    import warnings
-    warnings.filterwarnings(action='ignore')
 
-    from app.business.validator.validate_file import init
-    init()          # 초기 검사
+    from app.business.validator.validate_file import init, check_file
 
-    print("========== 112신고 빈도데이터 - [한강 경찰대]를 산출 합니다. ==========")
+    init()  # Check directory & data file
+    check_file(REPORT_PATH)  # Check Report file
 
+    import pandas as pd
     grid_hangang_map = pd.read_csv(PATH_GRID_HANGANG_MAP, encoding=UTF_8)
 
+    from app.business.validator.validate_dataframe import validate_hangang_grid_df
+
+    validate_hangang_grid_df(grid_hangang_map)
+
     from app.model.report import Report
-    report = Report(pd.read_csv(REPORT_PATH, encoding=UTF_8))
+
+    import pandas as pd
+
+    report = pd.read_csv(REPORT_PATH, encoding=UTF_8)
+    from app.business.validator.validate_dataframe import validate_report_df
+
+    validate_report_df(report)  # validate report dataframe
+    report = Report(report)  # report data
 
     from app.model.grid_map import GridMap
     import geopandas as gpd
 
-    grid_map = GridMap(gpd.read_file(PATH_GRID_MAP, driver="GeoJSON"))  # 100격자
+    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
+    from app.business.validator.validate_dataframe import validate_grid_df
+
+    validate_grid_df(grid_map)  # validate grid
+
+    grid_map = GridMap(grid_map)  # 100 grid data dataframe
 
     for day_month_year in report.get_day_list():
+        from log import logger
+
 
         logger.info(f"[한강 경찰대] [%s] 데이터를 산출합니다" % day_month_year)
         from app.service.hangang.service import service
