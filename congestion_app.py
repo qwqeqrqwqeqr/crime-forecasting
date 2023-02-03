@@ -53,8 +53,11 @@ if __name__ == '__main__':
 
     report = Report(pd.concat(temp_report))  # concat report df
 
-    from app.business.utils.shape_file_manager import ShapeFileManager
-    grid_map = ShapeFileManager("./app/data/map/small_map.shp",encoding=UTF_8).get()
+
+
+    import geopandas as gpd
+    grid_map = gpd.read_file(PATH_AREA_CONGESTION_MAP, driver="GeoJSON")
+    grid_map = grid_map.drop_duplicates('TOT_REG_CD')
 
 
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)

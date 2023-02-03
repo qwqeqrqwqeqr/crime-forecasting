@@ -62,4 +62,5 @@ RUN pip install -r  requirements.txt
 ###############################################
 #  Entry Point
 ###############################################
-CMD ["sh","/seoul/build/utils/cron.sh"]
+CMD cron
+ENTRYPOINT ["/bin/sh", "-c", "/bin/bash"]

@@ -7,6 +7,7 @@
   - postgresql 설치 
   - postgresql 사용자 생성 (이때, 사용자 권한은 insert,update,delete,select 모두 적용)
   - sql_script 디렉터리 내 6개 sql 파일 확인
+  - DB table 스키마 위치 이름 확인
 ***
 ### 필수 데이터 확인
 - 지도 데이터 (./app/data/map)
@@ -19,6 +20,7 @@
   - middle_map => 행정동 격자 데이터
   - small_map => 집계구 격자 데이터
   - grid.geojson => 격자 데이터
+  - congestion_map.geojson => 혼잡지역 집계구 지리 데이터
   - large_map(dbf,prj,shp,shx) => 자치구 지리 데이터
   - middle_map(dbf,prj,shp,shx) => 행정동 지리 데이터
   - small_map(dbf,prj,shp,shx) => 집계구 지리 데이터 
@@ -45,7 +47,7 @@
     - 편의점.csv
 ***
 ###  생활인구 
-- 특정 폴더에 누적
+- 특정 폴더에 일마다 누적
 - 형식
   - 단일 파일 `LOCAL_PEOPLE_yyyyMMdd.csv`
   - 월별 파일 `LOCAL_PEOPLE_yyyyMM.zip`
@@ -59,7 +61,7 @@
 - docker file 내 구간 DB 정보에 맞게 수정
 - docker build
   - `sudo docker build -t [image-name]  ./`
-- docker run
+- docker run (생활인구 신고데이터폴더를 컨테이너에서 접근할 수 있도록 연결)
   - `docker run -it -d -v /data:/data [image] `
 - 내부 shell 접속
   - `sudo docker exec -it [container-name] /bin/bash`

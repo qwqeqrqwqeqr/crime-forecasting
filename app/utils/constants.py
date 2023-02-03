@@ -43,6 +43,7 @@ PATH_GRID_HANGANG_MAP = PATH_MAP + "grid_hangang.csv"
 PATH_GRID_TOURIST_MAP = PATH_MAP + "grid_tourist.csv"
 PATH_GRID_SUBWAY_MAP = PATH_MAP + "grid_subway.csv"
 PATH_GRID_CONGESTION_MAP = PATH_MAP + "grid_congestion.csv"
+PATH_AREA_CONGESTION_MAP = PATH_MAP+"congestion_map.geojson"
 
 PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
 PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
@@ -87,6 +88,7 @@ FILE_LIST = [
     PATH_GRID_HANGANG_MAP,
     PATH_GRID_SUBWAY_MAP,
     PATH_GRID_CONGESTION_MAP,
+    PATH_AREA_CONGESTION_MAP,
     PATH_GRID_MAP,
 
     PATH_LARGE_MAP,
