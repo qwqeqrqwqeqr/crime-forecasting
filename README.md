@@ -7,7 +7,8 @@
   - postgresql 설치 
   - postgresql 사용자 생성 (이때, 사용자 권한은 insert,update,delete,select 모두 적용)
   - sql_script 디렉터리 내 6개 sql 파일 확인
-  - **DB table 스키마 위치 이름 확인**
+  - **DB table 스키마 위치 이름 확인** 
+    - 스키마 이름 변경할 경우 (public -> digitalif)  /app/database/query/constants.py내 쿼리문 또한 변경해줘야함.  
 ***
 ### 필수 데이터 확인
 - 지도 데이터 (./app/data/map)
@@ -66,7 +67,7 @@
   - *데이터 폴더 경로 수정할 시, "./build/utils/movefile.sh" 파일 내부 설정 경로도 같이 수정할 것
 
 ## 실행 방식
-- docker file 내 구간 DB 정보에 맞게 수정
+- docker file 내부에서 DB ENV 정보에 맞게 수정
 - docker build
   - `sudo docker build -t [image-name]  ./`
 - docker run (생활인구 신고데이터폴더를 컨테이너에서 접근할 수 있도록 연결)

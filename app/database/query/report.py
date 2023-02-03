@@ -8,8 +8,6 @@ def select_all_report():
     database.close()
     return  result
 
-
-
 def insert_report(data_record_list):
     database = Database()
     database.executeMany(QUERY_INSERT_REPORT, data_record_list)

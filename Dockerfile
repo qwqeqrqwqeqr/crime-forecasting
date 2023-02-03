@@ -17,11 +17,11 @@ RUN mv /seoul/build/utils/movefile.sh  /seoul
 ###############################################
 # DB_ENV
 ###############################################
-ENV DB_NAME='postgres'
-ENV DB_HOST='121.131.185.164'
-ENV DB_PASSWORD='ncyc0078'
-ENV DB_PORT=5435
-ENV DB_USER='ncyc'
+ENV DB_NAME='이름입력'
+ENV DB_HOST='호스트입력'
+ENV DB_PASSWORD='패스워드입력'
+ENV DB_PORT=1234'숫자로입력할것'
+ENV DB_USER='유저입력'
 
 
 ###############################################
@@ -62,7 +62,8 @@ RUN apt-get install -y python3-pip
 RUN pip install --upgrade pip
 RUN pip install -r  requirements.txt
 
-RUN python3 -m unittest
+
+RUN python3 -m unittest /seoul/test/validator_test.py
 ###############################################
 #  Entry Point
 ###############################################
