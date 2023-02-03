@@ -1,13 +1,9 @@
-# common
-
 EPSG_5181 = "epsg:5181"
 EPSG_4326: str = "epsg:4326"
 
 UTF_8 = 'utf-8'
 EUC_KR = 'euc-kr'
 CP_949 = 'CP949'
-
-# path
 
 PATH_ORIGIN = "app/data/origin/"
 PATH_MAP = "app/data/map/"
@@ -32,9 +28,6 @@ PATH_SAFETY_HOUSE_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심지킴이�
 PATH_SAFETY_FACILITY_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
 PATH_CONVENIENCE_STORE_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 
-'''
-MAP_PATH
-'''
 
 PATH_GRID_MAP = PATH_MAP + "grid.geojson"
 
@@ -49,9 +42,6 @@ PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
 PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
 PATH_SMALL_MAP = PATH_MAP + "small_map.csv"
 
-'''
-PATH_LIST
-'''
 
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,

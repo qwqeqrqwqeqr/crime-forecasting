@@ -8,11 +8,11 @@ RUN mkdir /seoul
 WORKDIR /seoul
 COPY . /seoul
 
-RUN chmod 644 ./build/run/*
-RUN chmod 644 ./build/run/utils/movefile.sh
+RUN chmod 644 /seoul/build/run/*
+RUN chmod 644 /seoul/build/utils/movefile.sh
 RUN chmod 777 /seoul/build/utils/cron.sh
-RUN mv ./build/run/*  ./
-RUN mv ./build/run/utils/movefile.sh  ./
+RUN mv /seoul/build/run/*  /seoul
+RUN mv /seoul/build/utils/movefile.sh  /seoul
 
 ###############################################
 # DB_ENV
@@ -54,6 +54,7 @@ RUN mv database.ini ./app/database/config/
 ###############################################
 RUN apt-get install -y cron
 RUN cron
+RUN /bin/sh /seoul/build/utils/cron.sh
 ###############################################
 # setting python
 ###############################################
@@ -61,6 +62,7 @@ RUN apt-get install -y python3-pip
 RUN pip install --upgrade pip
 RUN pip install -r  requirements.txt
 
+RUN python3 -m unittest
 ###############################################
 #  Entry Point
 ###############################################

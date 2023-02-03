@@ -4,7 +4,6 @@ import pandas as pd
 
 from app.utils.constants import *
 
-
 '''
 Run Parameters
 - REPORT_PATH: report directory path (ex) "./test/data/report/"
@@ -34,6 +33,7 @@ if __name__ == '__main__':
     for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH): # loop in life population directory
         life_population_item = pd.read_csv(LIFE_POPULATION_DIRECTORY_PATH + item, encoding=EUC_KR)
         from app.business.validator.validate_dataframe import validate_life_population_df
+
         validate_life_population_df(life_population_item)  # validate life population dataframe
         temp_life_population.append(life_population_item)
 
@@ -56,8 +56,10 @@ if __name__ == '__main__':
 
 
     import geopandas as gpd
-    grid_map = gpd.read_file(PATH_AREA_CONGESTION_MAP, driver="GeoJSON")
-    grid_map = grid_map.drop_duplicates('TOT_REG_CD')
+    area_map = gpd.read_file(PATH_AREA_CONGESTION_MAP, driver="GeoJSON")
+    area_map = area_map.drop_duplicates('TOT_REG_CD')
+    from app.business.validator.validate_dataframe import validate_congestion_area_df
+    validate_congestion_area_df(area_map)
 
 
     grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
@@ -73,6 +75,6 @@ if __name__ == '__main__':
 
         from app.service.congestion.service import service
 
-        service(grid_area_map, grid_map,
+        service(grid_area_map, area_map,
                 life_population.get_life_population_filtered_day(day_month_year),
                 report.get_report_filtered_day(day_month_year))

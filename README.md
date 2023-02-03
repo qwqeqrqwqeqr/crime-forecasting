@@ -1,13 +1,13 @@
 
-### 초기 환경 설정
+## 초기 환경 설정 및 확인 사항
 
 ***
-### 데이터 베이스 설정
+### 데이터 베이스 설정 및 확인
 - database 설정
   - postgresql 설치 
   - postgresql 사용자 생성 (이때, 사용자 권한은 insert,update,delete,select 모두 적용)
   - sql_script 디렉터리 내 6개 sql 파일 확인
-  - DB table 스키마 위치 이름 확인
+  - **DB table 스키마 위치 이름 확인**
 ***
 ### 필수 데이터 확인
 - 지도 데이터 (./app/data/map)
@@ -46,22 +46,30 @@
     - 여성안심택배함.csv
     - 편의점.csv
 ***
-###  생활인구 
+###  생활인구 폴더 확인
 - 특정 폴더에 일마다 누적
 - 형식
   - 단일 파일 `LOCAL_PEOPLE_yyyyMMdd.csv`
-  - 월별 파일 `LOCAL_PEOPLE_yyyyMM.zip`
 ***
 ###  신고 데이터 
 - 특정 폴더에 일마다 누적
 - 형식 
   - 단일 파일 `POL_01_YYYYMMDD_M.csv `
 ***
-### 실행 방식
+### 그외 확인 사항
+- cron 실행 여부 확인
+  - `crontab -l`
+  - 설정 오류날 경우 ./build/utils/cron.sh 파일을 crontab에 직접 주입
+- data directory 확인 
+  - /data/population
+  - /data/safety
+  - *데이터 폴더 경로 수정할 시, "./build/utils/movefile.sh" 파일 내부 설정 경로도 같이 수정할 것
+
+## 실행 방식
 - docker file 내 구간 DB 정보에 맞게 수정
 - docker build
   - `sudo docker build -t [image-name]  ./`
 - docker run (생활인구 신고데이터폴더를 컨테이너에서 접근할 수 있도록 연결)
-  - `docker run -it -d -v /data:/data [image] `
+  - `docker run -it -d -v /data:/data [image]`
 - 내부 shell 접속
-  - `sudo docker exec -it [container-name] /bin/bash`
+  - `sudo docker attach [container_id]`

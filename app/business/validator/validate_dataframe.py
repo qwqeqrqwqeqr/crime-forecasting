@@ -49,8 +49,14 @@ def validate_congestion_grid_df(grid: DataFrame):
         logger.info("[Error] [Congestion Grid] Incorrect file format")
         raise EnvironmentError
 
+def validate_congestion_area_df(area: DataFrame):
+    if False in area.columns.values == congestion_area_column_list:
+        from log import logger
+        logger.info("[Error] [Congestion Grid] Incorrect file format")
+        raise EnvironmentError
+
 def validate_area_grid_df(grid: DataFrame):
-    if False in grid.columns.values == area_grid_column_list:
+    if False in (grid.columns.values == area_grid_column_list):
         from log import logger
         logger.info("[Error] [Area Grid] Incorrect file format")
         raise EnvironmentError
