@@ -9,7 +9,10 @@ WORKDIR /seoul
 COPY . /seoul
 
 RUN chmod 644 ./build/run/*
+RUN chmod 644 ./build/run/utils/movefile.sh
+RUN chmod 777 /seoul/build/utils/cron.sh
 RUN mv ./build/run/*  ./
+RUN mv ./build/run/utils/movefile.sh  ./
 
 ###############################################
 # DB_ENV
@@ -47,13 +50,12 @@ RUN echo "[database]\nDB_NAME =$DB_NAME \nDB_HOST =$DB_HOST` \nDB_PASSWORD =$DB_
 RUN mv database.ini ./app/database/config/
 
 ###############################################
-# set cron
+# setting cron
 ###############################################
 RUN apt-get install -y cron
-RUN chmod 777 /seoul/build/utils/cron.sh
 RUN cron
 ###############################################
-# install python package
+# setting python
 ###############################################
 RUN apt-get install -y python3-pip
 RUN pip install --upgrade pip
@@ -62,5 +64,4 @@ RUN pip install -r  requirements.txt
 ###############################################
 #  Entry Point
 ###############################################
-CMD cron
 ENTRYPOINT ["/bin/sh", "-c", "/bin/bash"]
