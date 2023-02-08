@@ -4,8 +4,6 @@ RANDOM_STATE = 42
 
 
 
-from sklearn.linear_model import LogisticRegression
-LR_MODEL = LogisticRegression(random_state=RANDOM_STATE, C=100.0, penalty='l2', solver='lbfgs')
 
 
 import datetime

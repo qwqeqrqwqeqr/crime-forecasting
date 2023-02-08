@@ -1,5 +1,8 @@
 import numpy as np
 
+from app.business.ai import KEY_FILTER_CLASS
+from app.business.ai.danger_index import RANDOM_STATE, DANGER_INDEX_MODEL_PATH
+
 
 # for generate danger index
 def generate_danger_index(train_data_df, key_danger_index):
@@ -7,7 +10,8 @@ def generate_danger_index(train_data_df, key_danger_index):
     train_data_df = generate_filter_class(train_data_df)        # generate filter class
     x_train_val, y_train_val = generate_train_data(train_data_df)       # generate data for train model
 
-    model = LR_MODEL
+    from sklearn.linear_model import LogisticRegression
+    model =  LogisticRegression(random_state=RANDOM_STATE, C=100.0, penalty='l2', solver='lbfgs')
     from sklearn.model_selection import KFold
     kf = KFold(n_splits=10, random_state=RANDOM_STATE, shuffle=True)
 
@@ -35,11 +39,9 @@ def generate_danger_index(train_data_df, key_danger_index):
 
     return train_data_df[['격자고유번호', key_danger_index]]
 
-
-#TODO save model
 def save_model(model,key_danger_index):
     import joblib
-    joblib.dump(model, MODEL_PATH(key_danger_index))
+    joblib.dump(model, DANGER_INDEX_MODEL_PATH(key_danger_index))
 
 def generate_train_data(df):
     from sklearn.model_selection import train_test_split
