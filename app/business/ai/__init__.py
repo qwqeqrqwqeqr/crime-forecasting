@@ -1,8 +1,4 @@
-from app.utils.codebook import *
-
-
-
-
+KEY_FILTER_CLASS = 'filter_class'
 
 
 

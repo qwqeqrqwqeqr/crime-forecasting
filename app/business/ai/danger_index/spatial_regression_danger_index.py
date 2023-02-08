@@ -18,9 +18,7 @@ def geographically_weighted_regression(df):
     mgwr_selector = Sel_BW(coordinate, y, x)
     model = GWR(coordinate, y, x, mgwr_selector.search()).fit()
 
-
-
-    # Add GWR parameters to GeoDataframe
+    # add GWR parameters to GeoDataframe
     df['gwr_x0'] = model.params[:,0]
     df['gwr_x1'] = model.params[:,1]
     df['gwr_x2'] = model.params[:,2]

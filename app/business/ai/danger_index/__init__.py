@@ -1,6 +1,5 @@
 # Model Parameter
 
-KEY_FILTER_CLASS = 'filter_class'
 RANDOM_STATE = 42
 
 
