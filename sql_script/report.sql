@@ -1,4 +1,4 @@
-create table if not exists public.report
+create table if not exists digitalif.report
 (
     year             integer,
     month            integer,

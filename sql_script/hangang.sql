@@ -1,4 +1,4 @@
-create table if not exists public.hangang
+create table if not exists digitalif.hangang
 (
     year             integer,
     month            integer,

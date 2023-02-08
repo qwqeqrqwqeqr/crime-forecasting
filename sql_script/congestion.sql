@@ -1,4 +1,4 @@
-create table if not exists public.congestion
+create table if not exists digitalif.congestion
 (
     day_month_year  integer    not null,
     weekday         varchar(2),

@@ -1,4 +1,4 @@
-create table if not exists public.tourist
+create table if not exists digitalif.tourist
 (
     year             integer,
     month            integer,

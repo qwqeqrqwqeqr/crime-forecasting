@@ -1,4 +1,4 @@
-create table if not exists public.danger_index
+create table if not exists digitalif.danger_index
 (
     grid_number     varchar(6) not null
         constraint danger_index_pk

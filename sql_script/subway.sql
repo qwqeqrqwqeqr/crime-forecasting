@@ -1,4 +1,4 @@
-create table if not exists public.subway
+create table if not exists digitalif.subway
 (
     year             integer,
     month            integer,
