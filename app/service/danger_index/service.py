@@ -3,19 +3,21 @@
 
 def service(life_population, report, grid_map, grid_area_map):
 
-    report_list = []
+    report_list = []        # generate mask filtered report list
     from app.service.danger_index import evt_cl_cd_mask_list
     for i in range(len(evt_cl_cd_mask_list(report.report))):        # get filtered report df
         report_list.append(report.report.loc[evt_cl_cd_mask_list(report.report)[i]])
 
     from app.business.ai.generate_data.gernerate_data import generate_data
-    generate_data_dfs = generate_data(life_population, report_list, grid_map, grid_area_map)
+    generate_data_dfs = generate_data(life_population, report_list, grid_map, grid_area_map)        # generate concat train data
 
     dfs = []
     from app.service.danger_index import DANGER_INDEX_NAME_LIST
     for i in range(len(DANGER_INDEX_NAME_LIST)):         # loop by danger index
+
+        save_df(generate_data_dfs[i],DANGER_INDEX_NAME_LIST[i])
         from app.business.ai.danger_index.danger_index import generate_danger_index
-        dfs.append(generate_danger_index(generate_data_dfs[i], DANGER_INDEX_NAME_LIST[i]))         # train generated data
+        dfs.append(generate_danger_index(generate_data_dfs[i], DANGER_INDEX_NAME_LIST[i]))         # train
 
     from app.business.ai.utils import concat_grid_data
     df = concat_grid_data(dfs, '격자고유번호')
@@ -23,13 +25,10 @@ def service(life_population, report, grid_map, grid_area_map):
 
     insert_data(df)
 
+def save_df(concat_df,key_danger_index):        # save train data
+    from app.service.danger_index import DANGER_INDEX_DATA_PATH
+    concat_df.to_csv(DANGER_INDEX_DATA_PATH(key_danger_index))
 
-def save_df(concat_df):        # save train data
-    from app.business.ai.generate_data import TRAIN_DATA_PATH
-    concat_df.to_csv(TRAIN_DATA_PATH())
-
-def TRAIN_DATA_PATH(key_danger_index) :
-    return PATH_TRAIN_DATA+str(datetime.date.today())+"_"+key_danger_index.replace('_','-')+".csv"
 
 def insert_data(df):  # insert in DB
     insert_list =[]

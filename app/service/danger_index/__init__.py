@@ -1,3 +1,4 @@
+
 from app.utils.codebook import *
 
 
@@ -25,3 +26,8 @@ def evt_cl_cd_mask_list(report):
 DANGER_INDEX_NAME_LIST = ["dv_danger_index", "tp_danger_index", "sh_danger_index", "da_danger_index", "st_danger_index",
              "ca_danger_index", "sv_danger_index"]
 
+
+from datetime import datetime
+from app.utils.constants import PATH_DANGER_INDEX_DATA
+DANGER_INDEX_DATA_PATH = lambda key_danger_index: PATH_DANGER_INDEX_DATA + str(
+    datetime.date.today()) + "_" + key_danger_index.replace('_', '-') + ".csv"

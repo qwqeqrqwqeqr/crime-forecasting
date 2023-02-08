@@ -13,6 +13,10 @@ PATH_SR_DANGER_INDEX_MODEL = "app/data/ai/spatial_regression/model/"
 PATH_PREDICT_TRAIN_MODEL = "app/data/ai/predict/model/"
 PATH_PREDICT_TRAIN_SCALER = "app/data/ai/predict/scaler/"
 
+PATH_DANGER_INDEX_DATA = "app/data/ai/danger_index/data/"
+PATH_SR_DANGER_INDEX_DATA = "app/data/ai/spatial_regression/data/"
+PATH_PREDICT_TRAIN_DATA = "app/data/ai/predict/data/"
+
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
 PATH_MJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시목욕장업인허가정보.csv"
@@ -50,6 +54,10 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_SR_DANGER_INDEX_MODEL,
              PATH_PREDICT_TRAIN_MODEL,
              PATH_PREDICT_TRAIN_SCALER,
+
+             PATH_DANGER_INDEX_DATA,
+             PATH_SR_DANGER_INDEX_DATA,
+             PATH_PREDICT_TRAIN_DATA,
 
              PATH_ORIGIN + "danger_facility/",
              PATH_ORIGIN + "police_facility/",
