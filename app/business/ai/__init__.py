@@ -10,6 +10,8 @@ GRID_NAME_LIST = [
 NAME_LIST_SIZE= len(NAME_LIST)
 GRID_NAME_LIST_SIZE= len(GRID_NAME_LIST)
 
+
+
 def evt_cl_cd_mask_list(report):
     return [
         (report.evt_cl_cd == EVT_CL_CD_가정폭력),

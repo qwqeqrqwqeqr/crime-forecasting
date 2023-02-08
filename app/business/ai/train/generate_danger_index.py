@@ -1,14 +1,13 @@
 import numpy as np
 from app.business.ai.train import *
 
-def train(train_data_df, key_danger_index):
+
+def generate_danger_index(train_data_df, key_danger_index):
 
     train_data_df = generate_filter_class(train_data_df)        # generate filter class
     x_train_val, y_train_val = generate_train_data(train_data_df)       # generate data for train model
 
-
-    from sklearn.linear_model import LogisticRegression
-    model = LogisticRegression(random_state=RANDOM_STATE, C=C, penalty=PENALTY, solver=SOLVER)
+    model = LR_MODEL
     from sklearn.model_selection import KFold
     kf = KFold(n_splits=10, random_state=RANDOM_STATE, shuffle=True)
 
@@ -42,7 +41,7 @@ def save_model(model,key_danger_index):
 
 def generate_train_data(df):
     from sklearn.model_selection import train_test_split
-    x_train_val, x_test, y_train_val, y_test = train_test_split(df.iloc[:, :-1], df['filter_class'],
+    x_train_val, x_test, y_train_val, y_test = train_test_split(df.iloc[:, :-1], df[KEY_FILTER_CLASS],
                                                                 test_size=0.10, random_state=42, shuffle=True)
     x_train_val = x_train_val.iloc[:, 2:]
 

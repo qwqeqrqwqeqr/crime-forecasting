@@ -8,8 +8,8 @@ def service(life_population, report, grid_map, grid_area_map):
     dfs = []
     from app.business.ai import NAME_LIST, NAME_LIST_SIZE
     for i in range(NAME_LIST_SIZE):         # loop by danger index
-        from app.business.ai.train.train import train
-        dfs.append(train(generate_data_dfs[i], NAME_LIST[i]))         # train generated data
+        from app.business.ai.train.generate_danger_index import generate_danger_index
+        dfs.append(generate_danger_index(generate_data_dfs[i], NAME_LIST[i]))         # train generated data
 
     from app.business.ai.utils import concat_grid_data
     df = concat_grid_data(dfs, '격자고유번호')
