@@ -21,7 +21,7 @@ def generate_data(life_population,report_list,grid_map,grid_area_map):
         temp_dfs = [temp_report, life_population] + facility       # concat all data
 
         from app.business.ai.utils import rename_dataframe, concat_grid_data
-        from app.business.ai import GRID_NAME_LIST
+        from app.business.ai.generate_data import GRID_NAME_LIST
         concat_df =concat_grid_data(rename_dataframe(temp_dfs,'count',GRID_NAME_LIST), '격자고유번호')
         dfs.append(concat_df)
     return dfs

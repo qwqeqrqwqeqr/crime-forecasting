@@ -1,5 +1,4 @@
 import numpy as np
-from app.business.ai.train import *
 
 
 # for generate danger index

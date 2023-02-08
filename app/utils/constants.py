@@ -7,9 +7,10 @@ CP_949 = 'CP949'
 
 PATH_ORIGIN = "app/data/origin/"
 PATH_MAP = "app/data/map/"
-PATH_DANGER_INDEX_TRAIN_MODEL = "app/data/ai/danger_index/model/"
+
+PATH_DANGER_INDEX_MODEL = "app/data/ai/danger_index/model/"
+PATH_SR_DANGER_INDEX_MODEL = "app/data/ai/spatial_regression/model/"
 PATH_PREDICT_TRAIN_MODEL = "app/data/ai/predict/model/"
-PATH_SPATIAL_REGRESSION_TRAIN_MODEL = "app/data/ai/spatial_regression/model/"
 
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"

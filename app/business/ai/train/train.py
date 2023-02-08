@@ -95,10 +95,3 @@ def generate_filter_class(df):
     df[KEY_FILTER_CLASS] = np.digitize(x=df['num'], bins=[q2, upper_fence], right=True)  # generate filter class
     return df.drop(columns=['num'])
 
-
-'''
-2023년 2월 기준 
-1. 모델 학습하는거 (1달에 1번   신고데이터: 작년 전체, 생활인구: 2달전 (12월)) 
-2. LGBM 위험지수 뽑는거 (모델 넣으면 예측 위험지수 나오는거)
-3. 공간회귀 위험지수 뽑는거 (모델 넣으면 예측 위험지수 나오는거)
-'''
