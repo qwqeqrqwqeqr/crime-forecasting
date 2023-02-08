@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 
+
 def service(life_population, report, grid_map, grid_area_map):
+
+    report_list = []
+    from app.service.danger_index import evt_cl_cd_mask_list
+    for i in range(len(evt_cl_cd_mask_list(report.report))):        # get filtered report df
+        report_list.append(report.report.loc[evt_cl_cd_mask_list(report.report)[i]])
+
     from app.business.ai.generate_data.gernerate_data import generate_data
-    generate_data_dfs = generate_data(life_population, report, grid_map, grid_area_map)
-    save_train_data(generate_data_dfs)
+    generate_data_dfs = generate_data(life_population, report_list, grid_map, grid_area_map)
 
     dfs = []
-    from app.business.ai import NAME_LIST, NAME_LIST_SIZE
-    for i in range(NAME_LIST_SIZE):         # loop by danger index
-        from app.business.ai.train.generate_danger_index import generate_danger_index
-        dfs.append(generate_danger_index(generate_data_dfs[i], NAME_LIST[i]))         # train generated data
+    from app.service.danger_index import DANGER_INDEX_NAME_LIST
+    for i in range(len(DANGER_INDEX_NAME_LIST)):         # loop by danger index
+        from app.business.ai.danger_index.danger_index import generate_danger_index
+        dfs.append(generate_danger_index(generate_data_dfs[i], DANGER_INDEX_NAME_LIST[i]))         # train generated data
 
     from app.business.ai.utils import concat_grid_data
     df = concat_grid_data(dfs, '격자고유번호')
@@ -18,15 +24,12 @@ def service(life_population, report, grid_map, grid_area_map):
     insert_data(df)
 
 
-
-def save_train_data(train_data):        # save train data
-    from app.business.ai import NAME_LIST_SIZE,NAME_LIST
+def save_df(concat_df):        # save train data
     from app.business.ai.generate_data import TRAIN_DATA_PATH
+    concat_df.to_csv(TRAIN_DATA_PATH())
 
-    for i in range (NAME_LIST_SIZE):
-        train_data.to_csv(TRAIN_DATA_PATH(NAME_LIST[i]))
-
-
+def TRAIN_DATA_PATH(key_danger_index) :
+    return PATH_TRAIN_DATA+str(datetime.date.today())+"_"+key_danger_index.replace('_','-')+".csv"
 
 def insert_data(df):  # insert in DB
     insert_list =[]

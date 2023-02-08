@@ -7,8 +7,9 @@ CP_949 = 'CP949'
 
 PATH_ORIGIN = "app/data/origin/"
 PATH_MAP = "app/data/map/"
-PATH_TRAIN_MODEL = "app/data/ai/model/"
-PATH_TRAIN_DATA = "app/data/ai/data/"
+PATH_DANGER_INDEX_TRAIN_MODEL = "app/data/ai/danger_index/model/"
+PATH_PREDICT_TRAIN_MODEL = "app/data/ai/predict/model/"
+PATH_SPATIAL_REGRESSION_TRAIN_MODEL = "app/data/ai/spatial_regression/model/"
 
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"
@@ -28,7 +29,6 @@ PATH_SAFETY_HOUSE_ORIGIN = PATH_ORIGIN + "safety_facility/여성안심지킴이�
 PATH_SAFETY_FACILITY_ORIGIN = PATH_ORIGIN + "safety_facility/아동안전지킴이시설물.csv"
 PATH_CONVENIENCE_STORE_ORIGIN = PATH_ORIGIN + "safety_facility/편의점.csv"
 
-
 PATH_GRID_MAP = PATH_MAP + "grid.geojson"
 
 PATH_GRID_AREA_MAP = PATH_MAP + "grid_area.csv"
@@ -36,23 +36,22 @@ PATH_GRID_HANGANG_MAP = PATH_MAP + "grid_hangang.csv"
 PATH_GRID_TOURIST_MAP = PATH_MAP + "grid_tourist.csv"
 PATH_GRID_SUBWAY_MAP = PATH_MAP + "grid_subway.csv"
 PATH_GRID_CONGESTION_MAP = PATH_MAP + "grid_congestion.csv"
-PATH_AREA_CONGESTION_MAP = PATH_MAP+"congestion_map.geojson"
+PATH_AREA_CONGESTION_MAP = PATH_MAP + "congestion_map.geojson"
 
 PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
 PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
 PATH_SMALL_MAP = PATH_MAP + "small_map.csv"
 
-
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,
-             PATH_TRAIN_DATA,
-             PATH_TRAIN_MODEL,
+             PATH_DANGER_INDEX_TRAIN_MODEL,
+             PATH_PREDICT_TRAIN_MODEL,
+             PATH_SPATIAL_REGRESSION_TRAIN_MODEL,
 
              PATH_ORIGIN + "danger_facility/",
              PATH_ORIGIN + "police_facility/",
              PATH_ORIGIN + "safety_facility/",
              ]
-
 
 FILE_LIST = [
     PATH_NY_ORIGIN,

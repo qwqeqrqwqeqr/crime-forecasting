@@ -69,3 +69,4 @@ wrapt==1.14.1
 zipp==3.11.0
 psycopg2==2.9.5
 lightgbm==3.3.5
+mgwr==2.1.2

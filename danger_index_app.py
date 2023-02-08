@@ -58,7 +58,7 @@ if __name__ == '__main__':
         temp_report.append(report_item)
 
     from log import logger
-    logger.info(f"[위험지수] [%s] 데이터를 산출합니다")
+    logger.info(f"[위험지수] 데이터를 산출합니다")
 
     from app.model.life_population import LifePopulation
     from app.model.report import Report

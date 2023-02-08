@@ -55,7 +55,7 @@ if __name__ == '__main__':
     for day_month_year in report.get_day_list():
         from log import logger
 
-        logger.info(f"[지하철 경찰대] [%s] 데이터를 산출합니다" % day_month_year)
+        logger.info(f"[지하철 경찰대] [%s] 데이터를 산출합니다" %day_month_year)
         from app.service.subway.service import service
 
         service(grid_subway_map, grid_map, report.get_report_filtered_day(day_month_year))
