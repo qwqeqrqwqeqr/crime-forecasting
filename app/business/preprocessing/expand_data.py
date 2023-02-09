@@ -14,7 +14,7 @@ dataframe column info
 '''
 
 
-def expand_data(depth, df):
+def expand_data(df,depth):
     df = preprocess(df)
 
     queue = []
@@ -54,7 +54,7 @@ def expand_data(depth, df):
 
 
 def preprocess(df):
-    df['격자고유번호'] = df['격자고유번호'].map(lambda x: x[-6:])
+    df['격자고유번호'] = df['격자고유번호'].map(lambda x: str(x)[-6:])
     df['x'] = df['격자고유번호'].str.slice(start=0, stop=3)
     df['y'] = df['격자고유번호'].str.slice(start=-3)
     df = df.astype({'x': 'int'})  # convert type to int

@@ -27,7 +27,6 @@ DANGER_INDEX_NAME_LIST = ["dv_danger_index", "tp_danger_index", "sh_danger_index
              "ca_danger_index", "sv_danger_index"]
 
 
-from datetime import datetime
+from datetime import date
 from app.utils.constants import PATH_DANGER_INDEX_DATA
-DANGER_INDEX_DATA_PATH = lambda key_danger_index: PATH_DANGER_INDEX_DATA + str(
-    datetime.date.today()) + "_" + key_danger_index.replace('_', '-') + ".csv"
+DANGER_INDEX_DATA_PATH = lambda key_danger_index: PATH_DANGER_INDEX_DATA + str(date.today()) + "_" + key_danger_index.replace('_', '-') + ".csv"
