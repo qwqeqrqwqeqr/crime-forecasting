@@ -8,14 +8,14 @@ from app.business.ai.danger_index import RANDOM_STATE, DANGER_INDEX_MODEL_PATH
 def generate_danger_index(train_data_df, key_danger_index):
 
     train_data_df = generate_filter_class(train_data_df)        # generate filter class
-    x_train_val, y_train_val = generate_train_data(train_data_df)       # generate data for train model
+    x_train_val, y_train_val = generate_train_data(train_data_df)       # generate data for predict model
 
     from sklearn.linear_model import LogisticRegression
     model =  LogisticRegression(random_state=RANDOM_STATE, C=100.0, penalty='l2', solver='lbfgs')
     from sklearn.model_selection import KFold
     kf = KFold(n_splits=10, random_state=RANDOM_STATE, shuffle=True)
 
-    for train_index, val_index in kf.split(x_train_val):        # train model
+    for train_index, val_index in kf.split(x_train_val):        # predict model
         x_train, x_val = x_train_val.values[train_index], x_train_val.values[val_index]
         y_train, y_val = y_train_val.values[train_index], y_train_val.values[val_index]
         model.fit(x_train, y_train)

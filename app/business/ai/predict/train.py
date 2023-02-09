@@ -1,12 +1,12 @@
 import pandas as pd
 
-from app.business.ai.train import *
+from app.business.ai.predict import *
 
 
-# for train & test data
+# for predict & test data
 def train(train_data_df):
     train_data_df = generate_filter_class(train_data_df)  # generate filter class
-    x, y = generate_xy_class(train_data_df)  # generate data for train model
+    x, y = generate_xy_class(train_data_df)  # generate data for predict model
     x,scaler = generate_train_data(x)
 
     from lightgbm import LGBMClassifier
@@ -14,7 +14,7 @@ def train(train_data_df):
     model.fit(x, y)
     save_model(model)
     save_scaler(scaler)
-
+    return model, scaler
 
 def save_model(model):
     import joblib

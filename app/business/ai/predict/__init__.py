@@ -3,10 +3,10 @@ from datetime import datetime
 import numpy as np
 
 from app.business.ai import KEY_FILTER_CLASS
-from app.utils.constants import PATH_PREDICT_TRAIN_MODEL, PATH_PREDICT_TRAIN_SCALER
+from app.utils.constants import PATH_PREDICT_MODEL, PATH_PREDICT_SCALER
 
-PREDICT_TRAIN_MODEL_PATH = PATH_PREDICT_TRAIN_MODEL+str(datetime.date.today())+".pkl"
-PREDICT_TRAIN_SCALER_PATH = PATH_PREDICT_TRAIN_SCALER+str(datetime.date.today())+".pkl"
+PREDICT_TRAIN_MODEL_PATH = PATH_PREDICT_MODEL+str(datetime.date.today())+".pkl"
+PREDICT_TRAIN_SCALER_PATH = PATH_PREDICT_SCALER+str(datetime.date.today())+".pkl"
 
 
 
