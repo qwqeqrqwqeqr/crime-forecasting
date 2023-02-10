@@ -8,7 +8,7 @@
   - postgresql 사용자 생성 (이때, 사용자 권한은 insert,update,delete,select 모두 적용)
   - sql_script 디렉터리 내 6개 sql 파일 확인
   - **DB table 스키마 위치 이름 확인** 
-    - 스키마 이름 변경할 경우 (public -> digitalif)  /app/database/query/constants.py내 쿼리문 또한 변경해줘야함.  
+    - 스키마 이름 변경할 경우 (public -> digitalif)  /app/database/query/query.py내 쿼리문 또한 변경해줘야함.  
 ***
 ### 필수 데이터 확인
 - 지도 데이터 (./app/data/map)

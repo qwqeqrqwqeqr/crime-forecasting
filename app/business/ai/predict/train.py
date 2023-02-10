@@ -14,7 +14,6 @@ def train(train_data_df):
     model.fit(x, y)
     save_model(model)
     save_scaler(scaler)
-    return model, scaler
 
 def save_model(model):
     import joblib

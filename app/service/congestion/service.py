@@ -21,6 +21,7 @@ def service(grid_area_map, area_map, life_population, report):         # create 
 
         concat_life_population_report_df = pd.merge(grid_time_life_population_map, count_point_df,
                                                     on='TOT_REG_CD', how='inner')        # concat life population and report
+
         concat_life_population_report_df=concat_life_population_report_df.drop_duplicates(['TOT_REG_CD'])
         concat_life_population_report_df= pd.merge(concat_life_population_report_df,area_map,on='TOT_REG_CD', how='left')
         insert_data(make_df(concat_life_population_report_df, life_population, time))

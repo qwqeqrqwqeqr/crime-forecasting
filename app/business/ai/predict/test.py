@@ -1,7 +1,7 @@
 from app.business.ai.predict import *
 
 
-def predict(train_data_df,model,scaler):
+def test(train_data_df,model,scaler):
     train_data_df = generate_filter_class(train_data_df)  # generate filter class
     x, y = generate_xy_class(train_data_df)  # generate data for predict model
     x = generate_test_data(x,scaler)
