@@ -9,9 +9,10 @@ Run Parameters
 - REPORT_PATH: report directory path (ex) "./test/data/report/"
 - LIFE_POPULATION_PATH: life population directory path (ex) "./test/data/life_population/"
 
-PATH_GRID_MAP : 100 grid data 
-PATH_GRID_AREA_MAP : area(집계구) grid data
-PATH_GRID_CONGESTION_MAP : congestion(혼잡지역,실시간 도시 데이터) grid data
+ 
+PATH_AREA_CONGESTION_MAP
+    - congestion(혼잡 지역,실시간 도시 데이터)와 집계구 정보를 가짐
+    - 집계구의 공간 정보(geometry) 보유
 '''
 
 import os
@@ -54,19 +55,11 @@ if __name__ == '__main__':
     report = Report(pd.concat(temp_report))  # concat report df
 
 
-
     import geopandas as gpd
-    area_map = gpd.read_file(PATH_AREA_CONGESTION_MAP, driver="GeoJSON")
-    area_map = area_map.drop_duplicates('TOT_REG_CD')
+    area_congestion_map = gpd.read_file(PATH_AREA_CONGESTION_MAP, driver="GeoJSON")
+    area_congestion_map = area_congestion_map.drop_duplicates('TOT_REG_CD')
     from app.business.validator.validate_dataframe import validate_congestion_area_df
-    validate_congestion_area_df(area_map)
-
-
-    grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
-    from app.business.validator.validate_dataframe import validate_area_grid_df
-
-    validate_area_grid_df(grid_area_map)
-
+    validate_congestion_area_df(area_congestion_map)
 
 
     for day_month_year in life_population.get_day_list():
@@ -75,6 +68,6 @@ if __name__ == '__main__':
 
         from app.service.congestion.service import service
 
-        service(grid_area_map, area_map,
+        service(area_congestion_map,
                 life_population.get_life_population_filtered_day(day_month_year),
                 report.get_report_filtered_day(day_month_year))
