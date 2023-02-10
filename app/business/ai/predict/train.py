@@ -20,8 +20,8 @@ def save_model(model):
     joblib.dump(model, PREDICT_TRAIN_MODEL_PATH)
 
 def save_scaler(scaler):
-    from pickle import dump
-    dump(scaler, open(PREDICT_TRAIN_SCALER_PATH, 'wb'))
+    import joblib
+    joblib.dump(scaler, PREDICT_TRAIN_SCALER_PATH)
 
 def generate_train_data(x):
     x_train = x.iloc[:, 2:]

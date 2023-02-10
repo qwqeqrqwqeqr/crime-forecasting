@@ -1,6 +1,6 @@
 
 
-def service(report, grid_map, grid_area_map, life_population,model,scaler):
+def service(life_population,report, grid_map, grid_area_map,model,scaler):
 
         from app.business.ai.generate_data.gernerate_data import generate_data
         generate_data_dfs = generate_data(life_population, [report.report], grid_map,

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 import pandas as pd
 
@@ -12,15 +11,53 @@ Run Parameters
 
 PATH_GRID_MAP : 100 grid data 
 PATH_GRID_AREA_MAP : area(집계구) grid data
-
-실행 방식
-1. 훈련과 테스트 동시 진행(base) : model scaler 및 예측 결과가 산출됨 (파일로 저장)
-    - 모든 데이터를 전부 주입함
-    - REPORT_PATH,TRAIN_LIFE_POPULATION_PATH,PREDICT_POPULATION_PATH,MODEL,SCALER
-2. 훈련 만 진행 : model 과 scaler 가 산출됨 
-    - 112 신고데이터와 훈련용 생활 인구 만 주입 나머지는 None 으로 입력
-    - REPORT_PATH,TRAIN_LIFE_POPULATION_PATH,None,None,None
-3. 테스트 만 진행(이미 model 과 scaler 를 보유 하고 있을 시 사용 가능)  : 예측결과가 산출됨
-    - 112 신고데이터와 훈련용 생활 인구 만 주입 나머지는 None 으로 입력
-    - REPORT_PATH,TRAIN_LIFE_POPULATION_PATH,None,None,None
 '''
+
+
+import os
+import sys
+
+REPORT_DIRECTORY_PATH = sys.argv[1]
+LIFE_POPULATION_DIRECTORY_PATH = sys.argv[2]
+
+
+if __name__ == '__main__':
+
+    from app.business.validator.validate_file import init
+    init()  # Check directory & data file
+
+    from app.model.grid_map import GridMap
+    import geopandas as gpd
+
+    grid_map = gpd.read_file(PATH_GRID_MAP, driver="GeoJSON")
+    from app.business.validator.validate_dataframe import validate_grid_df
+
+    validate_grid_df(grid_map)  # validate grid
+    grid_map = GridMap(grid_map)  # 100 grid data dataframe
+
+    grid_area_map = pd.read_csv(PATH_GRID_AREA_MAP, encoding=UTF_8)
+    from app.business.validator.validate_dataframe import validate_area_grid_df
+
+    validate_area_grid_df(grid_area_map)
+
+    temp_life_population = []
+    for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH):
+        life_population_item = pd.read_csv(LIFE_POPULATION_DIRECTORY_PATH + item, encoding=EUC_KR)
+        from app.business.validator.validate_dataframe import validate_life_population_df
+        validate_life_population_df(life_population_item)  # validate life population dataframe
+        temp_life_population.append(life_population_item)
+
+    temp_report = []
+    for item in os.listdir(REPORT_DIRECTORY_PATH):
+        report_item = pd.read_csv(REPORT_DIRECTORY_PATH + item, encoding=UTF_8)
+        from app.business.validator.validate_dataframe import validate_report_df
+        validate_report_df(report_item)  # validate report dataframe
+        temp_report.append(report_item)
+
+    from log import logger
+    logger.info(f"[모델훈련]을 진행합니다.")
+
+    from app.model.life_population import LifePopulation
+    from app.model.report import Report
+    from app.service.predict.train.service import service
+    service(LifePopulation(pd.concat(temp_life_population)),Report(pd.concat(temp_report)),grid_map,grid_area_map)
