@@ -11,11 +11,9 @@ PATH_GRID_TOURIST_MAP : tourist grid data
 '''
 
 import sys
-
 REPORT_PATH = sys.argv[1]
 
 import warnings
-
 warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
@@ -37,6 +35,7 @@ if __name__ == '__main__':
     import pandas as pd
 
     report = pd.read_csv(REPORT_PATH, encoding=UTF_8)
+
     from app.business.validator.validate_dataframe import validate_report_df
 
     validate_report_df(report)  # validate report dataframe

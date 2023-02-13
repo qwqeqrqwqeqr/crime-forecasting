@@ -48,7 +48,9 @@ def expand_data(df,depth):
             queue.append(e)
         count += 1
 
-    return df[['격자고유번호', 'count']]
+    import pandas as pd
+    df_ar = pd.DataFrame(df, columns=["격자고유번호", "count","x","y","visited","index"])
+    return df_ar[['격자고유번호', 'count']]
 
 
 def preprocess(df):

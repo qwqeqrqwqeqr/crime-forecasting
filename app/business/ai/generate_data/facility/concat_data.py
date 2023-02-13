@@ -16,26 +16,26 @@ def concat_grid_facility(grid_map, expand_depth):
                                , '경도', '위도', EPSG_4326, True))
 
     facility.append(
-        expand_data(
+
                     count_point_in_polygon(grid_map, '격자고유번호',
                                            pd.read_csv(PATH_CONVENIENCE_STORE_ORIGIN, encoding=EUC_KR)
-                                           , 'x', 'y', EPSG_5181, True),expand_depth))
+                                           , 'x', 'y', EPSG_5181, True))
 
     facility.append(
-        expand_data(
+
                     count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_SAFETY_HOUSE_ORIGIN, encoding=UTF_8)
-                                           , 'lon', 'lat', EPSG_4326, True),expand_depth))
+                                           , 'lon', 'lat', EPSG_4326, True))
 
     facility.append(
-        expand_data(
+
                     count_point_in_polygon(grid_map, '격자고유번호', pd.read_csv(PATH_DELIVERY_BOX_ORIGIN, encoding=EUC_KR)
-                                           , 'WGS X 좌표', 'WGS Y 좌표', EPSG_4326, True),expand_depth))
+                                           , 'WGS X 좌표', 'WGS Y 좌표', EPSG_4326, True))
 
     facility.append(
-        expand_data(
+
                     count_point_in_polygon(grid_map, '격자고유번호',
                                            pd.read_csv(PATH_SAFETY_FACILITY_ORIGIN, encoding=EUC_KR)
-                                           , 'x', 'y', EPSG_5181, True),expand_depth))
+                                           , 'x', 'y', EPSG_5181, True))
 
     # 위험시설
     facility.append(
@@ -63,20 +63,20 @@ def concat_grid_facility(grid_map, expand_depth):
 
     # 치안시설
 
-    facility.append( expand_data(count_point_in_polygon(grid_map, '격자고유번호',
+    facility.append( count_point_in_polygon(grid_map, '격자고유번호',
                                                                      pd.read_csv(PATH_POICE_STATION_ORIGIN,
                                                                                  encoding=UTF_8)
-                                                                     , 'lon', 'lat', EPSG_4326, True),expand_depth))
+                                                                     , 'lon', 'lat', EPSG_4326, True))
 
-    facility.append( expand_data(count_point_in_polygon(grid_map, '격자고유번호',
+    facility.append( count_point_in_polygon(grid_map, '격자고유번호',
                                                                      pd.read_csv(PATH_SAFETY_CENTER_ORIGIN,
                                                                                  encoding=UTF_8)
-                                                                     , 'lon', 'lat', EPSG_4326, True),expand_depth))
+                                                                     , 'lon', 'lat', EPSG_4326, True))
 
-    facility.append( expand_data(count_point_in_polygon(grid_map, '격자고유번호',
+    facility.append( count_point_in_polygon(grid_map, '격자고유번호',
                                                                      pd.read_csv(PATH_POLICE_OFFICE_ORIGIN,
                                                                                  encoding=UTF_8)
 
-                                                                     , 'lon', 'lat', EPSG_4326, True),expand_depth))
+                                                                     , 'lon', 'lat', EPSG_4326, True))
 
     return facility

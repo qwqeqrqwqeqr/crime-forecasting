@@ -7,20 +7,21 @@ from app.utils.constants import *
 def service(area_congestion_map, life_population, report):  # create congestion data by day
     for time in life_population.get_hour_list():  # loop in time (0 to 23)
         from app.business.preprocessing.count_point_in_polygon import count_point_in_polygon
-        count_point_df = count_point_in_polygon(area_congestion_map, 'TOT_REG_CD',
+        count_report_df = count_point_in_polygon(area_congestion_map, 'TOT_REG_CD',
                                                 report.get_report_filtered_hour(time).report,
                                                 'x', 'y', EPSG_4326, False)  # 집계구 마다의 신고 건수 추출
 
-        filtered_life_population_df = life_population.get_life_population_filtered_hour(time).life_population
-        filtered_life_population_df['집계구코드'] = filtered_life_population_df['집계구코드'].astype(str)
-        count_point_df['TOT_REG_CD'] = count_point_df['TOT_REG_CD'].astype(str)
+        filtered_life_population_df = life_population.get_life_population_filtered_hour(time).life_population       # 특정 시간대에 대한 집계구를 추출 합니다.
 
-        concat_life_population_report_df = pd.merge(filtered_life_population_df, count_point_df, left_on='집계구코드',
+        filtered_life_population_df['집계구코드'] = filtered_life_population_df['집계구코드'].astype(str)       # 타입 변경
+        count_report_df['TOT_REG_CD'] = count_report_df['TOT_REG_CD'].astype(str)       # 타입 변경
+
+        concat_life_population_report_df = pd.merge(filtered_life_population_df, count_report_df, left_on='집계구코드',
                                                     right_on='TOT_REG_CD',
-                                                    how='inner')  # concat life population and report
+                                                    how='inner')  # merge life population and report
 
-        concat_life_population_report_df = concat_life_population_report_df.drop_duplicates(['TOT_REG_CD'])
-        concat_life_population_report_df = pd.merge(concat_life_population_report_df, area_congestion_map,
+        concat_life_population_report_df = concat_life_population_report_df.drop_duplicates(['TOT_REG_CD'])     # 후처리 작업
+        concat_life_population_report_df = pd.merge(concat_life_population_report_df, area_congestion_map,      # 위에 전처리과정에서 사라진
                                                     on='TOT_REG_CD', how='left')
         insert_data(make_df(concat_life_population_report_df, life_population, time))
 

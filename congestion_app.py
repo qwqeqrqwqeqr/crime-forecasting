@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-
 from app.utils.constants import *
 
 '''
@@ -22,37 +21,36 @@ REPORT_DIRECTORY_PATH = sys.argv[1]
 LIFE_POPULATION_DIRECTORY_PATH = sys.argv[2]
 
 import warnings
-
 warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
 
     from app.business.validator.validate_file import init
-    init()  # Check directory & data file
+    init()      # Check directory & data file
 
     temp_life_population = []
-    for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH): # loop in life population directory
+    for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH):          # loop in life population directory
         life_population_item = pd.read_csv(LIFE_POPULATION_DIRECTORY_PATH + item, encoding=EUC_KR)
         from app.business.validator.validate_dataframe import validate_life_population_df
 
-        validate_life_population_df(life_population_item)  # validate life population dataframe
+        validate_life_population_df(life_population_item)        # validate life population dataframe
         temp_life_population.append(life_population_item)
 
     from app.model.life_population import LifePopulation
-    life_population = LifePopulation(pd.concat(temp_life_population))  # concat life population df
+    life_population = LifePopulation(pd.concat(temp_life_population))       # concat life population df
 
     temp_report = []
-    for item in os.listdir(REPORT_DIRECTORY_PATH): # loop in report directory
+    for item in os.listdir(REPORT_DIRECTORY_PATH):       # loop in report directory
         report_item = pd.read_csv(REPORT_DIRECTORY_PATH + item, encoding=UTF_8)
         from app.business.validator.validate_dataframe import validate_report_df
 
-        validate_report_df(report_item)  # validate report dataframe
+        validate_report_df(report_item)     # validate report dataframe
 
         temp_report.append(report_item)
 
     from app.model.report import Report
 
-    report = Report(pd.concat(temp_report))  # concat report df
+    report = Report(pd.concat(temp_report))     # concat report df
 
 
     import geopandas as gpd

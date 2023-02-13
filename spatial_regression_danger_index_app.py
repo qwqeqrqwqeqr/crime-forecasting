@@ -17,9 +17,6 @@ import sys
 REPORT_DIRECTORY_PATH = sys.argv[1]
 LIFE_POPULATION_DIRECTORY_PATH = sys.argv[2]
 
-# import warnings
-#
-# warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
     from app.business.validator.validate_file import init
