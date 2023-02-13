@@ -1,7 +1,7 @@
 from pandas import DataFrame
 from app.business.validator import *
 
-
+# Dataframe 검증
 def validate_report_df(report: DataFrame):
     if False in report.columns.values == report_column_list:
         from log import logger

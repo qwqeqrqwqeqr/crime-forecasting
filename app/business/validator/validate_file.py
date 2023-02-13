@@ -1,6 +1,6 @@
 import os
 
-
+# file 검증
 def check_data():
     check_data_file()
     create_data_directory()
