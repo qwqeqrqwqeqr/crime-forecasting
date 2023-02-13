@@ -11,7 +11,7 @@ def service(area_congestion_map, life_population, report):  # create congestion 
                                                 report.get_report_filtered_hour(time).report,
                                                 'x', 'y', EPSG_4326, False)  # 집계구 마다의 신고 건수 추출
 
-        filtered_life_population_df = life_population.get_life_population_filtered_hour(time).life_population       # 특정 시간대에 대한 집계구를 추출 합니다.
+        filtered_life_population_df = life_population.get_life_population_filtered_hour(time).life_population       # 특정 시간대에 대한 집계구를 추출
 
         filtered_life_population_df['집계구코드'] = filtered_life_population_df['집계구코드'].astype(str)       # 타입 변경
         count_report_df['TOT_REG_CD'] = count_report_df['TOT_REG_CD'].astype(str)       # 타입 변경
@@ -21,12 +21,12 @@ def service(area_congestion_map, life_population, report):  # create congestion 
                                                     how='inner')  # merge life population and report
 
         concat_life_population_report_df = concat_life_population_report_df.drop_duplicates(['TOT_REG_CD'])     # 후처리 작업
-        concat_life_population_report_df = pd.merge(concat_life_population_report_df, area_congestion_map,      # 위에 전처리과정에서 사라진
+        concat_life_population_report_df = pd.merge(concat_life_population_report_df, area_congestion_map,      # 위에 전처리 과정에서 사라진 혼잡지역 컬럼 연결
                                                     on='TOT_REG_CD', how='left')
-        insert_data(make_df(concat_life_population_report_df, life_population, time))
+        insert_data(concat_sub_data(concat_life_population_report_df, life_population, time))
 
 
-def make_df(df, life_population, time):
+def concat_sub_data(df, life_population, time):     # 부가적인 데이터 연결
     new_df = pd.DataFrame()
     new_df['report_count'] = df['count'].map(lambda x: int(x))
     new_df['life_population'] = round(df['총생활인구수'], 3)

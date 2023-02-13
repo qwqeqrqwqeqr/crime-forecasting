@@ -13,9 +13,9 @@ def service(life_population, report, grid_map, grid_area_map):
 
     dfs = []
     from app.service.danger_index import DANGER_INDEX_NAME_LIST
-    for i in range(len(DANGER_INDEX_NAME_LIST)):         # loop by danger index
+    for i in range(len(DANGER_INDEX_NAME_LIST)):         # loop by danger index 위험지수 카테고리 별로(현재 7종) 필터링하여 loop함
 
-        save_data(generate_data_dfs[i],DANGER_INDEX_NAME_LIST[i])
+        save_data(generate_data_dfs[i],DANGER_INDEX_NAME_LIST[i])       # 필터링된 데이터로 만들어진 훈련 데이터 저장
         from app.business.ai.danger_index.danger_index import generate_danger_index
         dfs.append(generate_danger_index(generate_data_dfs[i], DANGER_INDEX_NAME_LIST[i]))         # predict
 

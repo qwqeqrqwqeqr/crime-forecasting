@@ -60,7 +60,7 @@ if __name__ == '__main__':
     validate_congestion_area_df(area_congestion_map)
 
 
-    for day_month_year in life_population.get_day_list():
+    for day_month_year in life_population.get_day_list():       # 일별로 필터링한 데이터 혼잡도 계산
         from log import logger
         logger.info(f"[혼잡도] [%s] 데이터를 산출합니다" % day_month_year)
 

@@ -19,7 +19,7 @@ def service(grid_map, report):
                                  evt_cl_cd_mask_list(report.report)[i],
                                  end_cd_mask_list(report.report), name_list[i]),
                              on='grid_number', how='inner')
-    concat_df = concat_date_df(report, concat_df)  # concat date df
+    concat_df = concat_sub_data(report, concat_df)  # concat date df
 
     insert_data(concat_df)
 
@@ -35,7 +35,7 @@ def make_df(grid_map, report, evt_cl_cd_mask_list, end_cd_mask_list, name_list):
         new_df['grid_number'] = concat_df['격자고유번호'].map(lambda x: x[-6:])
     return new_df
 
-def concat_date_df(report, new_df):
+def concat_sub_data(report, new_df):
     new_df.insert(0, 'weekday', str(report.weekday.iloc[0]))
     new_df.insert(0, 'day_month_year', str(report.day.iloc[0]))
     new_df.insert(0, 'month', str(report.day.iloc[0])[4:6])
