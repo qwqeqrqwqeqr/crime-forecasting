@@ -51,6 +51,8 @@ PATH_LARGE_MAP = PATH_MAP + "large_map.csv"
 PATH_MIDDLE_MAP = PATH_MAP + "middle_map.csv"
 PATH_SMALL_MAP = PATH_MAP + "small_map.csv"
 
+
+# 보유 디렉터리 경로
 PATH_LIST = [PATH_ORIGIN,
              PATH_MAP,
              PATH_DANGER_INDEX_MODEL,
@@ -70,6 +72,7 @@ PATH_LIST = [PATH_ORIGIN,
              PATH_ORIGIN + "safety_facility/",
              ]
 
+# 보유 파일 리스트
 FILE_LIST = [
     PATH_NY_ORIGIN,
     PATH_DJ_ORIGIN,

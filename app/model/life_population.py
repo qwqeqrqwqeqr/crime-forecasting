@@ -23,15 +23,15 @@ class LifePopulation:  # Life Population DaraFrame Class
         self.__total_population = self.__life_population["총생활인구수"]
         self.__area_code = self.__life_population["집계구코드"]
 
-    def get_day_list(self): return list(set(self.__day.tolist()))
+    def get_day_list(self): return list(set(self.__day.tolist()))       # 해당 df가 포함하고 있는 날짜 출력
 
-    def get_hour_list(self): return list(set(self.__hour.tolist()))
+    def get_hour_list(self): return list(set(self.__hour.tolist()))       # 해당 df가 포함하고 있는 시간 출력
 
     def get_life_population_filtered_day(self, day_month_year): return LifePopulation(
-        self.__life_population.loc[self.__day == day_month_year])
+        self.__life_population.loc[self.__day == day_month_year])       # 해당 df를 특정 날짜 기준으로 필터링함
 
     def get_life_population_filtered_hour(self, hour): return LifePopulation(
-        self.__life_population.loc[self.__hour == hour])
+        self.__life_population.loc[self.__hour == hour])       # 해당 df를 특정 시간 기준으로 필터링함
 
     @property
     def life_population(self):

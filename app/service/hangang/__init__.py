@@ -3,7 +3,7 @@
 from app.utils.codebook import *
 
 
-def evt_cl_cd_mask_list(report):
+def evt_cl_cd_mask_list(report):        # 사고 예방 / 인명 구조 / 교통 안전 /  대형 사건
     return [
         (report.evt_cl_cd == EVT_CL_CD_보호조치) | (report.evt_cl_cd == EVT_CL_CD_위험방지) | (
                 report.evt_cl_cd == EVT_CL_CD_비상벨),

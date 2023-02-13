@@ -36,5 +36,5 @@ def insert_data(df):  # insert in DB
         from app.service.danger_index import to_insert_list
         insert_list.append(to_insert_list(row))  # change format to insert in DB
 
-    from app.database.query.danger_index import insert_danger
-    insert_danger(insert_list)
+    from app.database.query.danger_index import insert_danger_index
+    insert_danger_index(insert_list)

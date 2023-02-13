@@ -1,16 +1,16 @@
-QUERY_SELECT_ALL_CONGESTION = '''select * from public.congestion;'''
-QUERY_SELECT_ALL_DANGER_INDEX = '''select * from public.danger_index;'''
-QUERY_SELECT_ALL_HANGANG = '''select * from public.hangang;'''
-QUERY_SELECT_ALL_REPORT = '''select * from public.report;'''
-QUERY_SELECT_ALL_SUBWAY = '''select * from public.subway;'''
-QUERY_SELECT_ALL_TOURIST = '''select * from public.tourist;'''
+QUERY_SELECT_ALL_CONGESTION = '''select * from digitalif.congestion;'''
+QUERY_SELECT_ALL_DANGER_INDEX = '''select * from digitalif.danger_index;'''
+QUERY_SELECT_ALL_HANGANG = '''select * from digitalif.hangang;'''
+QUERY_SELECT_ALL_REPORT = '''select * from digitalif.report;'''
+QUERY_SELECT_ALL_SUBWAY = '''select * from digitalif.subway;'''
+QUERY_SELECT_ALL_TOURIST = '''select * from digitalif.tourist;'''
 
-QUERY_INSERT_CONGESTION = '''INSERT INTO public.congestion(
+QUERY_INSERT_CONGESTION = '''INSERT INTO digitalif.congestion(
 day_month_year, weekday, hour, tot_reg_code,report_count,life_population,name) 
 VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (day_month_year,tot_reg_code,hour)  DO UPDATE SET 
 (weekday,report_count,life_population,name) = (EXCLUDED.weekday,EXCLUDED.report_count,EXCLUDED.life_population,EXCLUDED.name);'''
 
-QUERY_INSERT_DANGER_INDEX = '''INSERT INTO public.danger_index(grid_number, dv_danger_index,tp_danger_index,sh_danger_index,da_danger_index,st_danger_index,ca_danger_index,sv_danger_index) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (grid_number)
+QUERY_INSERT_DANGER_INDEX = '''INSERT INTO digitalif.danger_index(grid_number, dv_danger_index,tp_danger_index,sh_danger_index,da_danger_index,st_danger_index,ca_danger_index,sv_danger_index) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (grid_number)
  DO UPDATE SET  (dv_danger_index,tp_danger_index,sh_danger_index,da_danger_index,st_danger_index,ca_danger_index,sv_danger_index)=
  (EXCLUDED.dv_danger_index,
  EXCLUDED.tp_danger_index,
@@ -22,7 +22,7 @@ QUERY_INSERT_DANGER_INDEX = '''INSERT INTO public.danger_index(grid_number, dv_d
 
 
 
-QUERY_INSERT_REPORT = '''INSERT INTO public.report(
+QUERY_INSERT_REPORT = '''INSERT INTO digitalif.report(
 year, month, day_month_year, weekday,grid_number,
 dv_arrest,dv_investigation,dv_end_report,dv_not_handle, 
 tp_arrest,tp_investigation,tp_end_report,tp_not_handle,
@@ -52,7 +52,7 @@ EXCLUDED.st_arrest,EXCLUDED.st_investigation,EXCLUDED.st_end_report,EXCLUDED.st_
 EXCLUDED.ca_arrest,EXCLUDED.ca_investigation,EXCLUDED.ca_end_report,EXCLUDED.ca_not_handle,
 EXCLUDED.sv_arrest,EXCLUDED.sv_investigation,EXCLUDED.sv_end_report,EXCLUDED.sv_not_handle);'''
 
-QUERY_INSERT_SUBWAY = '''INSERT INTO public.subway(
+QUERY_INSERT_SUBWAY = '''INSERT INTO digitalif.subway(
 year, month,day_month_year,weekday,grid_number,
 ac_arrest,ac_investigation,ac_end_report,ac_not_handle,
 pp_arrest,pp_investigation,pp_end_report,pp_not_handle,
@@ -74,7 +74,7 @@ EXCLUDED.cr_arrest,EXCLUDED.cr_investigation,EXCLUDED.cr_end_report,EXCLUDED.cr_
 EXCLUDED.md_arrest,EXCLUDED.md_investigation,EXCLUDED.md_end_report,EXCLUDED.md_not_handle,EXCLUDED.name);'''
 
 
-QUERY_INSERT_HANGANG = '''INSERT INTO public.hangang(
+QUERY_INSERT_HANGANG = '''INSERT INTO digitalif.hangang(
 year, month, day_month_year, weekday, grid_number,
  ac_arrest, ac_investigation, ac_end_report, ac_not_handle, 
  ls_arrest, ls_investigation, ls_end_report, ls_not_handle,ts_arrest,
@@ -92,7 +92,7 @@ EXCLUDED.ls_arrest, EXCLUDED.ls_investigation, EXCLUDED.ls_end_report, EXCLUDED.
 EXCLUDED.ts_arrest,EXCLUDED.ts_investigation,EXCLUDED.ts_end_report,EXCLUDED.ts_not_handle,
 EXCLUDED.md_arrest,EXCLUDED.md_investigation,EXCLUDED.md_end_report,EXCLUDED.md_not_handle,EXCLUDED.name);'''
 
-QUERY_INSERT_TOURIST = '''INSERT INTO public.tourist(
+QUERY_INSERT_TOURIST = '''INSERT INTO digitalif.tourist(
 year,month,day_month_year,weekday,grid_number,
 ac_arrest,ac_investigation,ac_end_report,ac_not_handle,
 pp_arrest,pp_investigation,pp_end_report,pp_not_handle,

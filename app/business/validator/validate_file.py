@@ -1,7 +1,7 @@
 import os
 
 
-def init():
+def check_data():
     check_data_file()
     create_data_directory()
 

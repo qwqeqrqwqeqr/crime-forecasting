@@ -9,10 +9,12 @@ WORKDIR /seoul
 COPY . /seoul
 
 RUN chmod 644 /seoul/build/run/*
-RUN chmod 644 /seoul/build/utils/movefile.sh
+RUN chmod 644 /seoul/build/utils/move_file_by_month.sh
+RUN chmod 644 /seoul/build/utils/move_file_by_year.sh
 RUN chmod 777 /seoul/build/utils/cron.sh
 RUN mv /seoul/build/run/*  /seoul
-RUN mv /seoul/build/utils/movefile.sh  /seoul
+RUN mv /seoul/build/utils/move_file_by_month.sh  /seoul
+RUN mv /seoul/build/utils/move_file_by_year.sh  /seoul
 
 ###############################################
 # DB_ENV

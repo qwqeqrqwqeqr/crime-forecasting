@@ -4,7 +4,7 @@ from app.utils.constants import *
 
 '''
 Run Parameters
-- REPORT_PATH: report file path (ex) "./test/data/report/POL_01_20220101_M.csv"
+- REPORT_PATH: report file path (ex) "./test/data/report/POL_01_20220101.csv"
 
 PATH_GRID_MAP : 100 grid data 
 PATH_GRID_HANGANG_MAP : hangang grid data
@@ -20,10 +20,9 @@ warnings.filterwarnings(action='ignore')
 if __name__ == '__main__':
 
 
-    from app.business.validator.validate_file import init, check_file
+    from app.business.validator.validate_file import check_data
 
-    init()  # Check directory & data file
-    check_file(REPORT_PATH)  # Check Report file
+    check_data()  # Check directory & data file
 
     import pandas as pd
     grid_hangang_map = pd.read_csv(PATH_GRID_HANGANG_MAP, encoding=UTF_8)

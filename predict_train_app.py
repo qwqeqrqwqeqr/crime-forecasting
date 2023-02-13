@@ -23,8 +23,8 @@ LIFE_POPULATION_DIRECTORY_PATH = sys.argv[2]
 
 if __name__ == '__main__':
 
-    from app.business.validator.validate_file import init
-    init()  # Check directory & data file
+    from app.business.validator.validate_file import check_data
+    check_data()  # Check directory & data file
 
     from app.model.grid_map import GridMap
     import geopandas as gpd

@@ -10,7 +10,7 @@ def to_insert_list(df):
 
 
 
-def evt_cl_cd_mask_list(report):
+def evt_cl_cd_mask_list(report):        # 가정 폭력 / 주거 침입 / 성폭력 / 데이트폭력 / 스토킹 / 아동학대 / 학교폭력
     return [
         (report.evt_cl_cd == EVT_CL_CD_가정폭력),
         (report.evt_cl_cd == EVT_CL_CD_주거침입),

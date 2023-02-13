@@ -37,15 +37,15 @@ class Report:  # report DaraFrame Class
         self.__x = self.__report["x"]
         self.__y = self.__report["y"]
 
-    def get_day_list(self): return list(set(self.__day.tolist()))
+    def get_day_list(self): return list(set(self.__day.tolist()))      # 해당 df가 포함하고 있는 날짜 출력
 
-    def get_hour_list(self): return list(set(self.__hour.tolist()))
+    def get_hour_list(self): return list(set(self.__hour.tolist()))      # 해당 df가 포함하고 있는 시간 출력
 
-    def get_month_list(self): return list(set(self.__month.tolist()))
+    def get_month_list(self): return list(set(self.__month.tolist()))      # 해당 df가 포함하고 있는 월 출력
 
-    def get_report_filtered_day(self, day_month_year): return Report(self.__report.loc[self.__day == day_month_year])
+    def get_report_filtered_day(self, day_month_year): return Report(self.__report.loc[self.__day == day_month_year])       # 해당 df를 특정 날짜 기준으로 필터링함
 
-    def get_report_filtered_hour(self, hour): return Report(self.__report.loc[self.__hour == hour])
+    def get_report_filtered_hour(self, hour): return Report(self.__report.loc[self.__hour == hour])       # 해당 df를 툭정 시간 기준으로 필터링함
 
     @property
     def report(self):

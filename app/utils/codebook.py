@@ -114,15 +114,15 @@ end_report : 신고종결
 not_handle : 미처리 
 '''
 
-def end_cd_arrest_mask(df):
+def end_cd_arrest_mask(df):     # 검거 마스킹
     return (df.end_cd == END_CD_체포) | (df.end_cd == END_CD_임의동행) | (df.end_cd == END_CD_통고처분) | (
             df.end_cd == END_CD_즉결심판) | (df.end_cd == END_CD_검거후훈방)
 
-def end_cd_investigation_mask(df):
+def end_cd_investigation_mask(df):      # 계속조사 마스킹
     return (df.end_cd == END_CD_계속조사) | (df.end_cd == END_CD_보호조치) | (df.end_cd == END_CD_수배조치) | (
             df.end_cd == END_CD_타부서인계) | (df.end_cd == END_CD_타청_타서인계)
 
-def end_cd_end_report_mask(df):
+def end_cd_end_report_mask(df):     # 신고종결 마스킹
     return (df.end_cd == END_CD_현장조치) | (df.end_cd == END_CD_합의해산) | (df.end_cd == END_CD_순찰강화) | (
             df.end_cd == END_CD_상담안내) | (df.end_cd == END_CD_훈방) | (df.end_cd == END_CD_타기관인계) | (
             df.end_cd == END_CD_귀가조치) | (df.end_cd == END_CD_병원인계) | (df.end_cd == END_CD_허위오인) | (
@@ -132,7 +132,8 @@ def end_cd_end_report_mask(df):
             df.end_cd == END_CD_조치없이_종결) | (df.end_cd == END_CD_동일) | (df.end_cd == END_CD_이첩) | (
             df.end_cd == END_CD_FAX전송종결)
 
-def end_cd_not_handle_mask(df):
+
+def end_cd_not_handle_mask(df):     # 미처리 마스킹
     return (df.end_cd == END_CD_이미해산) | (df.end_cd == "0") | (df.end_cd == END_CD_불발견) | (
             df.end_cd == END_CD_신고취소) | (df.end_cd == END_CD_무조취종결) | (df.end_cd == END_CD_무응답) | (
             df.end_cd == END_CD_미도착종결)

@@ -25,8 +25,8 @@ warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
 
-    from app.business.validator.validate_file import init
-    init()      # Check directory & data file
+    from app.business.validator.validate_file import check_data
+    check_data()      # Check directory & data file
 
     temp_life_population = []
     for item in os.listdir(LIFE_POPULATION_DIRECTORY_PATH):          # loop in life population directory

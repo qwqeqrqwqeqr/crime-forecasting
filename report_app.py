@@ -5,7 +5,7 @@ from app.utils.constants import *
 
 '''
 Run Parameters
-- REPORT_PATH: report file path (ex) "./test/data/report/POL_01_20220101_M.csv"
+- REPORT_PATH: report file path (ex) "./test/data/report/POL_01_20220101.csv"
 
 PATH_GRID_MAP : 100 grid data 
 '''
@@ -19,8 +19,8 @@ warnings.filterwarnings(action='ignore')
 
 if __name__ == '__main__':
 
-    from app.business.validator.validate_file import init
-    init()  # Check directory & data file
+    from app.business.validator.validate_file import check_data
+    check_data()  # Check directory & data file
 
     from app.model.report import Report
 
