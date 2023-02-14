@@ -1,6 +1,6 @@
 from app.utils.constants import *
 
-EXPAND_DEPTH=0 # 2의 경우 8 방향 으로 2만큼 확장되기 때문에 총 500M가 됨 (1의 경우 300 2의 경우 500 3의 경우 700 ,...)
+EXPAND_DEPTH=2 # 2의 경우 8 방향 으로 2만큼 확장되기 때문에 총 500M가 됨 (1의 경우 300 2의 경우 500 3의 경우 700 ,...)
 def generate_data(life_population,report_list,grid_map,grid_area_map):
 
     from app.business.ai.generate_data.life_population.concat_data import concat_grid_life_population,calculate_life_population_average

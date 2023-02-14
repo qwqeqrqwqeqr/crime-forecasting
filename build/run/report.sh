@@ -1,6 +1,6 @@
 #!/bin/bash
 target_folder="/data/safety/"
-python_file="./report_app.py"
+python_file="/report_app.py"
 
 today=$(date "+%Y%m%d")
 file=POL_01_${today}.csv

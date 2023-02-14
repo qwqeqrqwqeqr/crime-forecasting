@@ -1,4 +1,3 @@
-
 ## 초기 환경 설정 및 확인 사항
 
 ***
@@ -73,7 +72,8 @@
     - tourist.sh
     - congestion.sh
     - danger_index.sh 
-- docker file 내부에서 DB ENV 정보에 맞게 수정
+- docker file 내부에서 DB ENV 정보에 맞게 수정 
+- 컨테이너 생성후 /database/config/database.ini 파일 확인
 
 
 
@@ -136,17 +136,24 @@
 ### 도커 실행
 - docker build (반드시 외부에서 빌드해서 이미지 만들 것)
   - `sudo docker build -t [image-name]  ./`
+  - 도커 이미지 저장
+    - docker save {option} {image:tag} {filename}
+    - ex) `docker save -o test-image:1.0 test.tar`
+  - 도커 이미지 불러오기
+    - docker load {option} {filename}
+    - ex) `docker load -i test.tar`
 - docker run (생활인구 신고데이터폴더를 컨테이너에서 접근할 수 있도록 연결)
   - `docker run -it -d -v /data:/data [image]`
-- 내부 shell 접속
+- 내부 컨테이너(shell) 접속
   - `sudo docker attach [container_id]`
+- 컨테이너 탈출
+  - `Ctrl + P + Q`
 ***
 ### 수동 실행 (경찰대 3종 유형별 신고건수)
 - `python3 (파일이름)_app.py "112신고경로 파일"`
 - 요구되는 파라미터는  (파일이름)_app.py 파일을 열어보면 상단 주석에 기재 되어있음
 - 반드시 파라미터 경로 확인 후 실행할 것
 - 예시 (2023년 1월 관광지 경찰대를 수동 추출 하고 싶을 경우)
-  - seoul 디렉터리로 이동
   - `python3 tourist_app.py "/data/safty/POL_01_20230101.csv"`
 - (추가) 경찰대 csv 파일에 header가 빠져서 전송 되는 이슈가 있음 헤더를 추가하기 위해선 다음과 같이 작업함 **(자동 실행의 경우 header 자동 추가 코드가 붙혀져 있으니, 고려하지 않아도 됨)**
   1. 해당 파일이 있는 디렉터리로 이동
@@ -159,7 +166,6 @@
 - 반드시 파라미터 경로 확인 후 실행할 것 (디렉터리의 경우 마지막은 /로 끝나야 함)
 - 각 년월별 디렉터리들은 move_file.sh가 만들어냄
 - 예시 (2023년 1월 혼잡도를 수동 추출 하고 싶을 경우)
-  - seoul 디렉터리로 이동
   - `python3 congestion_app.py "/data/safty/202301/" "/data/population/202301/"`
 ***
 ### 수동 실행 (위험지수)
@@ -169,7 +175,6 @@
 - 위험지수의 경우 지난달의 생활인구와 지난년도의 신고건수를 사용하여 산출
 - 각 년월별 디렉터리들은 move_file.sh가 만들어냄
 - 예시 (2023년 1월 위험지수를 수동 추출 하고 싶을 경우)
-  - seoul 디렉터리로 이동
   - `python3 danger_index_app.py "/data/safty/2022/" "/data/population/202212/"`
 
 ***
@@ -182,7 +187,6 @@
 - 각 년월별 디렉터리들은 move_file.sh가 만들어냄
 - 훈련을 진행할 경우 /seoul/app/data/ai/predict/ 디렉터리 내에 model 및 scaler가 만들어짐
 - 예시 (2023년 1월에 대해 훈련을 하고 싶은 경우)
-  - seoul 디렉터리로 이동
   - `python3 predict_train_app.py "/data/safty/2022/" "/data/population/202211/"`
 
 **예측**
@@ -193,5 +197,10 @@
 - 각 년월별 디렉터리들은 move_file.sh가 만들어냄
 - 훈련을 통해 만들어진 모델과 스케일러를 지정하여 예측을 진행함
 - 예시 (2023년 1월 8일에 훈련을 진행했다고 가정하에 2023년 1월에 대해 훈련을 하고 싶은 경우)
-  - seoul 디렉터리로 이동
   - `python3 predict_test_app.py "/data/safty/2022/" "/data/population/202212/" "/seoul/app/data/ai/predict/model/2023-01-08.pkl" "/seoul/app/data/ai/predict/scaler/2023-01-08.pkl"`
+
+***
+## 헤더 붙이는 코드
+  1. 해당 파일이 있는 디렉터리로 이동
+  2. 다음 명령어를 실행
+  3. `perl -p -i -e '$.==1 and print "RECV_NO,DAY,TIME,EVT_CL_CD,RECV_EMG_CD,RPTER_SEX,TRC_TYPE,HPPN_Y_SW,HPPN_X_SW,HPPN_Y_NE,HPPN_X_NE,HPPN_Y_NW,HPPN_X_NW,HPPN_Y_SE,HPPN_X_SE,END_CD\n"' [파일이름]`

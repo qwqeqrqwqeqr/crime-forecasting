@@ -82,8 +82,7 @@ def save_model(model):
 
 
 def generate_train_data(df):
-    from shapely.wkt import loads
-    df.geometry = df['geometry'].apply(loads)
+
     train_df = df.iloc[:, 1:18]
     train_df["x"] = df.centroid.x
     train_df["y"] = df.centroid.y

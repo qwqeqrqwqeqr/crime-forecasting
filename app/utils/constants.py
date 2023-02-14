@@ -5,20 +5,20 @@ UTF_8 = 'utf-8'
 EUC_KR = 'euc-kr'
 CP_949 = 'CP949'
 
-PATH_ORIGIN = "app/data/origin/"
-PATH_MAP = "app/data/map/"
+PATH_ORIGIN = "/app/data/origin/"
+PATH_MAP = "/app/data/map/"
 
-PATH_DANGER_INDEX_MODEL = "app/data/ai/danger_index/model/"
-PATH_SR_DANGER_INDEX_MODEL = "app/data/ai/spatial_regression/model/"
-PATH_PREDICT_MODEL = "app/data/ai/predict/model/"
-PATH_PREDICT_SCALER = "app/data/ai/predict/scaler/"
+PATH_DANGER_INDEX_MODEL = "/app/data/ai/danger_index/model/"
+PATH_SR_DANGER_INDEX_MODEL = "/app/data/ai/spatial_regression/model/"
+PATH_PREDICT_MODEL = "/app/data/ai/predict/model/"
+PATH_PREDICT_SCALER = "/app/data/ai/predict/scaler/"
 
-PATH_DANGER_INDEX_DATA = "app/data/ai/danger_index/data/"
-PATH_SR_DANGER_INDEX_TRAIN_DATA = "app/data/ai/spatial_regression/train_data/"
-PATH_SR_DANGER_INDEX_RESULT_DATA = "app/data/ai/spatial_regression/result_data/"
-PATH_PREDICT_TRAIN_DATA = "app/data/ai/predict/train_data/"
-PATH_PREDICT_TEST_DATA = "app/data/ai/predict/test_data/"
-PATH_PREDICT_RESULT_DATA = "app/data/ai/predict/result_data/"
+PATH_DANGER_INDEX_DATA = "/app/data/ai/danger_index/data/"
+PATH_SR_DANGER_INDEX_TRAIN_DATA = "/app/data/ai/spatial_regression/train_data/"
+PATH_SR_DANGER_INDEX_RESULT_DATA = "/app/data/ai/spatial_regression/result_data/"
+PATH_PREDICT_TRAIN_DATA = "/app/data/ai/predict/train_data/"
+PATH_PREDICT_TEST_DATA = "/app/data/ai/predict/test_data/"
+PATH_PREDICT_RESULT_DATA = "/app/data/ai/predict/result_data/"
 
 PATH_NY_ORIGIN = PATH_ORIGIN + "danger_facility/서울시노래연습장업인허가정보.csv"
 PATH_DJ_ORIGIN = PATH_ORIGIN + "danger_facility/서울시단란주점영업인허가정보.csv"

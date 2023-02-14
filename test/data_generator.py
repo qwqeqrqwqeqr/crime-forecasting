@@ -2,7 +2,7 @@ import pandas as pd
 import geopandas as gpd
 from app.utils.constants import *
 
-PATH_TEST_REPORT = "./test/data/report/POL_01_20220101_M.csv"
+PATH_TEST_REPORT = "./test/data/report/POL_01_20220101.csv"
 PATH_TEST_LIFE_POPULATION = "./test/data/life_population/LOCAL_PEOPLE_20220101.csv"
 
 TEST_REPORT=pd.read_csv(PATH_TEST_REPORT, encoding=UTF_8)
